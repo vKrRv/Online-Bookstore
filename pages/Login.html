@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Online Bookstore</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; padding: 20px; }
+        nav { background: #333; padding: 10px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { margin: 10px; text-decoration: none; color: white; font-weight: bold; }
+        .search-bar { margin-right: 20px; }
+        .search-bar input { padding: 5px; width: 200px; }
+        .logo { width: 150px; margin: 10px auto; display: block; }
+        .form-container { display: inline-block; text-align: left; background: white; padding: 20px; border-radius: 5px; width: 300px; }
+        input { display: block; width: calc(100% - 20px); margin: 5px 0; padding: 10px; }
+        button { background: #007BFF; color: white; padding: 10px 15px; border: none; cursor: pointer; width: 100%; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="LOGO.png" alt="Bookstore Logo" class="logo">
+        <h1>Login</h1>
+        <nav>
+            <div>
+                <a href="home.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="cart.html">Shopping Cart</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="login.html">Login</a>
+            </div>
+            <div class="search-bar">
+                <form>
+                    <input type="text" placeholder="Search for books...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    
+    <section>
+        <div class="form-container">
+            <form>
+                <input type="text" placeholder="Email or Username" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy;Online Bookstore</p>
+    </footer>
+</body>
+</html>

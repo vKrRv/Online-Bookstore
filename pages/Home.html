@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Online Bookstore</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; padding: 20px; }
+        nav { background: #333; padding: 10px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { margin: 10px; text-decoration: none; color: white; font-weight: bold; }
+        .search-bar { margin-right: 20px; }
+        .search-bar input { padding: 5px; width: 200px; }
+        .logo { width: 150px; margin: 10px auto; display: block; }
+        .book-list { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+        .book { border: 1px solid #000; padding: 15px; background: white; border-radius: 5px; width: 200px; }
+        .btn { display: inline-block; padding: 10px 20px; background: #007BFF; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px; }
+        .description { margin: 20px auto; max-width: 600px; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/images/logo.png" alt="Bookstore Logo" class="logo">
+        <h1>Welcome to Our Online Bookstore</h1>
+        <nav>
+            <div>
+                <a href="home.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="cart.html">Shopping Cart</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="login.html">Login</a>
+            </div>
+            <div class="search-bar">
+                <form>
+                    <input type="text" placeholder="Search for books...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    
+    <section>
+        <p class="description">Welcome to the best bookstore with the best prices! Find all kinds of books here at unbeatable deals!</p>
+    </section>
+    
+    <section>
+        <h2>Popular Books</h2>
+        <div class="book-list">
+            <div class="book"> <strong>Book 1</strong> <br> A thrilling adventure novel. <br><a href="#" class="btn">View</a></div>
+            <div class="book"> <strong>Book 2</strong> <br> A must-read mystery book. <br><a href="#" class="btn">View</a></div>
+            <div class="book"> <strong>Book 3</strong> <br> An inspiring self-help guide. <br><a href="#" class="btn">View</a></div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; Online Bookstore</p>
+    </footer>
+</body>
+</html>
