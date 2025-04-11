@@ -42,13 +42,25 @@ nav a:hover {
     margin-right: 20px;
     width: auto;
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 10px;
+    position: relative;
+}
+.search-bar form {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.search-bar i {
+    position: absolute;
+    left: 7px;
+    color: darkgray;
 }
 .search-bar input {
-    padding: 5px;
+    padding: 5px 5px 5px 30px; /* left padding for icon space */
     width: 200px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 /*.search-button {*/
 /*    padding: 5px 10px;*/
