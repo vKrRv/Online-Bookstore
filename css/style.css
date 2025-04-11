@@ -2,32 +2,62 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f4f4f4;
-    padding: 20px;
+    padding: 10px 20px;
 }
-nav {
+.logo {
+    width: 150px;
+    --logo-height: 200px;
+    margin: 10px auto;
+    display: block;
+    float: left;
+    border-radius: 15px;
+}
+.title {
+    text-align: center;
+    position: absolute;
+    left: 49%;
+    transform: translateX(-50%);
+    padding-top: 12px;
+    /*padding-top: calc(var(--logo-height) / 2);*/
+}
+.bar {
     background: #333;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    clear: left;
+    border-radius: 15px;
 }
-nav a { margin: 10px;
+nav a {
+    margin: 10px;
     text-decoration: none;
     color: white;
     font-weight: bold;
 }
+nav a:hover {
+
+}
 .search-bar {
     margin-right: 20px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }
 .search-bar input {
     padding: 5px;
     width: 200px;
 }
-.logo {
-    width: 150px;
-    margin: 10px auto;
-    display: block;
-}
+/*.search-button {*/
+/*    padding: 5px 10px;*/
+/*    margin-left: 10px;  !* Adds space between the input and the button *!*/
+/*    border-radius: 5px;  !* Optional: add rounded corners for the button *!*/
+/*    border: none;*/
+/*    color: white;  !* White text on the button *!*/
+/*    cursor: pointer;*/
+/*}*/
 .book-list {
     display: flex;
     justify-content: center;
