@@ -125,3 +125,51 @@ footer {
     text-align: center;
     padding: 20px 0;
 }
+
+/*Shopping cart styling*/
+#cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.cart-item {
+    width: 400px;
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px 10px 5px 10px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.book-cover {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+    float: left;
+    margin: 8px 25px 25px 50px;
+}
+.item-details {
+    margin-top: 75px;
+}
+.remove-btn {
+    background: none;
+    width: 15px;
+    height: 15px;
+    color: darkgray;
+    display: block;
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+.back-shop-btn {
+    width: 420px;
+    background-color: #777777;
+    margin-bottom: 10px;
+}
+.checkout-btn {
+    width: 420px;
+    border-radius: 0 0 10px 10px
+}
+.btn-text {
+    all: unset;
+    cursor: pointer;
+}
