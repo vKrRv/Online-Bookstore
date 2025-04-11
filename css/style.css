@@ -5,29 +5,32 @@ body {
     padding: 10px 20px;
 }
 .logo {
-    width: 150px;
-    --logo-height: 200px;
-    margin: 10px auto;
-    display: block;
+    height: 50px;
+    /*width: 150px;*/
+    /*--logo-height: 200px;*/
+    /*display: block;*/
     float: left;
-    border-radius: 15px;
+    border-radius: 15px 0 0 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .title {
     text-align: center;
-    position: absolute;
-    left: 49%;
-    transform: translateX(-50%);
-    padding-top: 12px;
+    /*position: absolute;*/
+    /*left: 49%;*/
+    /*transform: translateX(-50%);*/
+    /*padding-top: 12px;*/
+    clear: left;
     /*padding-top: calc(var(--logo-height) / 2);*/
 }
 .bar {
+    height: 30px;
     background: #333;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    clear: left;
-    border-radius: 15px;
+    border-radius: 0 15px 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 nav a {
     margin: 10px;
@@ -38,8 +41,18 @@ nav a {
 nav a:hover {
 
 }
+.login {
+    background-color: #007cff;
+    border-radius: 8px;
+    padding: 6px;
+}
+.signup {
+    margin-left: 3px;
+    padding: 6px;
+    border-radius: 3px 5px 5px 3px;
+}
 .search-bar {
-    margin-right: 20px;
+    margin: 0 20px 0 200px;
     width: auto;
     display: flex;
     align-items: center;
@@ -129,12 +142,14 @@ footer {
 /*Shopping cart styling*/
 #cart {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 .cart-item {
-    width: 400px;
+    width: 380px;
+    height: 350px;
     background-color: #fff;
     margin: 10px 0;
     padding: 10px 10px 5px 10px;
@@ -151,6 +166,7 @@ footer {
 .item-details {
     margin-top: 75px;
 }
+
 .remove-btn {
     background: none;
     width: 15px;
@@ -160,14 +176,22 @@ footer {
     font-size: 25px;
     margin-bottom: 25px;
 }
+.cart-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px;
+}
 .back-shop-btn {
-    width: 420px;
+    width: 400px;
     background-color: #777777;
     margin-bottom: 10px;
+    display: block;
+    border-radius: 10px;
 }
 .checkout-btn {
-    width: 420px;
-    border-radius: 0 0 10px 10px
+    width: 400px;
+    border-radius: 10px;
 }
 .btn-text {
     all: unset;

@@ -5,23 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Helps adjust the website for smaller devices (Smartphones or tablets). -->
     <title>Shopping Cart - Online Bookstore</title>
-    <link href="/css/style.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- This library have lots of uses, but I'm using it specifically for "Magnifying glass icon" in search bar -->
 </head>
 
 <body>
-    <header>
-        <img src="/images/logo.png" alt="Bookstore Logo" class="logo">
-        <h1 class="title">Shopping Cart</h1>
-
+<header>
+    <img src="../images/logo.png" alt="Bookstore Logo" class="logo" />
     <div class="bar">
         <nav>
-            <a href="home.html">Home</a>
+            <a href="../index.html">Home</a>
             <a href="products.html">Products</a>
             <a href="cart.html">Shopping Cart</a>
             <a href="contact.html">Contact Us</a>
-            <a href="login.html">Login</a>
         </nav>
         <div class="search-bar">
             <form>
@@ -29,13 +26,18 @@
                 <input type="text" placeholder="Search for books..." />
             </form>
         </div>
+        <nav>
+            <a href="login.html" class="login">Login</a>
+            <a href="login.html" class="signup">Sign up</a>
+        </nav>
     </div>
-    </header>
+    <h1 class="title">Your Shopping Cart</h1>
+</header>
 
     <section id="cart">
         <div class="cart-item">
             <button class="remove-btn">×</button>
-            <img src="/images/book1.png" alt="Book Cover" class="book-cover">
+            <img src="../images/book1.png" alt="Book Cover" class="book-cover">
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
@@ -45,7 +47,7 @@
         </div>
         <div class="cart-item">
             <button class="remove-btn">×</button>
-            <img src="/images/book2.png" alt="Book Cover" class="book-cover">
+            <img src="../images/book2.png" alt="Book Cover" class="book-cover">
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
@@ -55,7 +57,7 @@
         </div>
         <div class="cart-item">
             <button class="remove-btn">×</button>
-            <img src="/images/book3.png" alt="Book Cover" class="book-cover">
+            <img src="../images/book3.png" alt="Book Cover" class="book-cover">
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
@@ -64,10 +66,11 @@
             </div>
         </div>
 
-        <button class="back-shop-btn">Back to shopping</button>
-        <button class="checkout-btn"><a href="checkout.html" class="btn-text">Continue to payment</a></button>
     </section>
-
+<div class="cart-btn">
+<button class="back-shop-btn">Back to shopping</button>
+<button class="checkout-btn"><a href="checkout.html" class="btn-text">Continue to payment</a></button>
+</div>
 
     <footer>
         <p>&copy; 2025 Online Bookstore. All rights reserved.</p>
