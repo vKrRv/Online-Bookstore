@@ -76,3 +76,10 @@ input, textarea { display: block;
     margin: 5px 0;
     padding: 10px;
 }
+footer {
+    margin-top: 50px;
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+    padding: 20px 0;
+}
