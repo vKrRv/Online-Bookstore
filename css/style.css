@@ -137,6 +137,7 @@ footer {
     color: #777;
     text-align: center;
     padding: 20px 0;
+    clear: both;
 }
 
 /*Shopping cart styling*/
@@ -156,12 +157,20 @@ footer {
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.book-cover {
+.cart-item .book-cover {
     height: 225px;
     width: auto;
     border-radius: 8px;
     float: left;
     margin: 8px 25px 25px 50px;
+}
+.book-cover {
+    height: 500px;
+    width: auto;
+    border-radius: 8px;
+    float: left;
+    margin-right: 20px;
+    box-shadow: 0 0 10px darkgrey;
 }
 .item-details {
     margin-top: 75px;
@@ -260,4 +269,26 @@ footer {
     font-size: inherit;
     margin: 20px auto;
     color: inherit;
+}
+
+/**/
+.book-details {
+    margin-top: 20px;
+    text-align: left;
+}
+.book-details input {
+    width: 35px;
+    height: 40px;
+    display: inline;
+    border-radius: 10px 0 0 10px;
+    padding: 0 5px 0 10px;
+    border: solid #0056b3;
+    margin-right: 0;
+}
+.book-details button {
+    width: 200px;
+    height: 44px;
+    display: inline-block;
+    border-radius: 0 10px 10px 0;
+    margin-left: 0;
 }
