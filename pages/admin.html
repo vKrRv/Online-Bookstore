@@ -7,63 +7,31 @@
     <link href="../css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        .admin-section {
-            margin-top: 30px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: left;
-        }
-        .admin-section h3 {
-            border-bottom: 2px solid #007BFF;
-            padding-bottom: 5px;
-        }
-        .admin-form input, .admin-form textarea {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        .admin-table th, .admin-table td {
-            border: 1px solid #ccc;
-            padding: 8px;
-        }
-        .admin-table th {
-            background-color: #f0f0f0;
-        }
-        .delete-btn {
-            color: red;
-            cursor: pointer;
-            font-weight: bold;
-        }
+
     </style>
 </head>
 <body>
 <header>
-    <img src="../images/logo.png" alt="Bookstore Logo" class="logo">
-    <h1 class="title">Admin Dashboard</h1>
-
+    <img src="../images/logo.png" alt="Bookstore Logo" class="logo" />
     <div class="bar">
         <nav>
             <a href="../index.html">Home</a>
             <a href="products.html">Products</a>
             <a href="cart.html">Shopping Cart</a>
             <a href="contact.html">Contact Us</a>
-            <a href="login.html">Login</a>
         </nav>
         <div class="search-bar">
             <form>
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search in dashboard..." />
+                <input type="text" placeholder="Search for books..." />
             </form>
         </div>
+        <nav>
+            <a href="login.html" class="login">Login</a>
+            <a href="signup.html" class="signup">Sign up</a>
+        </nav>
     </div>
+    <h1 class="title">Admin Dashboard</h1>
 </header>
 
 <section class="admin-section">
