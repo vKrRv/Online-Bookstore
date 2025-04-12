@@ -391,7 +391,7 @@ main {
     margin-left: 5px;
 }
 
-.add-to-cart {
+.add-to-cart a {
     width: 100%;
     padding: 8px;
     background: #007BFF;
@@ -504,4 +504,10 @@ main {
     color: red;
     cursor: pointer;
     font-weight: bold;
+}
+
+.index-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
