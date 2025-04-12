@@ -3,40 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Helps adjust the website for smaller devices (Smartphones or tablets). -->
-    <title>Checkout - Online Bookstore</title>
-    <link href="../css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- This library have lots of uses, but I'm using it specifically for "Magnifying glass icon" in search bar -->
+    <title>Checkout</title>
+    <link href="/css/style.css" rel="stylesheet" />
 </head>
 <body>
-<header>
-    <img src="../images/logo.png" alt="Bookstore Logo" class="logo" />
-    <div class="bar">
-        <nav>
-            <a href="./bookstore/index.html">Home</a>
-            <a href="./pages/products.html">Products</a>
-            <a href="./pages/cart.html">Shopping Cart</a>
-            <a href="./pages/contact.html">Contact Us</a>
-        </nav>
-        <div class="search-bar">
-            <form>
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for books..." />
-            </form>
-        </div>
-        <nav>
-            <a href="./pages/login.html" class="login">Login</a>
-            <a href="./pages/login.html" class="signup">Sign up</a>
-        </nav>
+<div class="payment">
+    <h1>Payment</h1>
+    <div class="payment-details">
+        <h2>Card Details</h2>
+        <hr>
+        <form>
+            <label for="card-number"><strong>Card Number:</strong></label>
+            <input type="text" id="card-number" placeholder="0000-0000-0000-0000"/>
+            <br>
+            <label for="expire"><strong>Expire date:</strong></label>
+            <input type="month" id="expire" />
+            <br>
+            <label for="cvv"><strong>CVV:</strong></label>
+            <input type="text" id="cvv" maxlength="3" placeholder="765"/>
+            <p>Book A - 49.95 Riyals</p>
+            <hr class="short-hr">
+            <p><strong>Shipping:</strong> 5.00 Riyals</p>
+            <p><strong>VAT (15%):</strong> 8.25 Riyals</p> <!-- 15% of 55.00 Riyals -->
+            <p><strong>Total:</strong> 63.20 Riyals</p> <!-- Updated total -->
+        </form>
     </div>
-    <h1 class="title">Checkout</h1>
-</header>
+    <div class="customer-info">
+        <h2>Customer Information</h2>
+        <hr>
+        <p><strong>Name:</strong> Name</p>
+        <p><strong>Email:</strong> username@example.com</p>
+        <p><strong>Phone Number</strong> +966 00 000 0000</p>
 
-
-
-    <footer>
-        <p>&copy; 2025 Online Bookstore. All rights reserved.</p>
-    </footer>
+        <p><strong>Shipping Address:</strong> 123 Main St, City, State, ZIP</p>
+    </div>
+    <div class="cart-btn">
+        <button class="back-shop-btn"><a href="cart.html" class="btn-text">Back to cart</a></button>
+        <button class="checkout-btn"><a href="bill.html" class="btn-text">Confirm payment</a></button>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2025 Online Bookstore. All rights reserved.</p>
+</footer>
 </body>
 </html>

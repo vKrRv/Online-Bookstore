@@ -157,8 +157,8 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .book-cover {
-    width: 150px;
-    height: auto;
+    height: 225px;
+    width: auto;
     border-radius: 8px;
     float: left;
     margin: 8px 25px 25px 50px;
@@ -176,20 +176,20 @@ footer {
     font-size: 25px;
     margin-bottom: 25px;
 }
-.cart-btn {
+.cart-btn { /*Need renaming*/
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 30px;
 }
-.back-shop-btn {
+.back-shop-btn { /*Need renaming*/
     width: 400px;
     background-color: #777777;
     margin-bottom: 10px;
     display: block;
     border-radius: 10px;
 }
-.checkout-btn {
+.checkout-btn { /*Need renaming*/
     width: 400px;
     border-radius: 10px;
 }
@@ -198,7 +198,7 @@ footer {
     cursor: pointer;
 }
 /* Order Confirmation Styles */
-.order-confirmation {
+.order-confirmation, .payment {
     max-width: 600px;
     margin: auto;
     background: white;
@@ -208,7 +208,7 @@ footer {
 }
 
 .order-confirmation .order-details, 
-.order-confirmation .customer-info {
+.order-confirmation .customer-info, .payment-details {
     margin-top: 20px;
     padding: 10px;
     border: 1px solid #ddd;
@@ -235,6 +235,29 @@ footer {
     margin-top: 75px; 
 }
 .short-hr {
-    width: 50%; 
+    width: 55%; 
     margin: 10px auto; /* Center the hr */
+}
+/*Checkout page styling*/
+.payment-details label {
+    display: inline-block;
+    width: 150px;
+}
+.payment-details input{
+    width: 200px;
+    display: inline;
+}
+/* Saudi Riyal Symbol */
+@font-face {
+    font-family: 'SaudiRiyalSymbol';
+    src: url('../fonts/saudiriyalsymbol.woff2') format('woff2'),
+         url('../fonts/saudiriyalsymbol.woff') format('woff'),
+         url('../fonts/saudiriyalsymbol.otf') format('opentype');
+}
+
+.symbol {
+    font-family: 'SaudiRiyalSymbol', sans-serif;
+    font-size: inherit;
+    margin: 20px auto;
+    color: inherit;
 }
