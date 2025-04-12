@@ -235,10 +235,9 @@ footer {
     margin-top: 75px; 
 }
 .short-hr {
-    width: 50%; 
+    width: 55%; 
     margin: 10px auto; /* Center the hr */
 }
-
 /*Checkout page styling*/
 .payment-details label {
     display: inline-block;
@@ -248,3 +247,16 @@ footer {
     width: 200px;
     display: inline;
 }
+/* Saudi Riyal Symbol */
+@font-face {
+    font-family: 'SaudiRiyalSymbol';
+    src: url('../fonts/saudiriyalsymbol.woff2') format('woff2'),
+         url('../fonts/saudiriyalsymbol.woff') format('woff'),
+         url('../fonts/saudiriyalsymbol.otf') format('opentype');
+}
+
+.symbol {
+    font-family: 'SaudiRiyalSymbol', sans-serif;
+    font-size: inherit;
+    margin: 20px auto;
+    color: inherit;
