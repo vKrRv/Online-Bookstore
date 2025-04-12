@@ -469,3 +469,39 @@ main {
     margin-left: 0;
 }
 
+.admin-section {
+    margin-top: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+.admin-section h3 {
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 5px;
+}
+.admin-form input, .admin-form textarea {
+    width: 96.7%;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+}
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.admin-table th, .admin-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+.admin-table th {
+    background-color: #f0f0f0;
+}
+.delete-btn {
+    color: red;
+    cursor: pointer;
+    font-weight: bold;
+}
