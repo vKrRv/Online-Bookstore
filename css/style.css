@@ -247,6 +247,12 @@ footer {
     width: 200px;
     display: inline;
 }
+.customer-info input{
+    margin: 0 auto;
+    width: 300px;
+    margin-top: 10px;
+    text-align: center;
+}
 /* Saudi Riyal Symbol */
 @font-face {
     font-family: 'SaudiRiyalSymbol';
