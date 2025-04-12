@@ -144,7 +144,7 @@ footer {
 #cart {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -152,7 +152,7 @@ footer {
     width: 380px;
     height: 350px;
     background-color: #fff;
-    margin: 10px 0;
+    margin: 10px 5px;
     padding: 10px 10px 5px 10px;
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
