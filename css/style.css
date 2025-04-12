@@ -137,13 +137,14 @@ footer {
     color: #777;
     text-align: center;
     padding: 20px 0;
+    clear: both;
 }
 
 /*Shopping cart styling*/
 #cart {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -151,17 +152,25 @@ footer {
     width: 380px;
     height: 350px;
     background-color: #fff;
-    margin: 10px 0;
+    margin: 10px 5px;
     padding: 10px 10px 5px 10px;
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.book-cover {
+.cart-item .book-cover {
     height: 225px;
     width: auto;
     border-radius: 8px;
     float: left;
     margin: 8px 25px 25px 50px;
+}
+.book-cover {
+    height: 500px;
+    width: auto;
+    border-radius: 8px;
+    float: left;
+    margin-right: 20px;
+    box-shadow: 0 0 10px darkgrey;
 }
 .item-details {
     margin-top: 75px;
@@ -247,6 +256,12 @@ footer {
     width: 200px;
     display: inline;
 }
+.customer-info input{
+    margin: 0 auto;
+    width: 300px;
+    margin-top: 10px;
+    text-align: center;
+}
 /* Saudi Riyal Symbol */
 @font-face {
     font-family: 'SaudiRiyalSymbol';
@@ -261,6 +276,7 @@ footer {
     margin: 20px auto;
     color: inherit;
 }
+
 .form-container {
     display: inline-block;
     text-align: left;
@@ -293,4 +309,24 @@ footer {
 
 .form-container a:hover {
     text-decoration: underline;
+    
+.book-details {
+    margin-top: 20px;
+    text-align: left;
+}
+.book-details input {
+    width: 35px;
+    height: 40px;
+    display: inline;
+    border-radius: 10px 0 0 10px;
+    padding: 0 5px 0 10px;
+    border: solid #0056b3;
+    margin-right: 0;
+}
+.book-details button {
+    width: 200px;
+    height: 44px;
+    display: inline-block;
+    border-radius: 0 10px 10px 0;
+    margin-left: 0;
 }
