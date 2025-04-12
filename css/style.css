@@ -261,3 +261,36 @@ footer {
     margin: 20px auto;
     color: inherit;
 }
+.form-container {
+    display: inline-block;
+    text-align: left;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    margin: 30px auto;
+}
+
+.form-container input {
+    width: calc(100% - 20px);
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: block;
+}
+
+.form-container button {
+    background: #007BFF;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.form-container a:hover {
+    text-decoration: underline;
+}
