@@ -16,7 +16,7 @@
     <section id="cart">
         <div class="cart-item">
             <button class="remove-btn">×</button>
-            <img src="../images/book1.png" alt="Book Cover" class="book-cover">
+            <img src="../assets/images/book1.png" alt="Book Cover" class="book-cover">
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
@@ -26,7 +26,7 @@
         </div>
         <div class="cart-item">
             <button class="remove-btn">×</button>
-            <img src="../images/book2.png" alt="Book Cover" class="book-cover">
+            <img src="../assets/images/book2.png" alt="Book Cover" class="book-cover">
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
@@ -36,7 +36,7 @@
         </div>
         <div class="cart-item">
             <button class="remove-btn">×</button>
-            <img src="../images/book3.png" alt="Book Cover" class="book-cover">
+            <img src="../assets/images/book3.png" alt="Book Cover" class="book-cover">
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
@@ -46,7 +46,7 @@
         </div>
         <div class="cart-item">
             <button class="remove-btn">×</button>
-            <img src="../images/book4.png" alt="Book Cover" class="book-cover">
+            <img src="../assets/images/book4.png" alt="Book Cover" class="book-cover">
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
@@ -56,7 +56,7 @@
         </div>
         <div class="cart-item">
             <button class="remove-btn">×</button>
-            <img src="../images/book5.png" alt="Book Cover" class="book-cover">
+            <img src="../assets/images/book5.png" alt="Book Cover" class="book-cover">
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>

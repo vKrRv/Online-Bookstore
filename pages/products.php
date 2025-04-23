@@ -91,7 +91,7 @@
                     <div class="book">
                         <a href="product-details.php?id=<?php echo $book['book_id']; ?>" style="text-decoration: none; color: inherit;">
                             <div class="book-image-container">
-                                <img src="../images/<?php echo $book['image']; ?>" alt="<?php echo $book['title']; ?>" class="book-cover">
+                                <img src="../assets/images/<?php echo $book['image']; ?>" alt="<?php echo $book['title']; ?>" class="book-cover">
                                 <div class="show-details-btn">View Details</div>
                             </div>
                             <strong><?php echo $book['title']; ?></strong>

@@ -30,7 +30,7 @@
             ?>
             <div class="book-details">
                 <div class="book-image">
-                    <img src="../images/<?php echo $book['image']; ?>" alt="<?php echo $book['title']; ?>" />
+                    <img src="../assets/images/<?php echo $book['image']; ?>" alt="<?php echo $book['title']; ?>" />
                 </div>
                 <div class="book-info">
                     <h1><?php echo $book['title']; ?></h1>
