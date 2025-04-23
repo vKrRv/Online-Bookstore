@@ -19,16 +19,16 @@
         <h2>Featured Books</h2>
         <div class="book-list">
             <?php
-            // Include database connection
+            // Include db connection
             include 'includes/db.php';
             
-            // Query to fetch 4 random books from the database
+            // Fetch 4 random books from the database
             $query = "SELECT * FROM books ORDER BY RAND() LIMIT 4";
             $result = $conn->query($query);
             
-            // Check if there are any books
+            
             if ($result->num_rows > 0) {
-                // Loop through each book and display it
+                // Loop and display each book
                 while($book = $result->fetch_assoc()) {
                     ?>
                     <div class="book">
@@ -56,7 +56,7 @@
                 echo "<p class='no-books'>No books available at the moment.</p>";
             }
             
-            // Close the database connection
+            // Close db connection
             $conn->close();
             ?>
         </div>
