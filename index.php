@@ -11,28 +11,8 @@
 </head>
 
 <body>
-    <header>
-        <img src="./images/logo.jpg" alt="Bookstore Logo" class="logo" />
-    <div class="bar">
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="./pages/products.html">Products</a>
-            <a href="./pages/cart.html">Shopping Cart</a>
-            <a href="./pages/contact.html">Contact Us</a>
-        </nav>
-        <div class="search-bar">
-            <form>
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for books..." />
-            </form>
-        </div>
-        <nav>
-            <a href="./pages/login.html" class="login">Login</a>
-            <a href="./pages/signup.html" class="signup">Sign up</a>
-        </nav>
-    </div>
-        <h1 class="title">Welcome to Our Online Bookstore</h1>
-    </header>
+    <?php include 'includes/header.php'; ?>
+    <h1 class="title">Welcome to Our Bookstore</h1>
     <section>
         <p class="description">Welcome to the best bookstore with the best prices!<br>
             Find all kinds of books here at unbeatable deals!</p>
@@ -41,9 +21,9 @@
     <section>
         <h2>Popular Books</h2>
         <div class="book-list">
-            <div class="book"> <strong>Book 1</strong> <br> A thrilling adventure novel. <br><a href="./pages/product-details.html" class="btn">View</a></div>
-            <div class="book"> <strong>Book 2</strong> <br> A must-read mystery book. <br><a href="./pages/product-details.html" class="btn">View</a></div>
-            <div class="book"> <strong>Book 3</strong> <br> An inspiring self-help guide. <br><a href="./pages/product-details.html" class="btn">View</a></div>
+            <div class="book"> <strong>Book 1</strong> <br> A thrilling adventure novel. <br><a href="./pages/product-details.php" class="btn">View</a></div>
+            <div class="book"> <strong>Book 2</strong> <br> A must-read mystery book. <br><a href="./pages/product-details.php" class="btn">View</a></div>
+            <div class="book"> <strong>Book 3</strong> <br> An inspiring self-help guide. <br><a href="./pages/product-details.php" class="btn">View</a></div>
         </div>
     </section>
 
