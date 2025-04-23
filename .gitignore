@@ -5,4 +5,4 @@
 /workspace.xml
 # Editor-based HTTP Client requests
 /httpRequests/
-#includes/config.php
+includes/config.php
