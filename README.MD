@@ -19,22 +19,33 @@ online-bookstore/
 │   ├── delete-book.php        
 │   └── dashboard.php          
 │
-├── css/                      z # Stylesheets
-│   └── styles.css             
+├── assets/                    # Static assets
+│   ├── cards/                 # Payment cards images
+│   │   ├── apple-pay.svg
+│   │   ├── mada.svg
+│   │   ├── mastercard.svg
+│   │   └── visa.svg
+│   ├── fonts/                 # Font files
+│   │   ├── saudiriyalsymbol.otf
+│   │   ├── saudiriyalsymbol.woff
+│   │   └── saudiriyalsymbol.woff2
+│   └── images/                # Product and site images
+│       ├── 1984.jpg
+│       ├── atomic_habits.jpg
+│       ├── clean_code.jpg
+│       ├── logo.png
+│       ├── start_with_why.jpg
+│       ├── the_hobbit.jpg
+│       └── thinking_fast_slow.jpg
 │
-├── fonts/                     # Saudi Riyal symbol
-│    ├── saudiriyalsmybol.woff  
-│    └── ...
-│
-├── images/                    # Product images
-│   ├── clean_code.jpg
-│   ├── atomic_habits.jpg
-│   └── ...
+├── css/                       # Stylesheets
+│   └── style.css             
 │
 ├── includes/                  # Reusable logic
-│   ├── config.php             # Database credintials
+│   ├── config.php             # Database credentials
 │   ├── db.php                 # Database connection logic
-│   └── header.php             # Shared header HTML
+│   ├── header.php             # Shared header HTML
+│   └── footer.php             # Shared footer HTML
 │
 ├── js/                        # JavaScript files
 │   └── validation.js                  
@@ -43,16 +54,15 @@ online-bookstore/
 │   ├── product-details.php    # Product detail page         
 │   ├── cart.php               # Shopping cart
 │   ├── checkout.php           # Checkout and order review
+│   ├── bill.php               # Order receipt/bill
 │   ├── contact.php            # Contact page + map
 │   ├── products.php           # Products list page
 │   ├── signup.php             # Signup page for users
 │   └── ...
 │             
 ├── bookstore.sql              # Database schema + sample data
-│
 ├── index.php                  # Home page with product listings
-├── README.md                  
-└── .gitignore                 
+└── README.MD                  
 ```
 
 ## Instructions
