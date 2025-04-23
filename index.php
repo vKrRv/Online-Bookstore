@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <img src="./images/logo.png" alt="Bookstore Logo" class="logo" />
+        <img src="./images/logo.jpg" alt="Bookstore Logo" class="logo" />
     <div class="bar">
         <nav>
             <a href="index.html">Home</a>
