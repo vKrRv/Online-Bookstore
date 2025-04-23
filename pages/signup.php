@@ -9,29 +9,8 @@
 </head>
 <body>
 
-  <header>
-    <img src="../images/logo.png" alt="Bookstore Logo" class="logo" />
-    <div class="bar">
-      <nav>
-        <a href="../index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="cart.html">Shopping Cart</a>
-        <a href="contact.html">Contact Us</a>
-      </nav>
-      <div class="search-bar">
-        <form>
-          <i class="fas fa-search"></i>
-          <input type="text" placeholder="Search for books..." />
-        </form>
-      </div>
-      <nav>
-        <a href="login.html" class="login">Login</a>
-        <a href="signup.html" class="signup">Sign up</a>
-      </nav>
-    </div>
-    <h1 class="title">Create Account</h1>
-  </header>
-
+  <?php include '../includes/header.php'; ?>
+  <h1 class="title">Create an Account</h1>
   <section class="form-container">
     <form>
       <input type="text" placeholder="Full Name" required />
@@ -41,7 +20,7 @@
       <input type="password" placeholder="Confirm Password" required />
       <button type="submit">Create Account</button>
       <div style="text-align: center; margin-top: 10px;">
-        <a href="login.html" style="color: #007BFF; text-decoration: none;">Already have an account? Login</a>
+        <a href="../admin/login.php" style="color: #007BFF; text-decoration: none;">Already have an account? Login</a>
       </div>
     </form>
   </section>

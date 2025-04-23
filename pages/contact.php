@@ -10,29 +10,8 @@
     <!-- This library have lots of uses, but I'm using it specifically for "Magnifying glass icon" in search bar -->
 </head>
 <body>
-<header>
-    <img src="../images/logo.png" alt="Bookstore Logo" class="logo" />
-    <div class="bar">
-        <nav>
-            <a href="../index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="cart.html">Shopping Cart</a>
-            <a href="contact.html">Contact Us</a>
-        </nav>
-        <div class="search-bar">
-            <form>
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for books..." />
-            </form>
-        </div>
-        <nav>
-            <a href="login.html" class="login">Login</a>
-            <a href="signup.html" class="signup">Sign up</a>
-        </nav>
-    </div>
+<?php include '../includes/header.php'; ?>
     <h1 class="title">Contact Us</h1>
-</header>
-
     <section>
         <p>Address: King Fahad Road, Khobar</p>
         <p>Email: khobarbookstore@gmail.com</p>
