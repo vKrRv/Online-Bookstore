@@ -3,30 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Helps adjust the website for smaller devices (Smartphones or tablets). -->
     <title>Home - Online Bookstore</title>
     <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- This library have lots of uses, but I'm using it specifically for "Magnifying glass icon" in search bar -->
 </head>
 
 <body>
     <?php include 'includes/header.php'; ?>
     <h1 class="title">Welcome to Our Bookstore</h1>
     <section>
-        <p class="description">Welcome to the best bookstore with the best prices!<br>
-            Find all kinds of books here at unbeatable deals!</p>
+        <p class="description">Discover a world of knowledge and imagination with our carefully curated selection of books.<br>From bestsellers to hidden gems, we have something for every reader.</p>
     </section>
-
+    <!-- Featured books section -->
     <section>
-        <h2>Popular Books</h2>
+        <h2>Featured Books</h2>
         <div class="book-list">
-            <div class="book"> <strong>Book 1</strong> <br> A thrilling adventure novel. <br><a href="pages/product-details.php" class="btn">View</a></div>
-            <div class="book"> <strong>Book 2</strong> <br> A must-read mystery book. <br><a href="pages/product-details.php" class="btn">View</a></div>
-            <div class="book"> <strong>Book 3</strong> <br> An inspiring self-help guide. <br><a href="pages/product-details.php" class="btn">View</a></div>
+            <?php
+            // Include database connection
+            include 'includes/db.php';
+            
+            // Query to fetch 4 random books from the database
+            $query = "SELECT * FROM books ORDER BY RAND() LIMIT 4";
+            $result = $conn->query($query);
+            
+            // Check if there are any books
+            if ($result->num_rows > 0) {
+                // Loop through each book and display it
+                while($book = $result->fetch_assoc()) {
+                    ?>
+                    <div class="book">
+                        <a href="pages/product-details.php?id=<?php echo $book['book_id']; ?>" style="text-decoration: none; color: inherit;">
+                            <div class="book-image-container">
+                                <img src="images/<?php echo $book['image']; ?>" alt="<?php echo $book['title']; ?>" class="book-cover">
+                                <div class="show-details-btn">Show Details</div>
+                            </div>
+                            <strong><?php echo $book['title']; ?></strong>
+                        </a>
+                        <p class="price"><span class="symbol">&#xea;</span> <?php echo $book['price']; ?></p>
+                        <div class="stock-info">
+                            <?php if($book['stock'] <= 5): ?>
+                                <i class="fas fa-exclamation-circle low-stock"></i>
+                                <p class="low-stock">Only <?php echo $book['stock']; ?> left</p>
+                            <?php else: ?>
+                                <i class="fas fa-check-circle in-stock"></i>
+                                <p class="in-stock">In Stock</p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo "<p class='no-books'>No books available at the moment.</p>";
+            }
+            
+            // Close the database connection
+            $conn->close();
+            ?>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="pages/products.php" class="view-all-btn">View All Books</a>
         </div>
     </section>
-
+    
     <footer class="index-footer">
         <p>&copy; 2025 Online Bookstore. All rights reserved.</p>
     </footer>
