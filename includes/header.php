@@ -1,36 +1,63 @@
+<?php
+// Calculate the base URL path depending on where the file is included from
+$basePath = '';
+$currentPath = $_SERVER['PHP_SELF'];
+$depth = substr_count($currentPath, '/') - 1;
+
+if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/') !== false) {
+    $basePath = '../';
+} else if (strpos($currentPath, '/includes/') !== false) {
+    $basePath = '../';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Helps adjust the website for smaller devices (Smartphones or tablets). -->
     <title>Home - Online Bookstore</title>
-    <link href="../css/style.css" rel="stylesheet" />
+    <link href="<?php echo $basePath; ?>css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- This library have lots of uses, but I'm using it specifically for "Magnifying glass icon" in search bar -->
+    <!-- This library have lots of uses, but I'm using it specifically for icons in the header and throughout the site -->
 </head>
 
 <body>
-    <header>
-        <img src="../images/logo.jpg" alt="Bookstore Logo" class="logo" />
-    <div class="bar">
-        <nav>
-            <a href="../index.php">Home</a>
-            <a href="../pages/products.php">Products</a>
-            <a href="../pages/cart.php">Shopping Cart</a>
-            <a href="../pages/contact.php">Contact Us</a>
-        </nav>
-        <div class="search-bar">
-            <form>
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for books..." />
-            </form>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="<?php echo $basePath; ?>index.php">
+                    <img src="<?php echo $basePath; ?>assets/images/logo.png" alt="Bookstore Logo" class="logo" />
+                </a>
+            </div>
+
+            <div class="nav-container">
+                <nav class="main-nav">
+                    <a href="<?php echo $basePath; ?>index.php"><i class="fas fa-home"></i> Home</a>
+                    <a href="<?php echo $basePath; ?>pages/products.php"><i class="fas fa-book"></i> Books</a>
+                    <a href="<?php echo $basePath; ?>pages/cart.php"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    <a href="<?php echo $basePath; ?>pages/contact.php"><i class="fas fa-envelope"></i> Contact</a>
+                </nav>
+            </div>
+
+            <div class="search-container">
+                <form class="search-form">
+                    <input type="text" placeholder="Search for books..." />
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+            <div class="user-actions">
+                <a href="<?php echo $basePath; ?>admin/login.php" class="login-btn"><i class="fas fa-sign-in-alt"></i>
+                    Login</a>
+                <a href="<?php echo $basePath; ?>pages/signup.php" class="signup-btn"><i class="fas fa-user-plus"></i>
+                    Sign up</a>
+            </div>
         </div>
-        <nav>
-            <a href="../admin/login.php" class="login">Login</a>
-            <a href="../pages/signup.php" class="signup">Sign up</a>
-        </nav>
-    </div>
-</header>
-</body>
-</html>
+    </header>
+
+    <?php
+    // After migration notice
+    // Images have been moved from /images/ to /assets/images/
+    // Fonts have been moved from /fonts/ to /assets/fonts/
+    ?>
