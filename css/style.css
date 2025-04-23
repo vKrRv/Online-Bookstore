@@ -192,6 +192,39 @@ footer {
     align-items: center;
     margin: 30px;
 }
+.back-shop-btn { 
+    width: 400px;
+    background-color: #777777;
+    margin-bottom: 10px;
+    display: block;
+    border-radius: 10px;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+.checkout-btn { 
+    width: 400px;
+    border-radius: 10px;
+    background: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+.back-shop-btn:hover {
+    background-color: #5a5a5a;
+}
+.checkout-btn:hover {
+    background-color: #0056b3;
+}
+.btn-text {
+    all: unset;
+    cursor: pointer;
+}
 .back-shop-btn { /*Need renaming*/
     width: 400px;
     background-color: #777777;

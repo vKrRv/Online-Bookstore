@@ -67,8 +67,8 @@
 
     </section>
 <div class="cart-btn">
-<button class="back-shop-btn">Back to shopping</button>
-<button class="checkout-btn"><a href="checkout.php" class="btn-text">Continue to payment</a></button>
+<a href="../pages/products.php" class="back-shop-btn">Back to shopping</a>
+<a href="checkout.php" class="checkout-btn">Continue to payment</a>
 </div>
 
     <footer>

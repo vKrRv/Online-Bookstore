@@ -22,7 +22,7 @@
     <p class="symbol">Price: <strong>&#xea; 55</strong></p>
     <div>
         <input type="number" value="1" min="1">
-        <button class="checkout-btn"><a href="cart.php" class="btn-text">Continue to payment</a></button>
+        <a href="cart.php" class="checkout-btn">Continue to payment</a>
     </div>
 
 </div>

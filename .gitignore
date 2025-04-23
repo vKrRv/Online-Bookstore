@@ -6,3 +6,4 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 includes/config.php
+.htaccess
