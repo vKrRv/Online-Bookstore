@@ -11,29 +11,8 @@
 </head>
 
 <body>
-<header>
-    <img src="../images/logo.png" alt="Bookstore Logo" class="logo" />
-    <div class="bar">
-        <nav>
-            <a href="../index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="cart.html">Shopping Cart</a>
-            <a href="contact.html">Contact Us</a>
-        </nav>
-        <div class="search-bar">
-            <form>
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for books..." />
-            </form>
-        </div>
-        <nav>
-            <a href="login.html" class="login">Login</a>
-            <a href="signup.html" class="signup">Sign up</a>
-        </nav>
-    </div>
-    <h1 class="title">Your Shopping Cart</h1>
-</header>
-
+<?php include '../includes/header.php'; ?>
+    <h1 class="title">Shopping Cart</h1>
     <section id="cart">
         <div class="cart-item">
             <button class="remove-btn">×</button>
@@ -41,7 +20,7 @@
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
-                <p class="symbol">Price: <strong>&#xea; 30</strong></p>
+                <p class="symbol">Price: <strong>&#xea;</strong> 30</p>
                 <input type="number" value="1" min="1">
             </div>
         </div>
@@ -51,7 +30,7 @@
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
-                <p class="symbol">Price: <strong>&#xea; 25</strong></p>
+                <p class="symbol">Price: <strong>&#xea;</strong> 25</p>
                 <input type="number" value="1" min="1">
             </div>
         </div>
@@ -61,7 +40,7 @@
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
-                <p class="symbol">Price: <strong>&#xea; 20</strong></p>
+                <p class="symbol">Price: <strong>&#xea;</strong> 20</p>
                 <input type="number" value="1" min="1">
             </div>
         </div>
@@ -71,7 +50,7 @@
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
-                <p class="symbol">Price: <strong>&#xea; 20</strong></p>
+                <p class="symbol">Price: <strong>&#xea;</strong> 20</p>
                 <input type="number" value="1" min="1">
             </div>
         </div>
@@ -81,7 +60,7 @@
             <div class="item-details">
                 <h3>Book Title</h3>
                 <p>Author Name</p>
-                <p class="symbol">Price: <strong>&#xea; 20</strong></p>
+                <p class="symbol">Price: <strong>&#xea;</strong> 20</p>
                 <input type="number" value="1" min="1">
             </div>
         </div>
@@ -89,7 +68,7 @@
     </section>
 <div class="cart-btn">
 <button class="back-shop-btn">Back to shopping</button>
-<button class="checkout-btn"><a href="checkout.html" class="btn-text">Continue to payment</a></button>
+<button class="checkout-btn"><a href="checkout.php" class="btn-text">Continue to payment</a></button>
 </div>
 
     <footer>

@@ -32,7 +32,7 @@
         <div class="thank-you">
             <p>Your order has been Confirmed</p>
         </div>
-        <a href="../index.html" class="button btn">Continue Shopping</a>
+        <a href="../index.php" class="button btn">Continue Shopping</a>
     </div>
     <footer>
         <p>&copy; 2025 Online Bookstore. All rights reserved.</p>

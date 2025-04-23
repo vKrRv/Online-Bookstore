@@ -10,29 +10,8 @@
     <!-- This library have lots of uses, but I'm using it specifically for "Magnifying glass icon" in search bar -->
 </head>
 <body>
-<header>
-    <img src="../images/logo.png" alt="Bookstore Logo" class="logo" />
-    <div class="bar">
-        <nav>
-            <a href="../index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="cart.html">Shopping Cart</a>
-            <a href="contact.html">Contact Us</a>
-        </nav>
-        <div class="search-bar">
-            <form>
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for books..." />
-            </form>
-        </div>
-        <nav>
-            <a href="login.html" class="login">Login</a>
-            <a href="signup.html" class="signup">Sign up</a>
-        </nav>
-    </div>
-    <h1 class="title">All Books</h1>
-</header>
-
+<?php include '../includes/header.php'; ?>
+<h1 class="title">All Books</h1>
 <main>
     <div class="sort-options">
       <span>Sort by:</span>
@@ -58,7 +37,7 @@
             <i class="fas fa-star-half-alt"></i>
             <span>(4,321)</span>
           </div>
-          <p class="price">$30 <span class="original-price">$40</span></p>
+          <p class="price"><span class="symbol">&#xea;</span> 30 <span class="original-price"><span class="symbol">&#xea;</span> 40</span></p>
           <button class="add-to-cart">Add to Cart</button>
         </div>
       </div>
@@ -78,7 +57,7 @@
             <i class="far fa-star"></i>
             <span>(3,987)</span>
           </div>
-          <p class="price">$25 <span class="original-price">$30</span></p>
+          <p class="price"><span class="symbol">&#xea;</span> 25 <span class="original-price"><span class="symbol">&#xea;</span> 30</span></p>
           <button class="add-to-cart">Add to Cart</button>
         </div>
       </div>
@@ -98,7 +77,7 @@
             <i class="fas fa-star"></i>
             <span>(5,642)</span>
           </div>
-          <p class="price">$20</p>
+          <p class="price"><span class="symbol">&#xea;</span> 20</p>
           <button class="add-to-cart">Add to Cart</button>
         </div>
       </div>
@@ -117,9 +96,7 @@
             <i class="fas fa-star"></i>
             <span>(8,123)</span>
           </div>
-          <p class="price">
-            $29.99<span class="original-price">$35.99</span>
-          </p>
+          <p class="price"><span class="symbol">&#xea;</span> 29.99<span class="original-price"><span class="symbol">&#xea;</span> 35.99</span></p>
           <button class="add-to-cart">Add to Cart</button>
         </div>
       </div>
@@ -138,9 +115,7 @@
             <i class="fas fa-star-half-alt"></i>
             <span>(6,789)</span>
           </div>
-          <p class="price">
-            $19.99 <span class="original-price">$29.99</span>
-          </p>
+          <p class="price"><span class="symbol">&#xea;</span> 19.99 <span class="original-price"><span class="symbol">&#xea;</span> 29.99</span></p>
           <button class="add-to-cart">Add to Cart</button>
         </div>
       </div>
@@ -159,9 +134,7 @@
             <i class="fas fa-star"></i>
             <span>(9,876)</span>
           </div>
-          <p class="price">
-            $10.99 <span class="original-price">$16.99</span>
-          </p>
+          <p class="price"><span class="symbol">&#xea;</span> 10.99 <span class="original-price"><span class="symbol">&#xea;</span> 16.99</span></p>
           <button class="add-to-cart">Add to Cart</button>
         </div>
       </div>

@@ -11,28 +11,9 @@
     </style>
 </head>
 <body>
-<header>
-    <img src="../images/logo.png" alt="Bookstore Logo" class="logo" />
-    <div class="bar">
-        <nav>
-            <a href="../index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="cart.html">Shopping Cart</a>
-            <a href="contact.html">Contact Us</a>
-        </nav>
-        <div class="search-bar">
-            <form>
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for books..." />
-            </form>
-        </div>
-        <nav>
-            <a href="login.html" class="login">Login</a>
-            <a href="signup.html" class="signup">Sign up</a>
-        </nav>
-    </div>
-    <h1 class="title">Admin Dashboard</h1>
-</header>
+<?php include '../includes/header.php'; ?>
+<h1 class="title">Admin Dashboard</h1>
+
 
 <section class="admin-section">
     <h3>Manage Products</h3>
@@ -50,8 +31,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr><td>Quantum Computing</td><td>John Doe</td><td>$49.99</td><td><span class="delete-btn">Delete</span></td></tr>
-            <tr><td>Web Dev 101</td><td>Jane Smith</td><td>$29.99</td><td><span class="delete-btn">Delete</span></td></tr>
+            <tr><td>Quantum Computing</td><td>John Doe</td><td><span class="symbol">&#xea;</span> 49.99</td><td><span class="delete-btn">Delete</span></td></tr>
+            <tr><td>Web Dev 101</td><td>Jane Smith</td><td><span class="symbol">&#xea;</span> 29.99</td><td><span class="delete-btn">Delete</span></td></tr>
         </tbody>
     </table>
 </section>
@@ -65,8 +46,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr><td>#001</td><td>Ali Ahmed</td><td>$63.20</td><td>Confirmed</td></tr>
-            <tr><td>#002</td><td>Fatimah Noor</td><td>$89.50</td><td>Pending</td></tr>
+            <tr><td>#001</td><td>Ali Ahmed</td><td><span class="symbol">&#xea;</span> 63.20</td><td>Confirmed</td></tr>
+            <tr><td>#002</td><td>Fatimah Noor</td><td><span class="symbol">&#xea;</span> 89.50</td><td>Pending</td></tr>
         </tbody>
     </table>
 </section>

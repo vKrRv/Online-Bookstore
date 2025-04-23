@@ -38,8 +38,8 @@
         <input type="text" id="address" value="123 Main St, City, State, ZIP" placeholder="Enter shipping address">
     </div>
     <div class="cart-btn">
-        <button class="back-shop-btn"><a href="cart.html" class="btn-text">Back to cart</a></button>
-        <button class="checkout-btn"><a href="bill.html" class="btn-text">Confirm payment</a></button>
+        <button class="back-shop-btn"><a href="cart.php" class="btn-text">Back to cart</a></button>
+        <button class="checkout-btn"><a href="bill.php" class="btn-text">Confirm payment</a></button>
     </div>
 </div>
 <footer>

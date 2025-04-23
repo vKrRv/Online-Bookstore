@@ -39,7 +39,8 @@ nav a {
     font-weight: bold;
 }
 nav a:hover {
-
+    color: #000000; /* Example: Change text color on hover */
+    text-decoration: underline; /* Example: Add underline on hover */
 }
 .login {
     background-color: #007cff;
@@ -52,7 +53,7 @@ nav a:hover {
     border-radius: 3px 5px 5px 3px;
 }
 .search-bar {
-    margin: 0 20px 0 200px;
+    margin-left: auto;
     width: auto;
     display: flex;
     align-items: center;
@@ -273,11 +274,9 @@ footer {
 .symbol {
     font-family: 'SaudiRiyalSymbol', sans-serif;
     font-size: inherit;
-    margin: 20px auto;
+    margin-right: 5px; /* Adds spacing between the symbol and the number */
     color: inherit;
 }
-
-
 
 
 /* Product List Page Styles */
