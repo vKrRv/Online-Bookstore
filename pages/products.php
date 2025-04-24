@@ -122,8 +122,6 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2025 Online Bookstore. All rights reserved.</p>
-    </footer>
+    <?php include '../includes/footer.php'; ?>
 </body>
 </html>

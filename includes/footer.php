@@ -1,5 +1,5 @@
 <?php
-// Calculate the base URL path for the footer
+// Calculate  base URL 
 $footerBasePath = '';
 $currentPath = $_SERVER['PHP_SELF'];
 
@@ -51,8 +51,10 @@ if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/')
             </form>
             <div class="payment-methods">
                 <img src="<?php echo $footerBasePath; ?>assets/cards/visa.svg" alt="Visa" class="payment-icon">
-                <img src="<?php echo $footerBasePath; ?>assets/cards/mastercard.svg" alt="Mastercard" class="payment-icon">
-                <img src="<?php echo $footerBasePath; ?>assets/cards/apple-pay.svg" alt="Apple Pay" class="payment-icon">
+                <img src="<?php echo $footerBasePath; ?>assets/cards/mastercard.svg" alt="Mastercard"
+                    class="payment-icon">
+                <img src="<?php echo $footerBasePath; ?>assets/cards/apple-pay.svg" alt="Apple Pay"
+                    class="payment-icon">
                 <img src="<?php echo $footerBasePath; ?>assets/cards/mada.svg" alt="Mada" class="payment-icon">
             </div>
         </div>

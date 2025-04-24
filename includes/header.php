@@ -1,5 +1,5 @@
 <?php
-// Calculate the base URL path depending on where the file is included from
+// Calculate  base URL 
 $basePath = '';
 $currentPath = $_SERVER['PHP_SELF'];
 $depth = substr_count($currentPath, '/') - 1;
@@ -19,18 +19,11 @@ if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/')
     <title>Home - Online Bookstore</title>
     <link href="<?php echo $basePath; ?>css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- This library have lots of uses, but I'm using it specifically for icons in the header and throughout the site -->
 </head>
 
 <body>
     <header class="main-header">
         <div class="header-container">
-            <div class="logo-container">
-                <a href="<?php echo $basePath; ?>index.php">
-                    <img src="<?php echo $basePath; ?>assets/images/logo.png" alt="Bookstore Logo" class="logo" />
-                </a>
-            </div>
-
             <div class="nav-container">
                 <nav class="main-nav">
                     <a href="<?php echo $basePath; ?>index.php"><i class="fas fa-home"></i> Home</a>
@@ -57,7 +50,4 @@ if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/')
     </header>
 
     <?php
-    // After migration notice
-    // Images have been moved from /images/ to /assets/images/
-    // Fonts have been moved from /fonts/ to /assets/fonts/
     ?>

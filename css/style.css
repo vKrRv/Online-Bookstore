@@ -45,47 +45,11 @@ body {
     flex-wrap: wrap;
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    background-color: #ffffff;
-}
-
-.logo-container a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-.logo {
-    height: 80px;
-    border-radius: 0;
-    box-shadow: none;
-    margin-right: 12px;
-    transition: transform 0.3s ease;
-    background-color: #ffffff;
-    padding: 5px;
-    object-fit: contain;
-    mix-blend-mode: normal;
-    border: 2px solid #ffffff;
-}
-
-.logo:hover {
-    transform: scale(1.05);
-}
-
-.site-name {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #2c3e50;
-    margin-left: 10px;
-    letter-spacing: 0.5px;
-}
-
 .nav-container {
     flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; 
+    margin-right: 20px;
 }
 
 .main-nav {

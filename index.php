@@ -2,7 +2,7 @@
 $pageTitle = "Home - BookHaven";
 include 'includes/header.php';
 ?>
-<h1 class="title">Welcome to Our Bookstore</h1>
+<h1 class="title">Welcome to Book Haven</h1>
 <section>
     <p class="description">Discover a world of knowledge and imagination with our carefully curated selection of
         books.<br>From bestsellers to hidden gems, we have something for every reader.</p>
