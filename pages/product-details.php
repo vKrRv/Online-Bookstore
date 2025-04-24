@@ -14,7 +14,7 @@
     <?php include '../includes/header.php'; ?>
     <?php
     // Include db connection 
-    include '../includes/db.php'; 
+    include '../includes/db.php';
 
     // See if we have a book ID in the URL
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -68,10 +68,7 @@
     // Close db connection
     $conn->close();
     ?>
-
-    <footer class="index-footer">
-        <p>&copy; 2025 Online Bookstore. All rights reserved.</p>
-    </footer>
+    <?php include '../includes/footer.php'; ?>
 </body>
-<?php include 'includes/footer.php'; ?>
+
 </html>
