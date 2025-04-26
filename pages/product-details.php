@@ -7,27 +7,61 @@
     <title>Product Details - Online Bookstore</title>
     <link href="../css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- This library have lots of uses, but I'm using it specifically for "Magnifying glass icon" in search bar -->
 </head>
 
 <body>
-    <?php include '../includes/header.php'; ?>
+    <?php 
+    session_start();
+    include '../includes/header.php'; 
+    ?>
+
     <?php
-    // Include db connection 
     include '../includes/db.php';
 
-    // See if we have a book ID in the URL
+    $message = "";
+    $messageType = ""; // success or error
+
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $book_id = $_GET['id'];
 
-        // Fetch book details from the db
         $query = "SELECT * FROM books WHERE book_id = $book_id";
         $result = $conn->query($query);
 
-        // Check if it exists
         if ($result->num_rows > 0) {
             $book = $result->fetch_assoc();
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['quantity'])) {
+                $quantity = intval($_POST['quantity']);
+                
+                if ($quantity < 1) {
+                    $message = "⚠️ Value must be greater than or equal to 1.";
+                    $messageType = "error";
+                } elseif ($quantity > $book['stock']) {
+                    $message = "⚠️ Sorry, not enough stock available. Only {$book['stock']} left.";
+                    $messageType = "error";
+                } else {
+                    if (!isset($_SESSION['cart'])) {
+                        $_SESSION['cart'] = [];
+                    }
+                    
+                    if (isset($_SESSION['cart'][$book_id])) {
+                        $_SESSION['cart'][$book_id]['quantity'] += $quantity;
+                    } else {
+                        $_SESSION['cart'][$book_id] = [
+                            'book_id' => $book['book_id'],
+                            'title' => $book['title'],
+                            'price' => $book['price'],
+                            'quantity' => $quantity,
+                            'image' => $book['image']
+                        ];
+                    }
+                    
+                    $message = "✅ Book added to cart successfully!";
+                    $messageType = "success";
+                }
+            }
             ?>
+
             <div class="book-details">
                 <div class="book-image">
                     <img src="../assets/images/<?php echo $book['image']; ?>" alt="<?php echo $book['title']; ?>" />
@@ -47,16 +81,23 @@
                         <p class="stock"><i class="fas fa-check-circle"></i> In Stock: <?php echo $book['stock']; ?> available</p>
                     <?php endif; ?>
 
-                    <div class="purchase-controls">
-                        <input type="number" value="1" min="1" max="<?php echo $book['stock']; ?>">
-                        <a href="cart.php?id=<?php echo $book['book_id']; ?>" class="checkout-btn">
+                    <?php if (!empty($message)): ?>
+                        <div class="message-box <?php echo $messageType; ?>">
+                            <?php echo $message; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <form method="post" class="purchase-controls">
+                        <input type="number" name="quantity" value="1"  >
+                        <button type="submit" class="checkout-btn">
                             <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </a>
-                    </div>
+                        </button>
+                    </form>
 
                     <a href="products.php" class="back-to-products"><i class="fas fa-arrow-left"></i> Back to All Books</a>
                 </div>
             </div>
+
             <?php
         } else {
             echo "<div class='error-message'><i class='fas fa-exclamation-triangle'></i><h2>Book not found</h2><p>The book you are looking for does not exist.</p><a href='products.php'><i class='fas fa-arrow-left'></i></a></div>";
@@ -65,9 +106,9 @@
         echo "<div class='error-message'><i class='fas fa-exclamation-triangle'></i><h2>Invalid Request</h2><p>Please provide a valid book ID.</p><a href='products.php'><i class='fas fa-arrow-left'></i></a></div>";
     }
 
-    // Close db connection
     $conn->close();
     ?>
+    
     <?php include '../includes/footer.php'; ?>
 </body>
 
