@@ -1393,4 +1393,28 @@ main {
     .footer-section ul li a::before {
         display: none;
     }
+
+} 
+.message-box {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
+
+.message-box.success {
+    background: #e9f9ee;
+    border: 2px solid #28a745;
+    color: #28a745;
+}
+
+.message-box.error {
+    background: #fbeaea;
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+}
+
