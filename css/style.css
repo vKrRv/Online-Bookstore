@@ -1418,3 +1418,13 @@ main {
     color: #e74c3c;
 }
 
+ /* إضافة بسيطة للستايل */
+ .edit-btn {
+    color: blue;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.delete-btn {
+    color: red;
+    cursor: pointer;
+}

@@ -6,14 +6,11 @@
     <title>Admin Dashboard - Online Bookstore</title>
     <link href="../css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
 
-    </style>
 </head>
 <body>
 <?php include '../includes/header.php'; ?>
 <h1 class="title">Admin Dashboard</h1>
-
 
 <section class="admin-section">
     <h3>Manage Products</h3>
@@ -31,8 +28,24 @@
             </tr>
         </thead>
         <tbody>
-            <tr><td>Quantum Computing</td><td>John Doe</td><td><span class="symbol">&#xea;</span> 49.99</td><td><span class="delete-btn">Delete</span></td></tr>
-            <tr><td>Web Dev 101</td><td>Jane Smith</td><td><span class="symbol">&#xea;</span> 29.99</td><td><span class="delete-btn">Delete</span></td></tr>
+            <tr>
+                <td>Quantum Computing</td>
+                <td>John Doe</td>
+                <td><span class="symbol">&#xea;</span> 49.99</td>
+                <td>
+                    <span class="edit-btn">Edit</span> | 
+                    <span class="delete-btn">Delete</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Web Dev 101</td>
+                <td>Jane Smith</td>
+                <td><span class="symbol">&#xea;</span> 29.99</td>
+                <td>
+                    <span class="edit-btn">Edit</span> | 
+                    <span class="delete-btn">Delete</span>
+                </td>
+            </tr>
         </tbody>
     </table>
 </section>
@@ -46,8 +59,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr><td>#001</td><td>Ali Ahmed</td><td><span class="symbol">&#xea;</span> 63.20</td><td>Confirmed</td></tr>
-            <tr><td>#002</td><td>Fatimah Noor</td><td><span class="symbol">&#xea;</span> 89.50</td><td>Pending</td></tr>
+            <tr>
+                <td>#001</td>
+                <td>Ali Ahmed</td>
+                <td><span class="symbol">&#xea;</span> 63.20</td>
+                <td>Confirmed</td>
+            </tr>
+            <tr>
+                <td>#002</td>
+                <td>Fatimah Noor</td>
+                <td><span class="symbol">&#xea;</span> 89.50</td>
+                <td>Pending</td>
+            </tr>
         </tbody>
     </table>
 </section>
@@ -66,8 +89,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr><td>Ali Ahmed</td><td>ali@example.com</td><td><span class="delete-btn">Delete</span></td></tr>
-            <tr><td>Fatimah Noor</td><td>fatimah@example.com</td><td><span class="delete-btn">Delete</span></td></tr>
+            <tr>
+                <td>Ali Ahmed</td>
+                <td>ali@example.com</td>
+                <td>
+                    <span class="edit-btn">Edit</span> | 
+                    <span class="delete-btn">Delete</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Fatimah Noor</td>
+                <td>fatimah@example.com</td>
+                <td>
+                    <span class="edit-btn">Edit</span> | 
+                    <span class="delete-btn">Delete</span>
+                </td>
+            </tr>
         </tbody>
     </table>
 </section>
@@ -75,5 +112,8 @@
 <footer>
     <p>&copy; 2025 Online Bookstore. Admin Panel.</p>
 </footer>
+
+<script src="dashboard.js"></script>
+
 </body>
 </html>
