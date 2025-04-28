@@ -1,5 +1,10 @@
 <?php
-// Calculate  base URL 
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Calculate base URL 
 $basePath = '';
 $currentPath = $_SERVER['PHP_SELF'];
 $depth = substr_count($currentPath, '/') - 1;
@@ -41,10 +46,24 @@ if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/')
             </div>
 
             <div class="user-actions">
-                <a href="<?php echo $basePath; ?>admin/login.php" class="login-btn"><i class="fas fa-sign-in-alt"></i>
-                    Login</a>
-                <a href="<?php echo $basePath; ?>pages/signup.php" class="signup-btn"><i class="fas fa-user-plus"></i>
-                    Sign up</a>
+                <?php if (isset($_SESSION['admin_username'])): ?>
+                    <div class="user-welcome">
+                        <i class="fas fa-user-shield"></i> Welcome, <?php echo $_SESSION['admin_username']; ?>
+                    </div>
+                    <a href="<?php echo $basePath; ?>admin/dashboard.php" class="login-btn">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                    <a href="<?php echo $basePath; ?>admin/logout.php" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                <?php else: ?>
+                    <a href="<?php echo $basePath; ?>admin/login.php" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a href="<?php echo $basePath; ?>pages/signup.php" class="signup-btn">
+                        <i class="fas fa-user-plus"></i> Sign up
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
     </header>

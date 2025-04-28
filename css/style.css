@@ -8,8 +8,8 @@
 @font-face {
     font-family: 'Saudi Riyal Symbol';
     src: url('../assets/fonts/saudiriyalsymbol.woff2') format('woff2'),
-         url('../assets/fonts/saudiriyalsymbol.woff') format('woff'),
-         url('../assets/fonts/saudiriyalsymbol.otf') format('opentype');
+        url('../assets/fonts/saudiriyalsymbol.woff') format('woff'),
+        url('../assets/fonts/saudiriyalsymbol.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -48,7 +48,7 @@ body {
 .nav-container {
     flex: 1;
     display: flex;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     margin-right: 20px;
 }
 
@@ -130,7 +130,8 @@ body {
     align-items: center;
 }
 
-.login-btn, .signup-btn {
+.login-btn,
+.signup-btn {
     text-decoration: none;
     padding: 8px 18px;
     border-radius: 6px;
@@ -165,22 +166,63 @@ body {
     margin-right: 5px;
 }
 
+.user-welcome {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 6px;
+    background-color: rgba(0, 123, 255, 0.1);
+    margin-right: 10px;
+}
+
+.user-welcome i {
+    margin-right: 5px;
+    color: #007bff;
+}
+
+.logout-btn {
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    color: white;
+    background-color: #dc3545;
+    box-shadow: 0 2px 5px rgba(220, 53, 69, 0.3);
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.4);
+}
+
+.logout-btn i {
+    margin-right: 5px;
+}
+
 /* Responsive header */
 @media (max-width: 992px) {
     .header-container {
         flex-direction: column;
         padding: 15px;
     }
-    
-    .logo-container, .nav-container, .search-container, .user-actions {
+
+    .logo-container,
+    .nav-container,
+    .search-container,
+    .user-actions {
         margin: 8px 0;
         width: 100%;
     }
-    
+
     .search-form input {
         width: 100%;
     }
-    
+
     .user-actions {
         justify-content: center;
     }
@@ -190,7 +232,7 @@ body {
     .main-nav {
         flex-wrap: wrap;
     }
-    
+
     .main-nav a {
         font-size: 0.9rem;
         padding: 8px 12px;
@@ -230,26 +272,33 @@ body {
     border-radius: 0 15px 15px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 nav a {
     margin: 10px;
     text-decoration: none;
     color: white;
     font-weight: bold;
 }
+
 nav a:hover {
-    color: #000000; /* Example: Change text color on hover */
-    text-decoration: underline; /* Example: Add underline on hover */
+    color: #000000;
+    /* Example: Change text color on hover */
+    text-decoration: underline;
+    /* Example: Add underline on hover */
 }
+
 .login {
     background-color: #007cff;
     border-radius: 8px;
     padding: 6px;
 }
+
 .signup {
     margin-left: 3px;
     padding: 6px;
     border-radius: 3px 5px 5px 3px;
 }
+
 .search-bar {
     margin-left: auto;
     width: auto;
@@ -258,18 +307,22 @@ nav a:hover {
     gap: 10px;
     position: relative;
 }
+
 .search-bar form {
     position: relative;
     display: flex;
     align-items: center;
 }
+
 .search-bar i {
     position: absolute;
     left: 7px;
     color: darkgray;
 }
+
 .search-bar input {
-    padding: 5px 5px 5px 30px; /* left padding for icon space */
+    padding: 5px 5px 5px 30px;
+    /* left padding for icon space */
     width: 200px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -292,14 +345,14 @@ nav a:hover {
     background: white;
     border-radius: 12px;
     width: 280px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     overflow: hidden;
 }
 
 .book:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .book-image-container {
@@ -321,7 +374,7 @@ nav a:hover {
     max-width: 90%;
     object-fit: contain;
     transition: transform 0.4s ease;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
 .show-details-btn {
@@ -371,7 +424,7 @@ nav a:hover {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    line-clamp: 2; 
+    line-clamp: 2;
     line-height: 1.5;
 }
 
@@ -417,7 +470,7 @@ nav a:hover {
     text-decoration: none;
     border-radius: 30px;
     font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,123,255,0.3);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
     transition: all 0.3s ease;
     margin-top: 2rem;
 }
@@ -425,37 +478,37 @@ nav a:hover {
 .view-all-btn:hover {
     background: #0056b3;
     transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,123,255,0.4);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
 }
 
 .add-to-cart-btn {
-    background: linear-gradient(to right, #2ecc71, #27ae60); 
+    background: linear-gradient(to right, #2ecc71, #27ae60);
     color: white;
-    padding: 12px 20px; 
+    padding: 12px 20px;
     text-decoration: none;
-    border-radius: 30px; 
+    border-radius: 30px;
     font-weight: 600;
     font-size: 1.05rem;
     transition: all 0.3s ease;
     margin-top: 18px;
-    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3); 
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
     border: none;
-    display: block; 
+    display: block;
     letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
-    width: 100%; 
-    box-sizing: border-box; 
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .add-to-cart-btn:hover {
-    background: linear-gradient(to right, #27ae60, #219653); 
-    transform: translateY(-4px); 
-    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4); 
+    background: linear-gradient(to right, #27ae60, #219653);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
 }
 
 .add-to-cart-btn:active {
-    transform: translateY(-1px); 
+    transform: translateY(-1px);
     box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);
 }
 
@@ -507,11 +560,13 @@ h2 {
 
 .form-container a:hover {
     text-decoration: underline;
-}   
+}
+
 .book-details-summary {
     margin-top: 20px;
     text-align: left;
 }
+
 .book-details-summary input {
     width: 35px;
     height: 40px;
@@ -521,6 +576,7 @@ h2 {
     border: solid #0056b3;
     margin-right: 0;
 }
+
 .book-details-summary button {
     width: 200px;
     height: 44px;
@@ -539,27 +595,35 @@ h2 {
     margin-right: auto;
     text-align: left;
 }
+
 .admin-section h3 {
     border-bottom: 2px solid #007BFF;
     padding-bottom: 5px;
 }
-.admin-form input, .admin-form textarea {
+
+.admin-form input,
+.admin-form textarea {
     width: 96.7%;
     padding: 10px 15px;
     margin-bottom: 10px;
 }
+
 .admin-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
-.admin-table th, .admin-table td {
+
+.admin-table th,
+.admin-table td {
     border: 1px solid #ccc;
     padding: 8px;
 }
+
 .admin-table th {
     background-color: #f0f0f0;
 }
+
 .delete-btn {
     color: red;
     cursor: pointer;
@@ -592,6 +656,7 @@ footer {
     align-items: center;
     flex-wrap: wrap;
 }
+
 .cart-item {
     width: 380px;
     height: 350px;
@@ -601,6 +666,7 @@ footer {
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .cart-item .book-cover {
     height: 225px;
     width: auto;
@@ -608,6 +674,7 @@ footer {
     float: left;
     margin: 8px 25px 25px 50px;
 }
+
 .book-cover {
     height: 500px;
     width: auto;
@@ -616,6 +683,7 @@ footer {
     margin-right: 20px;
     box-shadow: 0 0 10px darkgrey;
 }
+
 .item-details {
     margin-top: 75px;
 }
@@ -629,13 +697,16 @@ footer {
     font-size: 25px;
     margin-bottom: 25px;
 }
-.cart-btn { /*Need renaming*/
+
+.cart-btn {
+    /*Need renaming*/
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 30px;
 }
-.back-shop-btn { 
+
+.back-shop-btn {
     width: 400px;
     background-color: #777777;
     margin-bottom: 10px;
@@ -646,7 +717,8 @@ footer {
     text-decoration: none;
     text-align: center;
 }
-.checkout-btn { 
+
+.checkout-btn {
     width: 400px;
     border-radius: 10px;
     background: #007BFF;
@@ -658,33 +730,43 @@ footer {
     display: inline-block;
     text-align: center;
 }
+
 .back-shop-btn:hover {
     background-color: #5a5a5a;
 }
+
 .checkout-btn:hover {
     background-color: #0056b3;
 }
+
 .btn-text {
     all: unset;
     cursor: pointer;
 }
-.back-shop-btn { /*Need renaming*/
+
+.back-shop-btn {
+    /*Need renaming*/
     width: 400px;
     background-color: #777777;
     margin-bottom: 10px;
     display: block;
     border-radius: 10px;
 }
-.checkout-btn { /*Need renaming*/
+
+.checkout-btn {
+    /*Need renaming*/
     width: 400px;
     border-radius: 10px;
 }
+
 .btn-text {
     all: unset;
     cursor: pointer;
 }
+
 /* Order Confirmation Styles */
-.order-confirmation, .payment {
+.order-confirmation,
+.payment {
     max-width: 600px;
     margin: auto;
     background: white;
@@ -693,18 +775,21 @@ footer {
     box-shadow: 0 0 10px darkgrey;
 }
 
-.order-confirmation .order-details, 
-.order-confirmation .customer-info, .payment-details {
+.order-confirmation .order-details,
+.order-confirmation .customer-info,
+.payment-details {
     margin-top: 20px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+
 .order-confirmation .thank-you {
     margin-top: 30px;
     font-size: 30px;
     color: #4CAF50;
 }
+
 .order-confirmation .button {
     display: inline-block;
     margin: 20px;
@@ -714,43 +799,50 @@ footer {
     text-decoration: none;
     border-radius: 6px;
 }
+
 .order-confirmation .button:hover {
     background-color: #0056b3;
 }
-.space{ 
-    margin-top: 75px; 
+
+.space {
+    margin-top: 75px;
 }
+
 .short-hr {
-    width: 55%; 
-    margin: 10px auto; 
+    width: 55%;
+    margin: 10px auto;
 }
+
 /*Checkout page styling*/
 .payment-details label {
     display: inline-block;
     width: 150px;
 }
-.payment-details input{
+
+.payment-details input {
     width: 200px;
     display: inline;
 }
-.customer-info input{
+
+.customer-info input {
     margin: 0 auto;
     width: 300px;
     margin-top: 10px;
     text-align: center;
 }
+
 /* Saudi Riyal Symbol */
 @font-face {
     font-family: 'SaudiRiyalSymbol';
     src: url('../assets/fonts/saudiriyalsymbol.woff2') format('woff2'),
-         url('../assets/fonts/saudiriyalsymbol.woff') format('woff'),
-         url('../assets/fonts/saudiriyalsymbol.otf') format('opentype');
+        url('../assets/fonts/saudiriyalsymbol.woff') format('woff'),
+        url('../assets/fonts/saudiriyalsymbol.otf') format('opentype');
 }
 
 .symbol {
     font-family: 'SaudiRiyalSymbol', sans-serif;
     font-size: inherit;
-    margin-right: 5px; 
+    margin-right: 5px;
     color: inherit;
 }
 
@@ -763,7 +855,8 @@ main {
     text-align: left;
 }
 
-.sort-options, .filter-options {
+.sort-options,
+.filter-options {
     margin: 20px 0;
     display: inline-flex;
     align-items: center;
@@ -771,18 +864,20 @@ main {
     background-color: #f8f9fa;
     padding: 12px 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     margin-right: 15px;
 }
 
-.sort-options label, .filter-options label {
+.sort-options label,
+.filter-options label {
     font-weight: 600;
     color: #2c3e50;
     font-size: 0.95rem;
     white-space: nowrap;
 }
 
-.sort-options select, .filter-options select {
+.sort-options select,
+.filter-options select {
     padding: 10px 14px;
     border-radius: 6px;
     border: 1px solid #ddd;
@@ -791,19 +886,22 @@ main {
     font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     outline: none;
     min-width: 160px;
 }
 
-.sort-options select:hover, .filter-options select:hover {
+.sort-options select:hover,
+.filter-options select:hover {
     border-color: #007bff;
 }
 
-.sort-options select:focus, .filter-options select:focus {
+.sort-options select:focus,
+.filter-options select:focus {
     border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -815,16 +913,16 @@ main {
     background: white;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     position: relative;
-    width: 250px; 
+    width: 250px;
     margin: 0 auto;
 }
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .badge {
@@ -852,7 +950,7 @@ main {
 
 .product-info {
     padding: 15px;
-    height: 180px; 
+    height: 180px;
     display: flex;
     flex-direction: column;
 }
@@ -919,12 +1017,12 @@ main {
 
 /* Product Details Page Styles */
 .book-details {
-    max-width: 1200px; 
-    margin: 50px auto; 
+    max-width: 1200px;
+    margin: 50px auto;
     background: white;
-    border-radius: 20px; 
-    padding: 40px; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
@@ -932,7 +1030,7 @@ main {
 }
 
 .book-image {
-    flex: 0 0 400px; 
+    flex: 0 0 400px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -941,14 +1039,14 @@ main {
 .book-image img {
     max-width: 100%;
     height: auto;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.2); 
-    border-radius: 12px; 
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
     transition: transform 0.3s ease;
-    will-change: transform; 
+    will-change: transform;
 }
 
 .book-image img:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05);
 }
 
 .book-info {
@@ -959,27 +1057,27 @@ main {
 .book-info h1 {
     color: #2c3e50;
     margin: 0 0 20px 0;
-    font-size: 2.2rem; 
-    border-bottom: 3px solid #007BFF; 
+    font-size: 2.2rem;
+    border-bottom: 3px solid #007BFF;
     padding-bottom: 15px;
 }
 
 .book-info .description {
     margin: 25px 0;
     color: #444;
-    font-size: 1.15rem; 
+    font-size: 1.15rem;
     line-height: 1.8;
     text-align: justify;
     padding: 20px;
-    border-left: 4px solid #007BFF; 
+    border-left: 4px solid #007BFF;
 }
 
 .book-info .price {
-    font-size: 2rem; 
+    font-size: 2rem;
     color: #007BFF;
     font-weight: bold;
     margin: 25px 0;
-    background: #f0f7ff; 
+    background: #f0f7ff;
     display: inline-block;
     padding: 10px 20px;
     border-radius: 10px;
@@ -989,8 +1087,8 @@ main {
     color: #28a745;
     font-weight: bold;
     margin-bottom: 25px;
-    font-size: 1.2rem; 
-    background: #f0fff4; 
+    font-size: 1.2rem;
+    background: #f0fff4;
     display: inline-block;
     padding: 8px 16px;
     border-radius: 8px;
@@ -999,29 +1097,29 @@ main {
 .book-info .low-stock {
     color: #e74c3c;
     font-weight: bold;
-    font-size: 1.2rem; 
-    background: #fff5f5; 
+    font-size: 1.2rem;
+    background: #fff5f5;
     display: inline-block;
     padding: 8px 16px;
     border-radius: 8px;
 }
 
 .purchase-controls {
-    margin-top: 40px; 
+    margin-top: 40px;
     display: flex;
     align-items: center;
-    gap: 15px; 
+    gap: 15px;
 }
 
 .purchase-controls input {
-    width: 80px; 
-    height: 50px; 
-    border: 3px solid #007BFF; 
-    border-radius: 10px; 
+    width: 80px;
+    height: 50px;
+    border: 3px solid #007BFF;
+    border-radius: 10px;
     padding: 5px 15px;
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .purchase-controls .checkout-btn {
@@ -1029,22 +1127,22 @@ main {
     background: #28a745;
     color: white;
     font-weight: bold;
-    font-size: 1.3rem; 
+    font-size: 1.3rem;
     border: none;
-    border-radius: 10px; 
-    padding: 15px 30px; 
+    border-radius: 10px;
+    padding: 15px 30px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    box-shadow: 0 5px 15px rgba(40,167,69,0.3); 
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
 }
 
 .purchase-controls .checkout-btn:hover {
     background: #218838;
-    transform: translateY(-5px); 
-    box-shadow: 0 8px 20px rgba(40,167,69,0.4); 
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
 }
 
 .back-to-products {
@@ -1053,24 +1151,24 @@ main {
     color: #007BFF;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
     transition: all 0.3s ease;
 }
 
 .back-to-products:hover {
     color: #0056b3;
-    transform: translateX(-5px); 
+    transform: translateX(-5px);
 }
 
 .category-tag {
     display: inline-block;
     background: #f1f1f1;
-    padding: 8px 18px; 
-    border-radius: 30px; 
+    padding: 8px 18px;
+    border-radius: 30px;
     color: #555;
-    font-size: 1.1rem; 
+    font-size: 1.1rem;
     margin-top: 8px;
-    border: 1px solid #ddd; /
+    border: 1px solid #ddd;/
 }
 
 .error-message {
@@ -1080,7 +1178,7 @@ main {
     padding: 50px 40px;
     background: white;
     border-radius: 16px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
     border-top: 6px solid #e74c3c;
     position: relative;
     overflow: hidden;
@@ -1098,8 +1196,13 @@ main {
 }
 
 @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
 .error-message i {
@@ -1162,6 +1265,7 @@ main {
     0% {
         transform: translateX(-50%) scale(1.25);
     }
+
     100% {
         transform: translateX(-50%) scale(1.4) translateY(-10px);
     }
@@ -1171,12 +1275,12 @@ main {
     .book-details {
         padding: 30px;
     }
-    
+
     .book-image {
         flex: 1 0 100%;
         justify-content: center;
     }
-    
+
     .book-image img {
         max-width: 300px;
     }
@@ -1376,25 +1480,26 @@ main {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-    
+
     .footer-section {
         text-align: center;
     }
-    
+
     .footer-section h3::after {
         left: 50%;
         transform: translateX(-50%);
     }
-    
+
     .social-icons {
         justify-content: center;
     }
-    
+
     .footer-section ul li a::before {
         display: none;
     }
 
-} 
+}
+
 .message-box {
     max-width: 600px;
     margin: 30px auto;
@@ -1403,7 +1508,7 @@ main {
     text-align: center;
     font-weight: bold;
     border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .message-box.success {
@@ -1418,3 +1523,110 @@ main {
     color: #e74c3c;
 }
 
+
+/* Login and Signup Styles */
+.login-container,
+.signup-container {
+    max-width: 450px;
+    margin: 50px auto;
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.login-form,
+.signup-form {
+    margin-top: 30px;
+}
+
+.login-form input,
+.signup-form input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.login-form input:focus,
+.signup-form input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.login-form button,
+.signup-form button {
+    width: 100%;
+    padding: 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.25);
+    margin-top: 10px;
+}
+
+.login-form button:hover,
+.signup-form button:hover {
+    background: #0069d9;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.35);
+}
+
+.auth-icon {
+    font-size: 60px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.auth-link {
+    display: block;
+    margin-top: 20px;
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.auth-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* Style for login error message */
+.error-message {
+    color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    font-weight: 500;
+}
+
+/* Utility */
+.text-center {
+    text-align: center;
+}
+
+.inherit-color {
+    color: inherit;
+}
+
+.no-decoration {
+    text-decoration: none;
+}

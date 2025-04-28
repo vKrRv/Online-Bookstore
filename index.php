@@ -25,8 +25,7 @@ include 'includes/header.php';
             while ($book = $result->fetch_assoc()) {
                 ?>
                 <div class="book">
-                    <a href="pages/product-details.php?id=<?php echo $book['book_id']; ?>"
-                        style="text-decoration: none; color: inherit;">
+                    <a href="pages/product-details.php?id=<?php echo $book['book_id']; ?>" class="no-decoration inherit-color">
                         <div class="book-image-container">
                             <img src="assets/images/<?php echo $book['image']; ?>" alt="<?php echo $book['title']; ?>"
                                 class="book-cover">
@@ -56,7 +55,7 @@ include 'includes/header.php';
         ?>
     </div>
 
-    <div style="text-align: center;">
+    <div class="text-center">
         <a href="pages/products.php" class="view-all-btn">View All Books</a>
     </div>
 </section>
