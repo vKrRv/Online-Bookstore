@@ -1,87 +1,110 @@
 <?php
-// Database connection
-$conn = new mysqli('localhost', 'root', '', 'bookstore');
+include '../includes/db.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+if (isset($_GET['id'])) {
+    $book_id = (int) $_GET['id'];
+    $result = $conn->query("SELECT * FROM books WHERE book_id = $book_id");
 
-// Check if book ID is provided
-if (isset($_POST['update'])) {
-    $book_id = intval($_POST['book_id']);
+    if ($result && $row = $result->fetch_assoc()) {
+        // book found
+    } else {
+        echo "Book not found.";
+        exit;
+    }
+} elseif (isset($_POST['update'])) {
+    $book_id = (int) $_POST['book_id'];
     $title = $conn->real_escape_string($_POST['title']);
     $description = $conn->real_escape_string($_POST['description']);
-    $price = floatval($_POST['price']);
-    $stock = intval($_POST['stock']);
+    $price = (float) $_POST['price'];
+    $stock = (int) $_POST['stock'];
     $category = $conn->real_escape_string($_POST['category']);
-    $image = $conn->real_escape_string($_POST['image']); // يفترض أنك تدير رفع الصورة بمكان ثاني
 
-    // update book in database
-    $sql = "UPDATE books 
-            SET title='$title', description='$description', price=$price, stock=$stock, category='$category'
-            WHERE book_id=$book_id";
+    // Check if a new image is uploaded
+    if (!empty($_FILES['image']['name'])) {
+        $image_name = basename($_FILES['image']['name']);
+        $target_dir = "../assets/images/";
+        $target_file = $target_dir . $image_name;
+        $allowed_types = ['jpg', 'jpeg', 'png'];
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Book updated successfully.";
+        $file_ext = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        if (in_array($file_ext, $allowed_types)) {
+            move_uploaded_file($_FILES['image']['tmp_name'], $target_file);
+        } else {
+            echo "Only JPG, JPEG, and PNG files are allowed.";
+            exit;
+        }
+    } else {
+        //  if no new image is uploaded, keep the current image
+        $image_name = $_POST['current_image'];
+    }
+
+    $update = "UPDATE books SET 
+                title = '$title', 
+                description = '$description', 
+                price = $price, 
+                stock = $stock, 
+                image = '$image_name', 
+                category = '$category' 
+               WHERE book_id = $book_id";
+
+    if ($conn->query($update) === TRUE) {
+        header('Location: dashboard.php');
+        exit;
     } else {
         echo "Error updating book: " . $conn->error;
     }
-
-    header("Location: dashboard.php");
-    exit();
-} elseif (isset($_GET['id'])) {
-    $book_id = intval($_GET['id']);
-
-    // Fetch book details from database
-    $result = $conn->query("SELECT * FROM books WHERE book_id = $book_id");
-
-    if ($result->num_rows > 0) {
-        $book = $result->fetch_assoc();
-    } else {
-        echo "Book not found.";
-        exit();
-    }
 } else {
-    echo "No book ID provided.";
-    exit();
+    echo "Invalid request.";
+    exit;
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php if (isset($row)) { ?>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Book</title>
-    <link href="../css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit Book</title>
+        <link href="../css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </head>
 
-<body>
+    <body>
 
-    <?php include '../includes/header.php'; ?>
+        <?php include '../includes/header.php'; ?>
 
-    <h1 class="title">Edit Book</h1>
+        <div class="edit-container">
+            <h2>Edit Book</h2>
+            <form method="POST" action="edit-book.php" enctype="multipart/form-data">
+                <input type="hidden" name="book_id" value="<?php echo $row['book_id']; ?>">
+                <input type="hidden" name="current_image" value="<?php echo htmlspecialchars($row['image']); ?>">
 
-    <section class="admin-section">
-        <h3>Update Book Details</h3>
-        <form class="admin-form" method="post" action="edit-book.php">
-            <input type="hidden" name="book_id" value="<?= $book['book_id'] ?>">
-            <input type="text" name="title" placeholder="Book Title" value="<?= htmlspecialchars($book['title']) ?>" required>
-            <textarea name="description" placeholder="Description" required><?= htmlspecialchars($book['description']) ?></textarea>
-            <input type="number" name="price" placeholder="Price (e.g., 49.99)" step="0.01" value="<?= $book['price'] ?>" required>
-            <input type="number" name="stock" placeholder="Stock" value="<?= $book['stock'] ?>" required>
-            <input type="text" name="category" placeholder="Category" value="<?= htmlspecialchars($book['category']) ?>" required>
-            <input type="text" name="image" placeholder="Image filename (e.g., book.jpg)" value="<?= htmlspecialchars($book['image']) ?>">
-            <button type="submit" name="update">Update Book</button>
-        </form>
-    </section>
+                <label>Title:</label>
+                <input type="text" name="title" value="<?php echo htmlspecialchars($row['title']); ?>" required>
 
-    <footer>
-        <p>&copy; 2025 Online Bookstore. Admin Panel.</p>
-    </footer>
+                <label>Description:</label>
+                <textarea name="description" required><?php echo htmlspecialchars($row['description']); ?></textarea>
 
-</body>
+                <label>Price:</label>
+                <input type="number" step="0.01" name="price" value="<?php echo htmlspecialchars($row['price']); ?>" required>
 
-</html>
+                <label>Stock:</label>
+                <input type="number" name="stock" value="<?php echo htmlspecialchars($row['stock']); ?>" required>
+
+                <label>Category:</label>
+                <input type="text" name="category" value="<?php echo htmlspecialchars($row['category']); ?>" required>
+
+                <label>Upload New Image:</label>
+                <input type="file" name="image" accept=".jpg, .jpeg, .png">
+
+                <button type="submit" name="update">Update Book</button>
+            </form>
+
+            <a href="dashboard.php" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+    </body>
+
+    </html>
+<?php } ?>

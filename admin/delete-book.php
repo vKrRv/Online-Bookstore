@@ -1,31 +1,23 @@
 <?php
-// Database connection
-$conn = new mysqli('localhost', 'root', '', 'bookstore');
+include '../includes/db.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Check if book ID is provided
 if (isset($_GET['id'])) {
-    $book_id = intval($_GET['id']);
+    $book_id = (int) $_GET['id'];
 
-    // Delete book from database
-    $sql = "DELETE FROM books WHERE book_id = $book_id";
+    
+    $conn->query("DELETE FROM order_items WHERE book_id = $book_id");
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Book deleted successfully.";
+    
+    $delete = "DELETE FROM books WHERE book_id = $book_id";
+
+    if ($conn->query($delete) === TRUE) {
+        header('Location: dashboard.php');
+        exit;
     } else {
         echo "Error deleting book: " . $conn->error;
     }
 } else {
-    echo "No book ID provided.";
+    echo "Invalid request.";
+    exit;
 }
-
-$conn->close();
-
-// Redirect to dashboard after deletion
-header("Location: dashboard.php");
-exit();
 ?>

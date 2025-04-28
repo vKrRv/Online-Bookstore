@@ -6,105 +6,65 @@
     <title>Admin Dashboard - Online Bookstore</title>
     <link href="../css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 <body>
 <?php include '../includes/header.php'; ?>
+<?php include '../includes/db.php'; ?>
+
 <h1 class="title">Admin Dashboard</h1>
 
 <section class="admin-section">
-    <h3>Manage Products</h3>
-    <form class="admin-form">
-        <input type="text" placeholder="Book Title" required>
-        <input type="text" placeholder="Author" required>
-        <input type="number" placeholder="Price (e.g., 49.99)" required>
-        <textarea placeholder="Description" required></textarea>
-        <button type="submit">Add Book</button>
-    </form>
-    <table class="admin-table">
-        <thead>
-            <tr>
-                <th>Title</th><th>Author</th><th>Price</th><th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Quantum Computing</td>
-                <td>John Doe</td>
-                <td><span class="symbol">&#xea;</span> 49.99</td>
-                <td>
-                    <span class="edit-btn">Edit</span> | 
-                    <span class="delete-btn">Delete</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Web Dev 101</td>
-                <td>Jane Smith</td>
-                <td><span class="symbol">&#xea;</span> 29.99</td>
-                <td>
-                    <span class="edit-btn">Edit</span> | 
-                    <span class="delete-btn">Delete</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
+    <h1>Manage Products</h1>
+    <br>
 
-<section class="admin-section">
-    <h3>View Orders</h3>
-    <table class="admin-table">
-        <thead>
-            <tr>
-                <th>Order ID</th><th>Customer</th><th>Total</th><th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>#001</td>
-                <td>Ali Ahmed</td>
-                <td><span class="symbol">&#xea;</span> 63.20</td>
-                <td>Confirmed</td>
-            </tr>
-            <tr>
-                <td>#002</td>
-                <td>Fatimah Noor</td>
-                <td><span class="symbol">&#xea;</span> 89.50</td>
-                <td>Pending</td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
-<section class="admin-section">
-    <h3>User Management</h3>
-    <form class="admin-form">
-        <input type="text" placeholder="User Full Name" required>
-        <input type="email" placeholder="Email Address" required>
-        <button type="submit">Add User</button>
+    <h3>Search Books</h3>
+    <!--Form for searching books -->
+    <form class="admin-form" method="GET" action="">
+        <input type="text" name="search" placeholder="Search by Title..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+        <button type="submit" class="search-button">Search</button>
     </form>
-    <table class="admin-table">
+<br>
+    <!-- Form for adding new books -->
+    <h3>Add New Book</h3>
+    <form class="admin-form" id="addProductForm" method="POST" action="add_product.php" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Book Title" required>
+        <textarea name="description" placeholder="Description" required></textarea>
+        <input type="number" step="0.01" name="price" placeholder="Price (e.g., 49.99)" required>
+        <input type="number" name="stock" placeholder="Stock Quantity" required>
+        <input type="text" name="category" placeholder="Category" required>
+        <button type="submit" class="search-button">Add Book</button>
+    </form>
+
+    <!-- Table to display books -->
+    <table class="admin-table" id="productTable">
         <thead>
             <tr>
-                <th>Name</th><th>Email</th><th>Action</th>
+                <th>Title</th><th>Price</th><th>Stock</th><th>Category</th><th>Image</th><th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Ali Ahmed</td>
-                <td>ali@example.com</td>
-                <td>
-                    <span class="edit-btn">Edit</span> | 
-                    <span class="delete-btn">Delete</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Fatimah Noor</td>
-                <td>fatimah@example.com</td>
-                <td>
-                    <span class="edit-btn">Edit</span> | 
-                    <span class="delete-btn">Delete</span>
-                </td>
-            </tr>
+            <?php
+            $search = isset($_GET['search']) ? $_GET['search'] : '';
+            $query = "SELECT * FROM books";
+            if (!empty($search)) {
+                $search = $conn->real_escape_string($search);
+                $query .= " WHERE title LIKE '%$search%'";
+            }
+            $books = $conn->query($query);
+            while ($row = $books->fetch_assoc()) {
+                echo "<tr data-id='{$row['book_id']}'>
+                    <td class='title'>".htmlspecialchars($row['title'])."</td>
+                    <td class='price'>".htmlspecialchars($row['price'])."</td>
+                    <td class='stock'>".htmlspecialchars($row['stock'])."</td>
+                    <td class='category'>".htmlspecialchars($row['category'])."</td>
+                    <td><img src='../assets/images/".htmlspecialchars($row['image'])."' width='50'></td>
+                    <td>
+                        <a href='edit-book.php?id={$row['book_id']}' class='edit-btn'>Edit</a> | 
+                        <a href='delete-book.php?id={$row['book_id']}' class='delete-btn' onclick=\"return confirm('Are you sure you want to delete this book?');\">Delete</a>
+                    </td>
+                </tr>";
+            }
+            ?>
         </tbody>
     </table>
 </section>
@@ -113,7 +73,8 @@
     <p>&copy; 2025 Online Bookstore. Admin Panel.</p>
 </footer>
 
-<script src="dashboard.js"></script>
+
+</script>
 
 </body>
 </html>
