@@ -74,7 +74,5 @@
 </footer>
 
 
-</script>
-
 </body>
 </html>
