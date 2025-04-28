@@ -1523,7 +1523,6 @@ main {
     color: #e74c3c;
 }
 
-
 /* Login and Signup Styles */
 .login-container,
 .signup-container {
@@ -1629,4 +1628,16 @@ main {
 
 .no-decoration {
     text-decoration: none;
+}
+
+/* Admin button styles */
+.edit-btn {
+    color: blue;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.delete-btn {
+    color: red;
+    cursor: pointer;
 }
