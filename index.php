@@ -23,7 +23,7 @@ include 'includes/header.php';
         if ($result->num_rows > 0) {
             // Loop and display each book
             while ($book = $result->fetch_assoc()) {
-                ?>
+        ?>
                 <div class="book">
                     <a href="pages/product-details.php?id=<?php echo $book['book_id']; ?>" class="no-decoration inherit-color">
                         <div class="book-image-container">
@@ -44,7 +44,7 @@ include 'includes/header.php';
                         <?php endif; ?>
                     </div>
                 </div>
-                <?php
+        <?php
             }
         } else {
             echo "<p class='no-books'>No books available at the moment.</p>";
