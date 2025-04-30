@@ -8,12 +8,8 @@ session_start();
     );
 
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "bookstore";
-
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Include database connection
+include '../includes/db.php';
 
 // Check connection
 if (!$conn) {
