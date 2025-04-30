@@ -1,33 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Helps adjust the website for smaller devices (Smartphones or tablets). -->
     <title>Contact Us - Online Bookstore</title>
     <link href="../css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- This library have lots of uses, but I'm using it specifically for "Magnifying glass icon" in search bar -->
 </head>
+
 <body>
-<?php include '../includes/header.php'; ?>
-    <h1 class="title">Contact Us</h1>
-    <section>
-        <p>Address: King Fahad Road, Khobar</p>
-        <p>Email: khobarbookstore@gmail.com</p>
-        <p>Phone: +966 056 789 1230</p>
-        <div class="form-container">
-            <form>
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
+    <?php include '../includes/header.php'; ?>
+
+    <div class="contact-container">
+        <h1 class="title">Contact Us</h1>
+        <div class="description">
+            Have a question or feedback? We'd love to hear from you!
         </div>
-    </section>
-    
-    <footer>
-        <p>&copy; 2025 Online Bookstore. All rights reserved.</p>
-    </footer>
+
+        <div class="contact-content">
+            <div class="contact-info-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Address</h3>
+                            <p>King Fahad Road, Khobar</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p><a href="mailto:contactus@bookhaven.com" class="contact-email">contactus@bookhaven.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+966 056 789 1230</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>Opening Hours</h3>
+                            <p>Daily 9:00 AM - 10:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-book-open"></i>
+                        <div>
+                            <h3>About Us</h3>
+                            <p>We're passionate about books and dedicated to providing a wide selection of titles for
+                                our customers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <h2>Send Us a Message</h2>
+                <form class="contact-form" action="mailto:contactus@bookhaven.com" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="Name" placeholder="Enter your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="Email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="Subject" placeholder="Enter the subject">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="Message" placeholder="Write your message here..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="contact-submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <?php include '../includes/footer.php'; ?>
 </body>
+
 </html>
