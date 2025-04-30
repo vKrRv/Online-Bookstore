@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Unset session variables
-$_SESSION = array();
+session_unset();
 
 // Destroy session
 session_destroy();
