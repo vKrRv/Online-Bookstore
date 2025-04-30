@@ -89,7 +89,7 @@ cd Online-Bookstore
 3. Import `bookstore.sql` file
 
 ### 4. Configure Database Connection 
-Create `config.php` inside `includes/` directory:
+Create `config.php` inside `includes/` directory and add the following script:
 ```php
 return [
     'host' => 'localhost',
