@@ -10,8 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $query = "SELECT * FROM admins WHERE username='$username' AND password='$password'";
     $result = mysqli_query($conn, $query);
 
-    if (mysqli_num_rows($result) == 1) {
+    if (mysqli_num_rows($result) == 1) { // check if admin exists
         $_SESSION['admin_username'] = $username;
+        $_SESSION['admin'] = true; // admin session variable
         header("Location: dashboard.php");
         exit();
     } else {
