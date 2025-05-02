@@ -10,14 +10,14 @@ This is an online bookstore web application  built using HTML, CSS, JavaScript, 
 - Server: Apache (via XAMPP)
 
 ## File Structure
-```python
-online-bookstore/
+```
+Online-Bookstore/
 ├── admin/                     # Admin-only pages
-│   ├── login.php              
-│   ├── add-book.php           
-│   ├── edit-book.php          
-│   ├── delete-book.php        
-│   └── dashboard.php          
+│   ├── dashboard.php          # Admin dashboard
+│   ├── delete-book.php        # Delete book page
+│   ├── edit-book.php          # Edit book page
+│   ├── login.php              # Admin login
+│   └── logout.php             # Admin logout
 │
 ├── assets/                    # Static assets
 │   ├── cards/                 # Payment cards images
@@ -39,30 +39,31 @@ online-bookstore/
 │       └── thinking_fast_slow.jpg
 │
 ├── css/                       # Stylesheets
-│   └── style.css             
+│   └── style.css
 │
 ├── includes/                  # Reusable logic
 │   ├── config.php             # Database credentials
 │   ├── db.php                 # Database connection logic
-│   ├── header.php             # Shared header HTML
-│   └── footer.php             # Shared footer HTML
+│   ├── footer.php             # Shared footer HTML
+│   └── header.php             # Shared header HTML
 │
 ├── js/                        # JavaScript files
-│   └── validation.js                  
+│   ├── cart.js                # Cart logic
+│   └── validation.js          # Form validation
 │
 ├── pages/                     # Main user-facing pages
-│   ├── product-details.php    # Product detail page         
+│   ├── bill.php               # Order receipt/bill
 │   ├── cart.php               # Shopping cart
 │   ├── checkout.php           # Checkout and order review
-│   ├── bill.php               # Order receipt/bill
 │   ├── contact.php            # Contact page + map
+│   ├── product-details.php    # Product detail page
 │   ├── products.php           # Products list page
 │   ├── signup.php             # Signup page for users
-│   └── ...
-│             
+│   └── signup_process.php     # Signup form handler
+│
 ├── bookstore.sql              # Database schema + sample data
 ├── index.php                  # Home page with product listings
-└── README.MD                  
+└── README.MD                  # Project documentation
 ```
 
 ## Instructions
@@ -89,7 +90,7 @@ cd Online-Bookstore
 3. Import `bookstore.sql` file
 
 ### 4. Configure Database Connection 
-Edit `config.php`:
+Create `config.php` in `includes/` and add the following:
 ```php
 return [
     'host' => 'localhost',
