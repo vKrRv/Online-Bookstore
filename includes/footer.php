@@ -2,7 +2,7 @@
 // Calculate  base URL 
 $footerBasePath = '';
 $currentPath = $_SERVER['PHP_SELF'];
-
+// Adjust based on current directory
 if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/') !== false) {
     $footerBasePath = '../';
 } else if (strpos($currentPath, '/includes/') !== false) {
