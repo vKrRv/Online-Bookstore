@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up - Online Bookstore</title>
+  <title>Sign Up - Book Haven</title>
   <link href="../css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -29,14 +29,14 @@ if (session_status() === PHP_SESSION_NONE) {
       <?php if (isset($_SESSION['error'])): ?>
         <div class="error-message">
           <i class="fas fa-exclamation-circle"></i> <?php echo $_SESSION['error'];
-          unset($_SESSION['error']); ?>
+                                                    unset($_SESSION['error']); ?>
         </div>
       <?php endif; ?>
 
       <?php if (isset($_SESSION['success'])): ?>
         <div class="message-box success">
           <i class="fas fa-check-circle"></i> <?php echo $_SESSION['success'];
-          unset($_SESSION['success']); ?>
+                                              unset($_SESSION['success']); ?>
         </div>
       <?php endif; ?>
 
@@ -45,7 +45,7 @@ if (session_status() === PHP_SESSION_NONE) {
           <input type="text" placeholder="Full Name" name="name" required />
         </div>
         <div class="input-group">
-          <input type="text" placeholder="Username" name="username" required />
+          <input type="text" placeholder="Username" name="username" required/>
         </div>
         <div class="input-group">
           <input type="email" placeholder="Email Address" name="email" required />
