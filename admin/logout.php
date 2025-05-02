@@ -1,16 +1,16 @@
 <?php
-// Start  session if not already started
+// Start  session 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Unset session variables
+// Unset variables
 session_unset();
 
 // Destroy session
 session_destroy();
 
-// Redirect to login page
-header("Location: login.php");
+// Redirect to home 
+header("Location: ../index.php");
 exit();
 ?>
