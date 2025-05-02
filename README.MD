@@ -10,7 +10,7 @@ This is an online bookstore web application  built using HTML, CSS, JavaScript, 
 - Server: Apache (via XAMPP)
 
 ## File Structure
-```
+```python
 Online-Bookstore/
 ├── admin/                     # Admin-only pages
 │   ├── dashboard.php          # Admin dashboard
@@ -101,7 +101,7 @@ return [
 ```
 
 ### 5. Access the Website
-Visit:v
+Visit:
 ```arduino
 http://localhost/online-bookstore/
 ```
