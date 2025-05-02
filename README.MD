@@ -96,12 +96,12 @@ return [
     'host' => 'localhost',
     'user' => 'root',
     'pass' => '',
-    'db'   => 'bookstore'
+    'db'   => 'bookstore' 
 ];
 ```
 
 ### 5. Access the Website
-Visit:
+Visit:v
 ```arduino
 http://localhost/online-bookstore/
 ```
