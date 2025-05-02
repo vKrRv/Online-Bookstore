@@ -3555,6 +3555,108 @@ main {
     }
 }
 
+
+ /* =======================================
+   Help Popup & FAQ Styles
+======================================= */
+
+.help-button-inline {
+    margin-left: 10px;
+    padding: 6px 12px;
+    font-size: 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.help-button-inline:hover {
+    background-color: #0056b3;
+}
+
+.help-popup {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.popup-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    font-family: Arial, sans-serif;
+}
+
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.popup-content h3 {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.popup-content p {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.faq-question {
+    background-color: #f8f8f8;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.faq-question:hover {
+    background-color: #e0e0e0;
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px 15px;
+    background-color: #f1f1f1;
+    border-left: 3px solid #007bff;
+    border-radius: 0 0 5px 5px;
+    font-size: 15px;
+    margin-top: 5px;
+    color: #333;
+}
+
+.faq-answer.show {
+    display: block;
+}
+
+
 /* ========================================
    End of File
    ======================================== */

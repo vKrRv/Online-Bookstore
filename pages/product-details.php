@@ -16,41 +16,29 @@ unset($_SESSION['applied_coupon']);
 <body>
     <?php
     include '../includes/header.php';
-    // Include db connection
     include '../includes/db.php';
 
     $message = "";
-    $messageType = ""; // success or error
+    $messageType = "";
 
-    // Sanitize book ID from URL
     $book_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
     if ($book_id) {
-        // Fetch book details
         $query = "SELECT * FROM books WHERE book_id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $book_id);
         $stmt->execute();
         $result = $stmt->get_result();
-        // Check if book exists
+
         if ($result->num_rows > 0) {
             $book = $result->fetch_assoc();
 
-            // Check if submitted
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['quantity'])) {
                 $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
+                if (!$quantity || $quantity < 1) $quantity = 1;
+                if ($quantity > $book['stock']) $quantity = $book['stock'];
 
-                // Basic validation
-                if (!$quantity || $quantity < 1) {
-                    $quantity = 1;
-                }
-                if ($quantity > $book['stock']) {
-                    $quantity = $book['stock'];
-                }
-
-                if (!isset($_SESSION['cart'])) {
-                    $_SESSION['cart'] = [];
-                }
+                if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
 
                 if (isset($_SESSION['cart'][$book_id])) {
                     $_SESSION['cart'][$book_id]['quantity'] += $quantity;
@@ -76,20 +64,20 @@ unset($_SESSION['applied_coupon']);
                 <div class="book-info">
                     <h1><?php echo htmlspecialchars($book['title']); ?></h1>
                     <span class="category-tag"><i class="fas fa-tag"></i> <?php echo htmlspecialchars($book['category']); ?></span>
-
                     <p class="description"><strong>Description:</strong><br><?php echo nl2br(htmlspecialchars($book['description'])); ?></p>
-
                     <p class="price"><span class="symbol">&#xea;</span> <?php echo htmlspecialchars($book['price']); ?></p>
 
-                    <div class="stock-container">
+                    <div class="stock-container with-help">
                         <?php if ($book['stock'] == 0): ?>
                             <p class="stock stock-out"><i class="fas fa-times-circle"></i> Out of Stock</p>
                         <?php elseif ($book['stock'] <= 5): ?>
-                            <p class="stock low-stock"><i class="fas fa-exclamation-circle"></i> Only <?php echo htmlspecialchars($book['stock']); ?> left in
-                                stock - order soon!</p>
+                            <p class="stock low-stock"><i class="fas fa-exclamation-circle"></i> Only <?php echo htmlspecialchars($book['stock']); ?> left in stock!</p>
                         <?php else: ?>
                             <p class="stock in-stock"><i class="fas fa-check-circle"></i> In Stock: <?php echo htmlspecialchars($book['stock']); ?> available</p>
                         <?php endif; ?>
+
+                        <!-- Help Button beside stock -->
+                        <button id="helpBtn" class="help-button-inline">Help ❓</button>
                     </div>
 
                     <?php if (!empty($message)): ?>
@@ -111,20 +99,55 @@ unset($_SESSION['applied_coupon']);
 
     <?php
         } else {
-            // Book not found
-            echo "<div class='error-message'><i class='fas fa-exclamation-triangle'></i><h2>Book not found</h2><p>The book you are looking for does not exist.</p><a href='products.php'><i class='fas fa-arrow-left'></i></a></div>";
+            echo "<div class='error-message'><i class='fas fa-exclamation-triangle'></i><h2>Book not found</h2><a href='products.php'><i class='fas fa-arrow-left'></i></a></div>";
         }
 
         $stmt->close();
     } else {
-        // Invalid book ID
-        echo "<div class='error-message'><i class='fas fa-exclamation-triangle'></i><h2>Invalid Request</h2><p>Please provide a valid book ID.</p><a href='products.php'><i class='fas fa-arrow-left'></i></a></div>";
+        echo "<div class='error-message'><i class='fas fa-exclamation-triangle'></i><h2>Invalid Request</h2><a href='products.php'><i class='fas fa-arrow-left'></i></a></div>";
     }
-    // Close db connection
+
     $conn->close();
     ?>
 
     <?php include '../includes/footer.php'; ?>
+
+    <!-- ✅ Help Popup Modal with FAQs -->
+    <div id="helpPopup" class="help-popup">
+        <div class="popup-content">
+            <span id="closePopup" class="close-btn">&times;</span>
+            <h3>Need Help?</h3>
+            <p>Click a question to see the answer:</p>
+
+            <div class="faq-item">
+                <button class="faq-question">📘 What is the "Title"?</button>
+                <div class="faq-answer">The title is the name of the book you’re viewing.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">💵 How is the price shown?</button>
+                <div class="faq-answer">The price shows the cost for one copy of the book.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">📝 What does the description include?</button>
+                <div class="faq-answer">It gives you a short summary of the book’s content or purpose.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">📦 What does stock status mean?</button>
+                <div class="faq-answer">It shows how many copies are available right now.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">🛒 How do I add to cart?</button>
+                <div class="faq-answer">Enter how many you want, then click "Add to Cart" to proceed.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ Link JavaScript -->
+    <script src="../js/validation.js"></script>
 </body>
 
 </html>
