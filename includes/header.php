@@ -1,5 +1,5 @@
 <?php
-// Start session if not already started
+// Start session 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $basePath = '';
 $currentPath = $_SERVER['PHP_SELF'];
 $depth = substr_count($currentPath, '/') - 1;
-
+// Adjust based on current directory
 if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/') !== false) {
     $basePath = '../';
 } else if (strpos($currentPath, '/includes/') !== false) {
@@ -21,7 +21,7 @@ if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/')
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Online Bookstore</title>
+    <title>Home - Book Haven</title>
     <link href="<?php echo $basePath; ?>css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -29,6 +29,11 @@ if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/')
 <body>
     <header class="main-header">
         <div class="header-container">
+            <div class="logo-container" style="display: flex; align-items: center; margin-right: 30px;">
+                <a href="<?php echo $basePath; ?>index.php">
+                    <img src="<?php echo $basePath; ?>assets/images/logo.png" alt="Book Haven Logo" height="90" width="180" style="display: block;" />
+                </a>
+            </div>
             <div class="nav-container">
                 <nav class="main-nav">
                     <a href="<?php echo $basePath; ?>index.php"><i class="fas fa-home"></i> Home</a>
@@ -47,9 +52,9 @@ if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/')
 
             <div class="user-actions">
                 <?php if (isset($_SESSION['admin_username'])): ?>
-                    <div class="user-welcome">
-                        <i class="fas fa-user-shield"></i> Welcome, <?php echo $_SESSION['admin_username']; ?>
-                    </div>
+                    <span class="user-welcome"> <!-- Changed div to span -->
+                        <i class="fas fa-user-shield"></i> Welcome, <?php echo htmlspecialchars($_SESSION['admin_username']); ?>
+                    </span>
                     <a href="<?php echo $basePath; ?>admin/dashboard.php" class="login-btn">
                         <i class="fas fa-tachometer-alt"></i> Dashboard
                     </a>
@@ -57,6 +62,8 @@ if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/')
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </a>
                 <?php else: ?>
+                    <!-- Placeholder to potentially maintain layout consistency -->
+                    <span class="user-welcome-placeholder" style="display: inline-block; visibility: hidden; width: 0; height: 0; margin: 0; padding: 0; border: 0;"></span>
                     <a href="<?php echo $basePath; ?>admin/login.php" class="login-btn">
                         <i class="fas fa-sign-in-alt"></i> Login
                     </a>
@@ -68,5 +75,6 @@ if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/')
         </div>
     </header>
 
-    <?php
-    ?>
+</body>
+
+</html>
