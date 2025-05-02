@@ -11,48 +11,59 @@ This is an online bookstore web application  built using HTML, CSS, JavaScript, 
 
 ## File Structure
 ```python
-online-bookstore/
+Online-Bookstore/
 ├── admin/                     # Admin-only pages
-│   ├── login.php              
-│   ├── add-book.php           
-│   ├── edit-book.php          
-│   ├── delete-book.php        
-│   └── dashboard.php          
+│   ├── dashboard.php          # Admin dashboard
+│   ├── delete-book.php        # Delete book page
+│   ├── edit-book.php          # Edit book page
+│   ├── login.php              # Admin login
+│   └── logout.php             # Admin logout
 │
-├── css/                      z # Stylesheets
-│   └── styles.css             
+├── assets/                    # Static assets
+│   ├── cards/                 # Payment cards images
+│   │   ├── apple-pay.svg
+│   │   ├── mada.svg
+│   │   ├── mastercard.svg
+│   │   └── visa.svg
+│   ├── fonts/                 # Font files
+│   │   ├── saudiriyalsymbol.otf
+│   │   ├── saudiriyalsymbol.woff
+│   │   └── saudiriyalsymbol.woff2
+│   └── images/                # Product and site images
+│       ├── 1984.jpg
+│       ├── atomic_habits.jpg
+│       ├── clean_code.jpg
+│       ├── logo.png
+│       ├── start_with_why.jpg
+│       ├── the_hobbit.jpg
+│       └── thinking_fast_slow.jpg
 │
-├── fonts/                     # Saudi Riyal symbol
-│    ├── saudiriyalsmybol.woff  
-│    └── ...
-│
-├── images/                    # Product images
-│   ├── clean_code.jpg
-│   ├── atomic_habits.jpg
-│   └── ...
+├── css/                       # Stylesheets
+│   └── style.css
 │
 ├── includes/                  # Reusable logic
-│   ├── config.php             # Database credintials
+│   ├── config.php             # Database credentials
 │   ├── db.php                 # Database connection logic
+│   ├── footer.php             # Shared footer HTML
 │   └── header.php             # Shared header HTML
 │
 ├── js/                        # JavaScript files
-│   └── validation.js                  
+│   ├── cart.js                # Cart logic
+│   └── validation.js          # Form validation
 │
 ├── pages/                     # Main user-facing pages
-│   ├── product-details.php    # Product detail page         
+│   ├── bill.php               # Order receipt/bill
 │   ├── cart.php               # Shopping cart
 │   ├── checkout.php           # Checkout and order review
 │   ├── contact.php            # Contact page + map
+│   ├── product-details.php    # Product detail page
 │   ├── products.php           # Products list page
 │   ├── signup.php             # Signup page for users
-│   └── ...
-│             
-├── bookstore.sql              # Database schema + sample data
+│   └── signup_process.php     # Signup form handler
 │
+├── bookstore.sql              # Database schema + sample data
 ├── index.php                  # Home page with product listings
-├── README.md                  
-└── .gitignore                 
+└── README.MD                  # Project documentation
 ```
 
 ## Instructions
@@ -79,13 +90,13 @@ cd Online-Bookstore
 3. Import `bookstore.sql` file
 
 ### 4. Configure Database Connection 
-Edit `config.php`:
+Create `config.php` in `includes/` and add the following:
 ```php
 return [
     'host' => 'localhost',
     'user' => 'root',
     'pass' => '',
-    'db'   => 'bookstore'
+    'db'   => 'bookstore' 
 ];
 ```
 
