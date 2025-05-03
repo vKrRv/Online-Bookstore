@@ -1,3 +1,11 @@
+<?php
+session_start();
+include '../includes/header.php';
+require_once '../includes/db.php';
+require_once '../includes/functions.php';
+requireAdmin();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,10 +17,7 @@
 </head>
 
 <body>
-    <?php include '../includes/header.php'; ?>
-    <?php require_once '../includes/db.php'; ?>
-    <?php require_once '../includes/functions.php'; ?>
-    <?php requireAdmin(); ?>
+
 
     <?php
     $addBookMessage = '';
@@ -27,26 +32,8 @@
 
         // check if image is uploaded
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $target_dir = __DIR__ . '/../assets/images/'; // save here
-            $image_name = basename($_FILES['image']['name']); // get name
-            $target_file = $target_dir . $image_name; // target path
-            $allowed_types = ['jpg', 'jpeg', 'png'];
-            // check file extension
-            $file_ext = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-            // check if its an image
-            if (in_array($file_ext, $allowed_types)) {
-                if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-                    // success
-                } else {
-                    // failure
-                    $addBookMessage = 'Failed to upload image. Check folder permissions.';
-                }
-            } else {
-                // invalid type
-                $addBookMessage = 'Only JPG, JPEG, and PNG files are allowed.';
-            }
+            $image_name = ImageUpload($_FILES['image'], $addBookMessage);
         } else {
-            // no image uploaded
             $addBookMessage = 'Please upload an image.';
         }
         // validate input
@@ -183,7 +170,7 @@
                         $books = $conn->query($query);
                         $rowIndex = 0;
                         while ($row = $books->fetch_assoc()) {
-                            renderBookRow($row);
+                            showBookRow($row);
                             $rowIndex++;
                         }
                         ?>
