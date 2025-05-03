@@ -3504,5 +3504,35 @@ main {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+/* Signup form layout improvements */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* Hints shown only on focus */
+.hint {
+  display: none;
+  font-size: 0.85em;
+  color: #555;
+  margin-top: 2px;
+}
+
+/* When input is focused, show hint */
+.input-group input:focus + .hint {
+  display: block;
+}
+
+/* Client-side validation error messages */
+.error-message {
+  color: red;
+  margin-bottom: 5px;
+}
 
 /* End of File */
