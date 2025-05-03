@@ -182,29 +182,8 @@
                         }
                         $books = $conn->query($query);
                         $rowIndex = 0;
-                        while ($row = $books->fetch_assoc()) { /// loop and fetch
-                            $stock = (int)$row['stock'];
-                            $stockClass = $stock < 5 ? 'low-stock' : 'in-stock';
-                            $category = htmlspecialchars($row['category']);
-                            $categoryBadge = "<span style='background:#e3fcec;color:#38a169;padding:4px 12px;border-radius:12px;font-size:0.95em;font-weight:500;'>$category</span>";
-                            if (!$category) $categoryBadge = "<span style='background:#fbe9e7;color:#e57373;padding:4px 12px;border-radius:12px;font-size:0.95em;font-weight:500;'>Uncategorized</span>";
-                            echo "<tr>
-                            <td style='display:flex;align-items:center;justify-content:flex-start;gap:18px;'>
-                                <div style='background:#fff;border-radius:10px;box-shadow:0 2px 8px #e3e3e3;display:flex;align-items:center;justify-content:center;width:100px;height:100px;min-width:100px;min-height:100px;max-width:100px;max-height:100px;overflow:hidden;'>
-                                    <img src='../assets/images/" . htmlspecialchars($row['image']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:100%;height:100%;object-fit:contain;display:block;background:#f8f9fa;'>
-                                </div>
-                                <span style='font-weight:600;color:#222;font-size:1.08rem;margin-left:10px;'>" . htmlspecialchars($row['title']) . "</span>
-                            </td>
-                            <td class='price' style='color:#1976d2;font-weight:700;'><span class='symbol'>&#xea;</span>" . htmlspecialchars($row['price']) . "</td>
-                            <td class='stock'><span class='$stockClass' style='padding:4px 10px;border-radius:10px;font-weight:600;font-size:0.97em;'>$stock</span></td>
-                            <td class='category'>$categoryBadge</td>
-                            <td style='min-width:90px;'>
-                                <div style='display:flex;justify-content:center;align-items:center;gap:8px;width:100%;height:100%;'>
-                                    <a href='edit-book.php?id={$row['book_id']}' class='edit-btn action-btn' title='Edit'><i class='fas fa-edit'></i></a>
-                                    <a href='delete-book.php?id={$row['book_id']}' class='delete-btn action-btn' title='Delete' onclick=\"return confirm('Are you sure you want to delete this book?');\"><i class='fas fa-trash-alt'></i></a>
-                                </div>
-                            </td>
-                        </tr>";
+                        while ($row = $books->fetch_assoc()) {
+                            renderBookRow($row);
                             $rowIndex++;
                         }
                         ?>
