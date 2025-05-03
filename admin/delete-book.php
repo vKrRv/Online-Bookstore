@@ -1,23 +1,19 @@
 <?php
 require_once '../includes/db.php';
-
-if (isset($_GET['id'])) { // get id from url
-    $book_id = (int) $_GET['id']; // security measure
-
-    
-    $conn->query("DELETE FROM order_items WHERE book_id = $book_id"); // delete query
-
-    
-    $delete = "DELETE FROM books WHERE book_id = $book_id"; // delete query
-
+require_once '../includes/functions.php';
+requireAdmin();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+    $book_id = (int) $_POST['id'];
+    $conn->query("DELETE FROM order_items WHERE book_id = $book_id");
+    $delete = "DELETE FROM books WHERE book_id = $book_id";
     if ($conn->query($delete) === TRUE) {
-        header('Location: dashboard.php'); // redirect to dashboard
+        header('Location: dashboard.php');
         exit;
     } else {
-        echo "Error deleting book: " . $conn->error; 
+        echo "Error deleting book: " . $conn->error;
     }
-} else { //invalid request
-    header('Location: dashboard.php'); // redirect to dashboard
+} else {
+    header('Location: dashboard.php');
     exit;
 }
 ?>
