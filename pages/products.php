@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             <?php
             // Include db connection
             require_once '../includes/db.php';
-            include_once '../includes/functions.php';
+            require_once '../includes/functions.php';
             // Fetch books with filters
             $filters = [
                 'category' => $_GET['category'] ?? 'all',
@@ -86,50 +86,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             $books = getAllBooks($conn, $filters);
             if (count($books) > 0) {
                 foreach ($books as $book) {
-            ?>
-                    <div class="book-card">
-                        <a href="product-details.php?id=<?php echo $book['book_id']; ?>" class="card-link">
-                            <div class="card-img-container">
-                                <img src="../assets/images/<?php echo htmlspecialchars($book['image']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>" class="card-img">
-                                <div class="view-details">View Details</div>
-                            </div>
-                        </a>
-                        <div class="card-content">
-                            <h3 class="card-title"><?php echo htmlspecialchars($book['title']); ?></h3>
-                            <span class="card-category"><?php echo htmlspecialchars($book['category']); ?></span>
-                            <div class="card-price">
-                                <span class="symbol">&#xea;</span><?php echo formatPrice($book['price']); ?>
-                            </div>
-                            <div class="card-stock <?php echo $book['stock'] == 0 ? 'stock-out' : ($book['stock'] <= 5 ? 'stock-low' : 'stock-in'); ?>">
-                                <?php if ($book['stock'] == 0): ?>
-                                    <i class="fas fa-times-circle"></i>
-                                    <span>Out of Stock</span>
-                                <?php elseif ($book['stock'] <= 5): ?>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <span>Only <?php echo htmlspecialchars($book['stock']); ?> left in stock</span>
-                                <?php else: ?>
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>In Stock</span>
-                                <?php endif; ?>
-                            </div>
-                            <form method="post" style="margin-top:10px;">
-                                <input type="hidden" name="book_id" value="<?php echo $book['book_id']; ?>">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" name="add_to_cart" class="add-to-cart-btn">
-                                    <i class="fas fa-shopping-cart"></i> Add to Cart
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                <?php
+                    renderBookCard($book, '../');
                 }
             } else {
-                ?>
-                <div class="no-books">
-                    <i class="fas fa-book-open"></i>
-                    <p>No books available at the moment.</p>
-                </div>
-            <?php
+                showError('No books available at the moment.');
             }
 
             // Close db connection

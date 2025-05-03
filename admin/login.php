@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../includes/db.php'; // your database connection file
+require_once '../includes/functions.php'; // include functions file
 
 // If form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -42,9 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1 class="title">Admin Login</h1>
 
         <div class="login-form">
-            <?php if (isset($error)) {
-                echo "<div class='error-message'></i> $error</div>";
-            } ?>
+            <?php if (isset($error)): ?>
+                <?php showError($error); ?>
+            <?php endif; ?>
 
             <form method="POST" action="login.php">
                 <div class="input-group">

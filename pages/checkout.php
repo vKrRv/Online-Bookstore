@@ -48,7 +48,7 @@ mysqli_close($conn);
         <h1>Payment</h1>
 
         <?php if (!empty($errorMessage)): ?>
-            <div class="order-error-msg"><?php echo $errorMessage; ?></div>
+            <?php showError($errorMessage); ?>
         <?php endif; ?>
 
         <div class="order-summary">

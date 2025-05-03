@@ -193,7 +193,7 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                             <button type="submit" name="apply_coupon">APPLY</button>
                         </div>
                         <?php if ($discountError): ?>
-                            <div class="success-message" style="background:#ffe3e3;color:#e53e3e;"><i class="fas fa-times-circle"></i> <?php echo $discountError; ?></div>
+                            <?php showError($discountError); ?>
                         <?php endif; ?>
 
                         <a href="#" class="offers-link" id="toggle-offers">
