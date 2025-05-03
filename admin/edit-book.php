@@ -1,10 +1,7 @@
 <?php
 session_start();
-// check if user is logged in
-if (!isset($_SESSION['admin_username'])) {
-    header('Location: login.php');
-    exit();
-}
+require_once '../includes/functions.php';
+requireAdmin();
 
 require_once '../includes/db.php'; // include db connection
 

@@ -17,6 +17,7 @@ unset($_SESSION['applied_coupon']);
     <?php
     include '../includes/header.php';
     require_once '../includes/db.php';
+    require_once '../includes/functions.php';
 
     $message = "";
     $messageType = "";
@@ -65,15 +66,13 @@ unset($_SESSION['applied_coupon']);
                     <h1><?php echo htmlspecialchars($book['title']); ?></h1>
                     <span class="category-tag"><i class="fas fa-tag"></i> <?php echo htmlspecialchars($book['category']); ?></span>
                     <p class="description"><strong>Description:</strong><br><?php echo nl2br(htmlspecialchars($book['description'])); ?></p>
-                    <p class="price"><span class="symbol">&#xea;</span> <?php echo htmlspecialchars($book['price']); ?></p>
+                    <p class="price"><span class="symbol">&#xea;</span> <?php echo formatPrice($book['price']); ?></p>
 
                     <div class="stock-container with-help">
-                        <?php if ($book['stock'] == 0): ?>
-                            <p class="stock stock-out"><i class="fas fa-times-circle"></i> Out of Stock</p>
-                        <?php elseif ($book['stock'] <= 5): ?>
-                            <p class="stock low-stock"><i class="fas fa-exclamation-circle"></i> Only <?php echo htmlspecialchars($book['stock']); ?> left in stock!</p>
-                        <?php else: ?>
+                        <?php if (isBookInStock($book)): ?>
                             <p class="stock in-stock"><i class="fas fa-check-circle"></i> In Stock: <?php echo htmlspecialchars($book['stock']); ?> available</p>
+                        <?php else: ?>
+                            <p class="stock stock-out"><i class="fas fa-times-circle"></i> Out of Stock</p>
                         <?php endif; ?>
 
                         <!-- Help Button beside stock -->

@@ -55,15 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                         <?php
                         // Check db connection
                         if (!isset($conn)) require_once '../includes/db.php';
+                        require_once '../includes/functions.php';
 
                         // Fetch categories
-                        $categoryQuery = "SELECT DISTINCT category FROM books ORDER BY category";
-                        $categoryResult = $conn->query($categoryQuery);
-
-                        // Display categories
-                        while ($categoryRow = $categoryResult->fetch_assoc()) {
-                            $selected = (isset($_GET['category']) && $_GET['category'] == $categoryRow['category']) ? 'selected' : '';
-                            echo "<option value='" . htmlspecialchars($categoryRow['category']) . "' $selected>" . htmlspecialchars($categoryRow['category']) . "</option>";
+                        $categories = getCategories($conn);
+                        foreach ($categories as $category) {
+                            $selected = (isset($_GET['category']) && $_GET['category'] == $category) ? 'selected' : '';
+                            echo "<option value='" . htmlspecialchars($category) . "' $selected>" . htmlspecialchars($category) . "</option>";
                         }
                         ?>
                     </select>
@@ -100,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                             <h3 class="card-title"><?php echo htmlspecialchars($book['title']); ?></h3>
                             <span class="card-category"><?php echo htmlspecialchars($book['category']); ?></span>
                             <div class="card-price">
-                                <span class="symbol">&#xea;</span><?php echo htmlspecialchars($book['price']); ?>
+                                <span class="symbol">&#xea;</span><?php echo formatPrice($book['price']); ?>
                             </div>
                             <div class="card-stock <?php echo $book['stock'] == 0 ? 'stock-out' : ($book['stock'] <= 5 ? 'stock-low' : 'stock-in'); ?>">
                                 <?php if ($book['stock'] == 0): ?>

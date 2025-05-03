@@ -1,83 +1,29 @@
 <?php
 session_start();
 unset($_SESSION['applied_coupon']);
-// Include database connection
 require_once '../includes/db.php';
+require_once '../includes/functions.php';
 
-$totalPrice = 0;
 $shipping = 5.00;
 $vat = 0;
 $finalTotal = 0;
-$bookDetails = [];
 $errorMessage = "";
 
-//cart total
-if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $item) {
-        if (!isset($item['book_id']) || !isset($item['quantity'])) continue; // skip invalid
-        $bookId = $item['book_id'];
-        $quantity = $item['quantity'];
-        $sql = "SELECT title, price FROM books WHERE book_id = $bookId";
-        $result = mysqli_query($conn, $sql);
-        if ($result) {
-            $row = mysqli_fetch_row($result);
-            if ($row) {
-                $bookPrice = $row[1];
-                $bookTotal = $bookPrice * $quantity;
-                $totalPrice += $bookTotal;
-                $bookDetails[] = [
-                    'title' => $row[0],
-                    'price' => $bookPrice,
-                    'quantity' => $quantity,
-                    'total' => $bookTotal,
-                ];
-            } else {
-                $errorMessage = "Book ID $bookId not found in the database.";
-            }
-        } else {
-            $errorMessage = "Query failed for Book ID $bookId.";
-        }
-    }
-    $vat = $totalPrice * 0.15;
-    $finalTotal = $totalPrice + $shipping + $vat;
-}
+// Calculate cart totals using utility function
+$cartTotals = calculateCartTotals($conn);
+$totalPrice = $cartTotals['totalPrice'];
+$bookDetails = $cartTotals['bookDetails'];
+$vat = $totalPrice * 0.15;
+$finalTotal = $totalPrice + $shipping + $vat;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-        $sql = "INSERT INTO orders (customer_id, total_price, order_date) VALUES (NULL, $finalTotal, NOW())";
-        if (mysqli_query($conn, $sql)) {
-            $orderId = mysqli_insert_id($conn);
-            foreach ($_SESSION['cart'] as $item) {
-                if (!isset($item['book_id']) || !isset($item['quantity'])) continue;
-                $bookId = $item['book_id'];
-                $quantity = $item['quantity'];
-                $sql = "SELECT price, stock FROM books WHERE book_id = $bookId";
-                $result = mysqli_query($conn, $sql);
-                if ($result) {
-                    $row = mysqli_fetch_row($result);
-                    if ($row) {
-                        $bookPrice = $row[0];
-                        $currentStock = $row[1];
-                        if ($currentStock >= $quantity) {
-                            $newStock = $currentStock - $quantity;
-                            $updateStockSql = "UPDATE books SET stock = $newStock WHERE book_id = $bookId";
-                            mysqli_query($conn, $updateStockSql);
-                            $orderItemSql = "INSERT INTO order_items (order_id, book_id, quantity, price) VALUES ($orderId, $bookId, $quantity, $bookPrice)";
-                            mysqli_query($conn, $orderItemSql);
-                        } else {
-                            $errorMessage = "Not enough stock for book ID: $bookId";
-                        }
-                    }
-                }
-            }
-            if (empty($errorMessage)) {
-                unset($_SESSION['cart']);
-                $_SESSION['total_price'] = 0;
-                header("Location: bill.php?order_id=$orderId&total_price=$finalTotal&shipping=$shipping&vat=$vat");
-                exit();
-            }
-        } else {
-            $errorMessage = "Error creating order: " . mysqli_error($conn);
+        list($orderId, $errorMessage) = createOrder($conn, $_SESSION['cart'], $finalTotal);
+        if ($orderId && empty($errorMessage)) {
+            unset($_SESSION['cart']);
+            $_SESSION['total_price'] = 0;
+            header("Location: bill.php?order_id=$orderId&total_price=$finalTotal&shipping=$shipping&vat=$vat");
+            exit();
         }
     } else {
         $errorMessage = "Cart is empty! Please add items to your cart before proceeding.";
@@ -116,19 +62,19 @@ mysqli_close($conn);
                         <div class="book-item">
                             <div class="book-details">
                                 <strong><?php echo $book['title']; ?></strong>
-                                <p><strong>Price:</strong> <?php echo $book['price']; ?><span class="symbol">&#xea;</span></p>
+                                <p><strong>Price:</strong> <?php echo formatPrice($book['price']); ?><span class="symbol">&#xea;</span></p>
                                 <p><strong>Quantity:</strong> <?php echo $book['quantity']; ?></p>
                                 <hr class="short-hr">
-                                <p><strong>Total: </strong> <?php echo $book['total']; ?><span class="symbol">&#xea;</span></p>
+                                <p><strong>Total: </strong> <?php echo formatPrice($book['total']); ?><span class="symbol">&#xea;</span></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <p><strong>Total :</strong><span class="symbol">&#xea;</span> <?php echo $totalPrice; ?></p>
-                <p><strong>Shipping:</strong><span class="symbol">&#xea;</span> <?php echo $shipping; ?></p>
-                <p><strong>VAT (15%):</strong><span class="symbol">&#xea;</span> <?php echo $vat; ?></p>
+                <p><strong>Total :</strong><span class="symbol">&#xea;</span> <?php echo formatPrice($totalPrice); ?></p>
+                <p><strong>Shipping:</strong><span class="symbol">&#xea;</span> <?php echo formatPrice($shipping); ?></p>
+                <p><strong>VAT (15%):</strong><span class="symbol">&#xea;</span> <?php echo formatPrice($vat); ?></p>
                 <hr class="short-hr">
-                <p><strong>Total including VAT & Shipping: </strong> <span class="symbol">&#xea;</span> <?php echo $finalTotal; ?></p>
+                <p><strong>Total including VAT & Shipping: </strong> <span class="symbol">&#xea;</span> <?php echo formatPrice($finalTotal); ?></p>
             <?php endif; ?>
         </div>
         <div class="payment-details">

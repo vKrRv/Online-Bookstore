@@ -38,7 +38,6 @@ include 'includes/header.php';
         $featuredBooks = getAllBooks($conn, ['sort' => 'featured']);
         $count = 0;
         foreach ($featuredBooks as $book) {
-            if ($book['featured'] != 1) continue;
             if ($count >= 3) break;
             $count++;
         ?>

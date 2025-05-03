@@ -3,6 +3,8 @@ session_start();
 // unset any previously applied coupon
 unset($_SESSION['applied_coupon']);
 
+require_once '../includes/functions.php';
+
 // Quantity increase/decrease
 if (isset($_GET['action']) && isset($_GET['id'])) {
     $book_id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
@@ -19,10 +21,10 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
         // Increment/Decrement 
         if ($_GET['action'] === 'increment') {
             if ($_SESSION['cart'][$book_id]['quantity'] < $stock) {
-                $_SESSION['cart'][$book_id]['quantity']++;
+                incrementCartItem($book_id);
             }
         } elseif ($_GET['action'] === 'decrement' && $_SESSION['cart'][$book_id]['quantity'] > 1) {
-            $_SESSION['cart'][$book_id]['quantity']--;
+            decrementCartItem($book_id);
         }
         header('Location: cart.php');
         exit;
@@ -33,7 +35,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
 if (isset($_GET['remove']) && is_numeric($_GET['remove'])) {
     $remove_id = filter_var($_GET['remove'], FILTER_VALIDATE_INT);
     if ($remove_id && isset($_SESSION['cart'][$remove_id])) {
-        unset($_SESSION['cart'][$remove_id]);
+        removeCartItem($remove_id);
         header('Location: cart.php');
         exit;
     }
@@ -46,14 +48,7 @@ $discountError = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // if cart quantity is updated
     if (isset($_POST['update_cart'])) {
-        // Validate and update quantity
-        foreach ($_POST['quantity'] as $book_id => $quantity) {
-            $quantity = filter_var($quantity, FILTER_VALIDATE_INT);
-            if (!$quantity || $quantity < 1) {
-                $quantity = 1;
-            }
-            $_SESSION['cart'][$book_id]['quantity'] = $quantity;
-        }
+        updateCartQuantities($_POST['quantity']);
     }
     // if coupon is applied
     if (isset($_POST['apply_coupon'])) {
@@ -143,8 +138,7 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                                     $stock = (int)$row['stock'];
                                 }
                                 // Delivery date
-                                $minDelivery = date('M j', strtotime('+3 days'));
-                                $maxDelivery = date('M j', strtotime('+5 days'));
+                                list($minDelivery, $maxDelivery) = getBookDeliveryDates();
                             ?>
                                 <tr>
                                     <td>
@@ -167,7 +161,7 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                                     </td>
                                     <td>
                                         <div class="product-price">
-                                            <span class="symbol">&#xea;</span> <?php echo htmlspecialchars($item['price']); ?>
+                                            <span class="symbol">&#xea;</span> <?php echo formatPrice($item['price']); ?>
                                         </div>
                                     </td>
                                     <td class="quantity-cell">

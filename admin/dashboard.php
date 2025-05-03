@@ -11,13 +11,10 @@
 <body>
     <?php include '../includes/header.php'; ?>
     <?php require_once '../includes/db.php'; ?>
+    <?php require_once '../includes/functions.php'; ?>
+    <?php requireAdmin(); ?>
 
     <?php
-    if (!isset($_SESSION['admin_username'])) { // redirect if not logged in
-        header('Location: login.php');
-        exit();
-    }
-
     $addBookMessage = '';
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title'], $_POST['description'], $_POST['price'], $_POST['stock'], $_POST['category'])) { //submit form
         // sanitize input
