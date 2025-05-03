@@ -31,6 +31,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Admin Login - Online Bookstore</title>
     <link href="../css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            form.addEventListener("submit", function (e) {
+                const username = form.username.value.trim();
+                const password = form.password.value.trim();
+                let isValid = true;
+                let errorMessages = [];
+
+                if (username === "") {
+                    errorMessages.push("Username is required.");
+                    isValid = false;
+                }
+
+                if (password === "") {
+                    errorMessages.push("Password is required.");
+                    isValid = false;
+                }
+
+                const errorDiv = document.getElementById("client-error");
+                errorDiv.innerHTML = ""; // Clear previous errors
+
+                if (!isValid) {
+                    e.preventDefault();
+                    errorMessages.forEach(msg => {
+                        const p = document.createElement("p");
+                        p.style.color = "red";
+                        p.textContent = msg;
+                        errorDiv.appendChild(p);
+                    });
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -46,6 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php if (isset($error)): ?>
                 <?php showError($error); ?>
             <?php endif; ?>
+
+            <div id="client-error"></div> <!-- For client-side validation messages -->
 
             <form method="POST" action="login.php">
                 <div class="input-group">
