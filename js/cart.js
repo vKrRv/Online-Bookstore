@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Copy to clipboard
   window.copyToClipboard = function (text, btn) {
     // Clipboard API
-    navigator.clipboard    
+    navigator.clipboard
       .writeText(text)
       .then(() => {
         const copyBtn = btn;
