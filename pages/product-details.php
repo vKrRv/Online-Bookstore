@@ -86,8 +86,8 @@ unset($_SESSION['applied_coupon']);
                     <?php endif; ?>
 
                     <form method="post" class="purchase-controls">
-                        <input type="number" name="quantity" value="1" min="1" max="<?php echo htmlspecialchars($book['stock']); ?>">
-                        <button type="submit" class="checkout-btn add-to-cart-green">
+                        <input type="number" name="quantity" value="1" min="1" max="<?php echo htmlspecialchars($book['stock']); ?>" <?php if ($book['stock'] == 0) echo 'disabled'; ?>>
+                        <button type="submit" class="checkout-btn add-to-cart-green" <?php if ($book['stock'] == 0) echo 'disabled style="opacity:0.5;cursor:not-allowed;"'; ?>>
                             <i class="fas fa-shopping-cart"></i> Add to Cart
                         </button>
                     </form>
