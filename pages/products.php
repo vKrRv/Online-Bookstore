@@ -3,18 +3,12 @@
 session_start();
 unset($_SESSION['applied_coupon']);
 // Check if POST request is made to add to cart
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    require_once '../includes/db.php';
-    include_once '../includes/functions.php';
-    $book_id = filter_var($_POST['book_id'], FILTER_VALIDATE_INT);
-    $quantity = filter_var($_POST['quantity'], FILTER_VALIDATE_INT);
-    if (!$quantity || $quantity < 1) $quantity = 1;
-    $book = getBookById($conn, $book_id);
-    if ($book) {
-        addToCart($book, $quantity);
-        header('Location: cart.php');
-        exit;
-    }
+
+require_once '../includes/db.php';
+include_once '../includes/functions.php';
+if (addToCartPost($conn)) {
+    header('Location: cart.php');
+    exit;
 }
 ?>
 <!DOCTYPE html>
