@@ -1,5 +1,3 @@
-//This file will contain the validation functions for the form inputs
-
 // ===============================
 // Help Popup Script for product-details.php
 // ===============================
