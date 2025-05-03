@@ -44,8 +44,9 @@ if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/')
             </div>
 
             <div class="search-container">
-                <form class="search-form">
-                    <input type="text" placeholder="Search for books..." />
+                <form class="search-form" action="<?php echo $basePath; ?>pages/products.php" method="get">
+                    <input type="text" name="search" placeholder="Search for books..."
+                        value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" />
                     <button type="submit"><i class="fas fa-search"></i></button>
                 </form>
             </div>
