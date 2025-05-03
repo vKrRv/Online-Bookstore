@@ -3,6 +3,7 @@
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
+require_once '../includes/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,17 +28,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <div class="signup-form">
       <?php if (isset($_SESSION['error'])): ?>
-        <div class="error-message">
-          <i class="fas fa-exclamation-circle"></i> <?php echo $_SESSION['error'];
-                                                    unset($_SESSION['error']); ?>
-        </div>
+        <?php showError($_SESSION['error']); unset($_SESSION['error']); ?>
       <?php endif; ?>
 
       <?php if (isset($_SESSION['success'])): ?>
-        <div class="message-box success">
-          <i class="fas fa-check-circle"></i> <?php echo $_SESSION['success'];
-                                              unset($_SESSION['success']); ?>
-        </div>
+        <?php showSuccess($_SESSION['success']); unset($_SESSION['success']); ?>
       <?php endif; ?>
 
       <form method="POST" action="signup_process.php">

@@ -1,20 +1,8 @@
 <?php
-// Start session 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Calculate base URL 
-$basePath = '';
-$currentPath = $_SERVER['PHP_SELF'];
-$depth = substr_count($currentPath, '/') - 1;
-// Adjust based on current directory
-if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/') !== false) {
-    $basePath = '../';
-} else if (strpos($currentPath, '/includes/') !== false) {
-    $basePath = '../';
-}
+require_once __DIR__ . '/functions.php';
+$basePath = getBasePath();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

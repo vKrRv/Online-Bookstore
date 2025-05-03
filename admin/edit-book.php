@@ -1,12 +1,9 @@
 <?php
 session_start();
-// check if user is logged in
-if (!isset($_SESSION['admin_username'])) {
-    header('Location: login.php');
-    exit();
-}
+require_once '../includes/functions.php';
+requireAdmin();
 
-include '../includes/db.php'; // include db connection
+require_once '../includes/db.php'; // include db connection
 
 if (isset($_GET['id'])) { // get book id
     $book_id = (int) $_GET['id'];
@@ -27,17 +24,9 @@ if (isset($_GET['id'])) { // get book id
     $category = $conn->real_escape_string($_POST['category']);
 
     if (!empty($_FILES['image']['name'])) { // check if new image is uploaded
-        $image_name = basename($_FILES['image']['name']);
-        $target_dir = "../assets/images/"; // save to this directory
-        $target_file = $target_dir . $image_name;
-        $allowed_types = ['jpg', 'jpeg', 'png'];
-
-        $file_ext = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        // check if file is an image
-        if (in_array($file_ext, $allowed_types)) {
-            move_uploaded_file($_FILES['image']['tmp_name'], $target_file); // move file
-        } else {
-            echo "Only JPG, JPEG, and PNG files are allowed.";
+        $image_name = ImageUpload($_FILES['image'], $errorMsg);
+        if (!$image_name) {
+            echo $errorMsg;
             exit;
         }
     } else {

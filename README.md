@@ -1,6 +1,16 @@
 # Online Bookstore
+This is an online bookstore web application built using HTML, CSS, JavaScript, and PHP. This project enables users to browse, search, and purchase books through a simple and intuitive interface.
 
-This is an online bookstore web application  built using HTML, CSS, JavaScript, and PHP. This project enables users to browse, search, and purchase books through a simple and intuitive interface.
+
+## Features
+- Browse, search, and filter books by category and price
+- View detailed information for each book
+- Add books to shopping cart with stock validation
+- User-friendly checkout and order summary
+- Admin dashboard for managing books and viewing orders
+- Add, edit, and delete books (with image upload)
+- Secure admin authentication
+
 
 ## Tech Stack
 
@@ -8,6 +18,7 @@ This is an online bookstore web application  built using HTML, CSS, JavaScript, 
 - Backend: PHP
 - Database: MySQL
 - Server: Apache (via XAMPP)
+
 
 ## File Structure
 ```python
@@ -44,11 +55,13 @@ Online-Bookstore/
 ├── includes/                  # Reusable logic
 │   ├── config.php             # Database credentials
 │   ├── db.php                 # Database connection logic
-│   ├── footer.php             # Shared footer HTML
-│   └── header.php             # Shared header HTML
+│   ├── footer.php             # Shared footer 
+│   ├── header.php             # Shared header
+│   └── functions.php          # Shared Logic
 │
 ├── js/                        # JavaScript files
 │   ├── cart.js                # Cart logic
+│   ├── popup.js               # Pop-up windows
 │   └── validation.js          # Form validation
 │
 ├── pages/                     # Main user-facing pages
@@ -63,7 +76,7 @@ Online-Bookstore/
 │
 ├── bookstore.sql              # Database schema + sample data
 ├── index.php                  # Home page with product listings
-└── README.MD                  # Project documentation
+└── README.md                  # Project documentation
 ```
 
 ## Instructions
@@ -102,7 +115,7 @@ return [
 
 ### 5. Access the Website
 Visit:
-```arduino
+```text
 http://localhost/online-bookstore/
 ```
 Admin login:
@@ -110,7 +123,6 @@ Admin login:
 Username: test
 Password: 123
 ```
-
 
 ## License
 

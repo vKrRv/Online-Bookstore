@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +29,23 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h3>Address</h3>
-                            <p>King Fahad Road, Khobar</p>
+                            <div class="map-container">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3576.7763419801305!2d50.1938016!3d26.3049022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49e6f3daa43ffd%3A0x78d07850229b8ffe!2sKing%20Fahd%20Rd%2C%20Al%20Khobar%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1679834567890!5m2!1sen!2s"
+                                    width="100%"
+                                    height="220"
+                                    allowfullscreen=""
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                            <p>
+                                <a href="https://maps.google.com/?q=King+Fahd+Road,+Khobar,+Saudi+Arabia"
+                                    target="_blank"
+                                    class="address-link">
+                                    King Fahad Road, Khobar
+                                </a>
+                            </p>
                         </div>
                     </div>
 
