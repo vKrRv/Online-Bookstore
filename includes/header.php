@@ -4,16 +4,14 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Calculate base URL 
-$basePath = '';
-$currentPath = $_SERVER['PHP_SELF'];
-$depth = substr_count($currentPath, '/') - 1;
-// Adjust based on current directory
-if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/') !== false) {
-    $basePath = '../';
-} else if (strpos($currentPath, '/includes/') !== false) {
-    $basePath = '../';
+require_once __DIR__ . '/functions.php';
+$basePath = getBasePath();
+
+// Add CSRF token to all forms (example for search form)
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
+$csrf_token = $_SESSION['csrf_token'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,8 +42,9 @@ if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/')
             </div>
 
             <div class="search-container">
-                <form class="search-form">
+                <form class="search-form" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                     <input type="text" placeholder="Search for books..." />
+                    <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                     <button type="submit"><i class="fas fa-search"></i></button>
                 </form>
             </div>

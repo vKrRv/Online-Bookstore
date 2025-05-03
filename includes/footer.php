@@ -1,13 +1,6 @@
 <?php
-// Calculate  base URL 
-$footerBasePath = '';
-$currentPath = $_SERVER['PHP_SELF'];
-// Adjust based on current directory
-if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/') !== false) {
-    $footerBasePath = '../';
-} else if (strpos($currentPath, '/includes/') !== false) {
-    $footerBasePath = '../';
-}
+require_once __DIR__ . '/functions.php';
+$footerBasePath = getBasePath();
 ?>
 <footer class="main-footer">
     <div class="footer-container">
