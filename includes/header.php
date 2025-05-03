@@ -1,18 +1,8 @@
 <?php
-// Start session 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 require_once __DIR__ . '/functions.php';
 $basePath = getBasePath();
-
-// Add CSRF token to all forms (example for search form)
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-$csrf_token = $_SESSION['csrf_token'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
