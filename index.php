@@ -34,7 +34,7 @@ include 'includes/header.php';
             if ($book['featured'] != 1) continue;
             if ($count >= 3) break;
             $count++;
-            renderBookCard($book, '');
+            showBookCard($book, '');
         }
         if ($count === 0) {
             echo "<div class='no-books'><i class='fas fa-book-open'></i><p>Featured books not found.</p></div>";

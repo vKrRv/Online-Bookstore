@@ -80,7 +80,7 @@ if (addToCartPost($conn)) {
             $books = getAllBooks($conn, $filters);
             if (count($books) > 0) {
                 foreach ($books as $book) {
-                    renderBookCard($book, '../');
+                    showBookCard($book, '../');
                 }
             } else {
                 showError('No books available at the moment.');

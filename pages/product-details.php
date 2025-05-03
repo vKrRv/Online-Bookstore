@@ -69,7 +69,7 @@ unset($_SESSION['applied_coupon']);
                     <p class="price"><span class="symbol">&#xea;</span> <?php echo formatPrice($book['price']); ?></p>
 
                     <div class="stock-container with-help">
-                        <?php if (isBookInStock($book)): ?>
+                        <?php if (isInStock($book)): ?>
                             <p class="stock in-stock"><i class="fas fa-check-circle"></i> In Stock: <?php echo htmlspecialchars($book['stock']); ?> available</p>
                         <?php else: ?>
                             <p class="stock stock-out"><i class="fas fa-times-circle"></i> Out of Stock</p>

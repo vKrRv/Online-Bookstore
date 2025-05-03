@@ -48,7 +48,7 @@ $discountError = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // if cart quantity is updated
     if (isset($_POST['update_cart'])) {
-        updateCartQuantities($_POST['quantity']);
+        updateQuantitiy($_POST['quantity']);
     }
     // if coupon is applied
     if (isset($_POST['apply_coupon'])) {
@@ -138,7 +138,7 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                                     $stock = (int)$row['stock'];
                                 }
                                 // Delivery date
-                                list($minDelivery, $maxDelivery) = getBookDeliveryDates();
+                                list($minDelivery, $maxDelivery) = getDeliveryDate();
                             ?>
                                 <tr>
                                     <td>
