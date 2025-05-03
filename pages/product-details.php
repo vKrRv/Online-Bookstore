@@ -145,9 +145,8 @@ unset($_SESSION['applied_coupon']);
             </div>
         </div>
     </div>
-
-    <!-- ✅ Link JavaScript -->
-    <script src="../js/validation.js"></script>
+    <!-- Help popup -->
+    <script src="../js/popup.js"></script>
 </body>
 
 </html>
