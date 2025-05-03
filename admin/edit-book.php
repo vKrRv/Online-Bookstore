@@ -6,7 +6,7 @@ if (!isset($_SESSION['admin_username'])) {
     exit();
 }
 
-include '../includes/db.php'; // include db connection
+require_once '../includes/db.php'; // include db connection
 
 if (isset($_GET['id'])) { // get book id
     $book_id = (int) $_GET['id'];

@@ -4,26 +4,14 @@ session_start();
 unset($_SESSION['applied_coupon']);
 // Check if POST request is made to add to cart
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    // Include db connection
-    include '../includes/db.php';
-    // Validate input
+    require_once '../includes/db.php';
+    include_once '../includes/functions.php';
     $book_id = filter_var($_POST['book_id'], FILTER_VALIDATE_INT);
     $quantity = filter_var($_POST['quantity'], FILTER_VALIDATE_INT);
     if (!$quantity || $quantity < 1) $quantity = 1;
-    $book = $conn->query("SELECT * FROM books WHERE book_id = $book_id")->fetch_assoc();
+    $book = getBookById($conn, $book_id);
     if ($book) {
-        if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
-        if (isset($_SESSION['cart'][$book_id])) {
-            $_SESSION['cart'][$book_id]['quantity'] += $quantity;
-        } else {
-            $_SESSION['cart'][$book_id] = [
-                'book_id' => $book['book_id'],
-                'title' => $book['title'],
-                'price' => $book['price'],
-                'quantity' => $quantity,
-                'image' => $book['image']
-            ];
-        }
+        addToCart($book, $quantity);
         header('Location: cart.php');
         exit;
     }
@@ -66,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                         <option value="all" <?php echo (!isset($_GET['category']) || $_GET['category'] == 'all') ? 'selected' : ''; ?>>All Categories</option>
                         <?php
                         // Check db connection
-                        if (!isset($conn)) include '../includes/db.php';
+                        if (!isset($conn)) require_once '../includes/db.php';
 
                         // Fetch categories
                         $categoryQuery = "SELECT DISTINCT category FROM books ORDER BY category";
@@ -90,40 +78,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         <div class="book-grid">
             <?php
             // Include db connection
-            include '../includes/db.php';
-            // Fetch books
-            $query = "SELECT * FROM books";
-
-            // Apply filter
-            if (isset($_GET['category']) && $_GET['category'] != 'all') {
-                $category = $conn->real_escape_string($_GET['category']);
-                $query .= " WHERE category = '$category'";
-            }
-
-            // Apply filter
-            if (isset($_GET['sort'])) {
-                switch ($_GET['sort']) {
-                    case 'price_asc':
-                        $query .= " ORDER BY price ASC";
-                        break;
-                    case 'price_desc':
-                        $query .= " ORDER BY price DESC";
-                        break;
-                    case 'featured':
-                    default:
-                        $query .= " ORDER BY featured DESC, book_id DESC"; // Featured books first
-                        break;
-                }
-            } else {
-                $query .= " ORDER BY featured DESC, book_id DESC";
-            }
-
-            $result = $conn->query($query);
-
-            // Check if there are any books
-            if ($result->num_rows > 0) {
-                // Loop and display 
-                while ($book = $result->fetch_assoc()) {
+            require_once '../includes/db.php';
+            include_once '../includes/functions.php';
+            // Fetch books with filters
+            $filters = [
+                'category' => $_GET['category'] ?? 'all',
+                'sort' => $_GET['sort'] ?? 'featured'
+            ];
+            $books = getAllBooks($conn, $filters);
+            if (count($books) > 0) {
+                foreach ($books as $book) {
             ?>
                     <div class="book-card">
                         <a href="product-details.php?id=<?php echo $book['book_id']; ?>" class="card-link">

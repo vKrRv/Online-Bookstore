@@ -2,7 +2,7 @@
 session_start();
 unset($_SESSION['applied_coupon']);
 // Include database connection
-include '../includes/db.php';
+require_once '../includes/db.php';
 
 $totalPrice = 0;
 $shipping = 5.00;

@@ -16,7 +16,7 @@ unset($_SESSION['applied_coupon']);
 <body>
     <?php
     include '../includes/header.php';
-    include '../includes/db.php';
+    require_once '../includes/db.php';
 
     $message = "";
     $messageType = "";

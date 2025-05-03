@@ -10,7 +10,7 @@
 
 <body>
     <?php include '../includes/header.php'; ?>
-    <?php include '../includes/db.php'; ?>
+    <?php require_once '../includes/db.php'; ?>
 
     <?php
     if (!isset($_SESSION['admin_username'])) { // redirect if not logged in

@@ -1,5 +1,5 @@
 <?php
-include '../includes/db.php';
+require_once '../includes/db.php';
 
 if (isset($_GET['id'])) { // get id from url
     $book_id = (int) $_GET['id']; // security measure

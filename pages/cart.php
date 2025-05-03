@@ -9,7 +9,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
 
     if ($book_id && isset($_SESSION['cart'][$book_id])) {
         // Fetch stock
-        include_once '../includes/db.php';
+        require_once '../includes/db.php';
         $stock = 1;
         $stockResult = $conn->query("SELECT stock FROM books WHERE book_id = " . intval($book_id));
         // Check if result is valid
@@ -136,7 +136,7 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                                 $totalItems += $item['quantity'];
 
                                 // Fetch stock
-                                include_once '../includes/db.php';
+                                require_once '../includes/db.php';
                                 $stock = 1;
                                 $stockResult = $conn->query("SELECT stock FROM books WHERE book_id = " . intval($book_id));
                                 if ($stockResult && $row = $stockResult->fetch_assoc()) {

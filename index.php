@@ -3,26 +3,14 @@ session_start();
 unset($_SESSION['applied_coupon']);
 // Check if POST request is made to add to cart
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    include 'includes/db.php';
-    // Validate input
+    require_once 'includes/db.php';
+    include_once 'includes/functions.php';
     $book_id = filter_var($_POST['book_id'], FILTER_VALIDATE_INT);
     $quantity = filter_var($_POST['quantity'], FILTER_VALIDATE_INT);
     if (!$quantity || $quantity < 1) $quantity = 1;
-    $book = $conn->query("SELECT * FROM books WHERE book_id = $book_id")->fetch_assoc();
-    // Check if book exists
+    $book = getBookById($conn, $book_id);
     if ($book) {
-        if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
-        if (isset($_SESSION['cart'][$book_id])) {
-            $_SESSION['cart'][$book_id]['quantity'] += $quantity;
-        } else {
-            $_SESSION['cart'][$book_id] = [
-                'book_id' => $book['book_id'],
-                'title' => $book['title'],
-                'price' => $book['price'],
-                'quantity' => $quantity,
-                'image' => $book['image']
-            ];
-        }
+        addToCart($book, $quantity);
         header('Location: pages/cart.php');
         exit;
     }
@@ -44,16 +32,15 @@ include 'includes/header.php';
     <div class="book-grid">
         <?php
         // Include db connection
-        include 'includes/db.php';
+        require_once 'includes/db.php';
+        include_once 'includes/functions.php';
         // Fetch featured books
-        $query = "SELECT * FROM books WHERE featured = 1 LIMIT 3";
-        $result = $conn->query($query);
-
-        if ($result) {
-
-            if ($result->num_rows > 0) {
-                // Loop and display
-                while ($book = $result->fetch_assoc()) {
+        $featuredBooks = getAllBooks($conn, ['sort' => 'featured']);
+        $count = 0;
+        foreach ($featuredBooks as $book) {
+            if ($book['featured'] != 1) continue;
+            if ($count >= 3) break;
+            $count++;
         ?>
                     <div class="book-card">
                         <a href="pages/product-details.php?id=<?php echo $book['book_id']; ?>" class="card-link">
@@ -94,13 +81,10 @@ include 'includes/header.php';
                         </div>
                     </div>
         <?php
-                } // end while
-            } else {
-                // No featured books were found
-                echo "<div class='no-books'><i class='fas fa-book-open'></i><p>Featured books not found.</p></div>";
-            }
         }
-        // Close db connection
+        if ($count === 0) {
+            echo "<div class='no-books'><i class='fas fa-book-open'></i><p>Featured books not found.</p></div>";
+        }
         $conn->close();
         ?>
     </div>
