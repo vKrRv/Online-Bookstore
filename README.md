@@ -60,7 +60,7 @@ Online-Bookstore/
 │   └── functions.php          # Shared Logic
 │
 ├── js/                        # JavaScript files
-│   ├── cart.js                # Cart logic
+│   ├── utils.js               # Utils logic
 │   ├── popup.js               # Pop-up windows
 │   └── validation.js          # Form validation
 │

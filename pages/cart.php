@@ -82,7 +82,7 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
     <title>Shopping Cart - Book Haven</title>
     <link href="../css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="../js/cart.js"></script>
+    <script src="../js/utils.js"></script>
 </head>
 
 <body>
