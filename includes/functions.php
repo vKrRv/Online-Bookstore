@@ -79,6 +79,37 @@ function getCategories($conn) {
     return $categories;
 }
 
+function getFilteredBooks($conn, $params = [])
+{
+    $search = isset($params['search']) ? $conn->real_escape_string(trim($params['search'])) : '';
+    $category = isset($params['category']) ? $conn->real_escape_string($params['category']) : '';
+    $sort = isset($params['sort']) ? $params['sort'] : '';
+    $query = "SELECT * FROM books";
+    $conditions = [];
+    if (!empty($search)) {
+        $conditions[] = "title LIKE '%$search%'";
+    }
+    if (!empty($category) && $category !== 'all') {
+        $conditions[] = "category = '$category'";
+    }
+    if (!empty($conditions)) {
+        $query .= " WHERE " . implode(" AND ", $conditions);
+    }
+    switch ($sort) {
+        case 'price_asc':
+            $query .= " ORDER BY price ASC";
+            break;
+        case 'price_desc':
+            $query .= " ORDER BY price DESC";
+            break;
+        case 'featured':
+        default:
+            $query .= " ORDER BY featured DESC, book_id DESC";
+            break;
+    }
+    return $conn->query($query);
+}
+
 // =====================
 // Cart/Session Logic
 // =====================
@@ -354,4 +385,3 @@ function ImageUpload($fileInput, &$errorMessage = null) {
     }
     return $image_name;
 }
-

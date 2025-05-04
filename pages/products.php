@@ -2,35 +2,14 @@
 // Start session
 session_start();
 unset($_SESSION['applied_coupon']);
+require_once '../includes/db.php';
 
-// Check if POST request is made to add to cart
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    // Include db connection
-    include '../includes/db.php';
-
-    // Validate input
-    $book_id = filter_var($_POST['book_id'], FILTER_VALIDATE_INT);
-    $quantity = filter_var($_POST['quantity'], FILTER_VALIDATE_INT);
-    if (!$quantity || $quantity < 1) $quantity = 1;
-
-    $book = $conn->query("SELECT * FROM books WHERE book_id = $book_id")->fetch_assoc();
-    if ($book) {
-        if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
-        if (isset($_SESSION['cart'][$book_id])) {
-            $_SESSION['cart'][$book_id]['quantity'] += $quantity;
-        } else {
-            $_SESSION['cart'][$book_id] = [
-                'book_id' => $book['book_id'],
-                'title' => $book['title'],
-                'price' => $book['price'],
-                'quantity' => $quantity,
-                'image' => $book['image']
-            ];
-        }
-        header('Location: cart.php');
-        exit;
-    }
+include_once '../includes/functions.php';
+if (addToCartPost($conn)) {
+    header('Location: cart.php');
+    exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,17 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                     <select name="category" onchange="document.getElementById('filterForm').submit()">
                         <option value="all" <?php echo (!isset($_GET['category']) || $_GET['category'] == 'all') ? 'selected' : ''; ?>>All Categories</option>
                         <?php
-                        // Check db connection
-                        if (!isset($conn)) include '../includes/db.php';
-
-                        // Fetch categories
-                        $categoryQuery = "SELECT DISTINCT category FROM books ORDER BY category";
-                        $categoryResult = $conn->query($categoryQuery);
-
-                        // Display categories
-                        while ($categoryRow = $categoryResult->fetch_assoc()) {
-                            $selected = (isset($_GET['category']) && $_GET['category'] == $categoryRow['category']) ? 'selected' : '';
-                            echo "<option value='" . htmlspecialchars($categoryRow['category']) . "' $selected>" . htmlspecialchars($categoryRow['category']) . "</option>";
+                        $categories = getCategories($conn);
+                        foreach ($categories as $category) {
+                            $selected = (isset($_GET['category']) && $_GET['category'] == $category) ? 'selected' : '';
+                            echo "<option value='" . htmlspecialchars($category) . "' $selected>" . htmlspecialchars($category) . "</option>";
                         }
                         ?>
                     </select>
@@ -101,94 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 
         <div class="book-grid">
             <?php
-            include '../includes/db.php';
-
-            // Start query
-            $search = isset($_GET['search']) ? $conn->real_escape_string(trim($_GET['search'])) : '';
-            $query = "SELECT * FROM books";
-            $conditions = [];
-
-            // Add search condition
-            if (!empty($search)) {
-                $conditions[] = "title LIKE '%$search%'";
-            }
-
-            // Add category condition
-            if (isset($_GET['category']) && $_GET['category'] != 'all') {
-                $category = $conn->real_escape_string($_GET['category']);
-                $conditions[] = "category = '$category'";
-            }
-
-            // Apply conditions
-            if (!empty($conditions)) {
-                $query .= " WHERE " . implode(" AND ", $conditions);
-            }
-
-            // Add sorting
-            if (isset($_GET['sort'])) {
-                switch ($_GET['sort']) {
-                    case 'price_asc':
-                        $query .= " ORDER BY price ASC";
-                        break;
-                    case 'price_desc':
-                        $query .= " ORDER BY price DESC";
-                        break;
-                    case 'featured':
-                    default:
-                        $query .= " ORDER BY featured DESC, book_id DESC";
-                        break;
-                }
-            } else {
-                $query .= " ORDER BY featured DESC, book_id DESC";
-            }
-
-            $result = $conn->query($query);
-
-            if ($result->num_rows > 0) {
+            $params = [
+                'search' => $_GET['search'] ?? '',
+                'category' => $_GET['category'] ?? 'all',
+                'sort' => $_GET['sort'] ?? 'featured'
+            ];
+            $result = getFilteredBooks($conn, $params);
+            if ($result && $result->num_rows > 0) {
                 while ($book = $result->fetch_assoc()) {
-            ?>
-                    <div class="book-card">
-                        <a href="product-details.php?id=<?php echo $book['book_id']; ?>" class="card-link">
-                            <div class="card-img-container">
-                                <img src="../assets/images/<?php echo htmlspecialchars($book['image']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>" class="card-img">
-                                <div class="view-details">View Details</div>
-                            </div>
-                        </a>
-                        <div class="card-content">
-                            <h3 class="card-title"><?php echo htmlspecialchars($book['title']); ?></h3>
-                            <span class="card-category"><?php echo htmlspecialchars($book['category']); ?></span>
-                            <div class="card-price">
-                                <span class="symbol">&#xea;</span><?php echo htmlspecialchars($book['price']); ?>
-                            </div>
-                            <div class="card-stock <?php echo $book['stock'] == 0 ? 'stock-out' : ($book['stock'] <= 5 ? 'stock-low' : 'stock-in'); ?>">
-                                <?php if ($book['stock'] == 0): ?>
-                                    <i class="fas fa-times-circle"></i>
-                                    <span>Out of Stock</span>
-                                <?php elseif ($book['stock'] <= 5): ?>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <span>Only <?php echo htmlspecialchars($book['stock']); ?> left in stock</span>
-                                <?php else: ?>
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>In Stock</span>
-                                <?php endif; ?>
-                            </div>
-                            <form method="post" style="margin-top:10px;">
-                                <input type="hidden" name="book_id" value="<?php echo $book['book_id']; ?>">
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" name="add_to_cart" class="add-to-cart-btn">
-                                    <i class="fas fa-shopping-cart"></i> Add to Cart
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-            <?php
+                    showBookCard($book, '../');
                 }
             } else {
-            ?>
+                ?>
                 <div class="no-books">
                     <i class="fas fa-book-open"></i>
                     <p>
                         <?php
+                        $search = trim($_GET['search'] ?? '');
                         echo !empty($search)
                             ? 'No results found for "' . htmlspecialchars($search) . '".'
                             : 'No books available at the moment.';
@@ -197,7 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 </div>
             <?php
             }
-
             $conn->close();
             ?>
         </div>
