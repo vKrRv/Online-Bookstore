@@ -18,6 +18,15 @@ $finalTotal = $totalPrice + $shipping + $vat;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+        // Store shipping details in session
+        $_SESSION['ship_name'] = $_POST['ship_name'];
+        $_SESSION['ship_line1'] = $_POST['ship_line1'];
+        $_SESSION['ship_line2'] = $_POST['ship_line2'];
+        $_SESSION['ship_city'] = $_POST['ship_city'];
+        $_SESSION['ship_postal'] = $_POST['ship_postal'];
+        $_SESSION['ship_phone'] = $_POST['ship_phone'];
+        $_SESSION['ship_email'] = $_POST['ship_email'];
+
         list($orderId, $errorMessage) = createOrder($conn, $_SESSION['cart'], $finalTotal);
         if ($orderId && empty($errorMessage)) {
             // Save purchased books to cookie before clearing cart
@@ -122,9 +131,9 @@ mysqli_close($conn);
                     <img src="../assets/cards/mastercard.svg" alt="Mastercard" class="payment-icon-co">
                     <img src="../assets/cards/apple-pay.svg" alt="Apple Pay" class="payment-icon-co">
                     <!-- <img src="../assets/cards/mada.svg" alt="Mada" class="payment-icon-co"> -->
-                    <img src="../assets/cards/tabby.svg" alt="Tabby" class="payment-icon-co">
+                    <img src="../assets/cards/tabby.svg" alt="Tabby" class="payment-icon-tabby">
                 </div>
-                <form method="POST" action="" id="payment-form">
+                <form method="POST" action="" id="payment-form" class="payform">
                     <!-- Hidden fields to include shipping information -->
                     <input type="hidden" id="form-ship-name" name="ship_name" value="">
                     <input type="hidden" id="form-ship-line1" name="ship_line1" value="">

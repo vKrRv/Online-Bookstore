@@ -16,6 +16,17 @@ $postalCode = isset($_POST['ship_postal']) ? $_POST['ship_postal'] : '';
 $customerPhone = isset($_POST['ship_phone']) ? $_POST['ship_phone'] : '';
 $customerEmail = isset($_POST['ship_email']) ? $_POST['ship_email'] : '';
 
+//If customer info isn't in POST, check if it's in the session from checkout.php
+if (empty($customerName) && isset($_SESSION['ship_name'])) {
+    $customerName = $_SESSION['ship_name'];
+    $addressLine1 = $_SESSION['ship_line1'];
+    $addressLine2 = $_SESSION['ship_line2'];
+    $city = $_SESSION['ship_city'];
+    $postalCode = $_SESSION['ship_postal'];
+    $customerPhone = $_SESSION['ship_phone'];
+    $customerEmail = $_SESSION['ship_email'];
+}
+
 //order details from the database
 $orderItems = [];
 if ($orderId > 0) {
