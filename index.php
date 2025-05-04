@@ -20,6 +20,10 @@ include 'includes/header.php';
 </section>
 
 <section>
+    <?php showPastPurchases(); ?>
+</section>
+
+<section>
     <h2>Featured Books</h2>
 
     <div class="book-grid">

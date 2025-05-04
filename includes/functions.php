@@ -385,3 +385,54 @@ function ImageUpload($fileInput, &$errorMessage = null) {
     }
     return $image_name;
 }
+
+// =====================
+// Past Purchases Utils
+// =====================
+function addToPastPurchases($books) {
+    if (!is_array($books) || empty($books)) return;
+    $purchasedBooks = $books;
+    if (isset($_COOKIE['past_purchases'])) {
+        $existing = json_decode($_COOKIE['past_purchases'], true);
+        if (is_array($existing)) {
+            foreach ($books as $book) {
+                $found = false;
+                foreach ($existing as $e) {
+                    if ($e['title'] === $book['title']) {
+                        $found = true;
+                        break;
+                    }
+                }
+                if (!$found) {
+                    $existing[] = $book;
+                }
+            }
+            $purchasedBooks = $existing;
+        }
+    }
+    setcookie('past_purchases', json_encode($purchasedBooks), time() + 60*60*24*7, '/'); // 7 days
+}
+
+function showPastPurchases() {
+    if (isset($_COOKIE['past_purchases'])) {
+        $pastPurchases = json_decode($_COOKIE['past_purchases'], true);
+        if (is_array($pastPurchases) && count($pastPurchases) > 0) {
+            echo '<section class="past-purchases-section">';
+            echo '<h2>Your Past Purchases</h2>';
+            echo '<div class="past-purchases-grid">';
+            foreach ($pastPurchases as $book) {
+                $img = 'assets/images/' . htmlspecialchars($book['image']);
+                $title = htmlspecialchars($book['title']);
+                $detailsLink = 'pages/product-details.php?id=' . $book['book_id'];
+                echo '<div class="past-purchase-card">';
+                echo '<a href="' . $detailsLink . '" title="View details">';
+                echo '<img src="' . $img . '" alt="Book cover" class="past-purchase-img">';
+                echo '</a>';
+                echo '<div class="past-purchase-title">' . $title . '</div>';
+                echo '</div>';
+            }
+            echo '</div>';
+            echo '</section>';
+        }
+    }
+}

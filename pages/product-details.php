@@ -98,12 +98,12 @@ unset($_SESSION['applied_coupon']);
 
     <?php
         } else {
-            echo "<div class='error-message'><i class='fas fa-exclamation-triangle'></i><h2>Book not found</h2><a href='products.php'><i class='fas fa-arrow-left'></i></a></div>";
+            echo "<div class='products-error-message'><i class='fas fa-exclamation-triangle'></i><h2>Book not found</h2><a href='products.php'><i class='fas fa-arrow-left'></i></a></div>";
         }
 
         $stmt->close();
     } else {
-        echo "<div class='error-message'><i class='fas fa-exclamation-triangle'></i><h2>Invalid Request</h2><a href='products.php'><i class='fas fa-arrow-left'></i></a></div>";
+        echo "<div class='products-error-message'><i class='fas fa-exclamation-triangle'></i><h2>Invalid Request</h2><a href='products.php'><i class='fas fa-arrow-left'></i></a></div>";
     }
 
     $conn->close();
