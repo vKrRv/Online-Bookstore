@@ -192,6 +192,7 @@ function calculateCartTotals($conn) {
                     'price' => $bookPrice,
                     'quantity' => $item['quantity'],
                     'total' => $bookTotal,
+                    'image' => $book['image']
                 ];
             }
         }
