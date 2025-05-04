@@ -136,15 +136,15 @@ mysqli_close($conn);
             <hr><br>
             <form method="POST" action="">
                 <label for="card-number"><strong>Card Number:</strong></label>
-                <input type="text" id="card-number" placeholder="0000-0000-0000-0000" />
+                <input type="text" id="card-number" name="card-number" placeholder="0000-0000-0000-0000" />
                 <br>
                 <label for="expire"><strong>Expire date:</strong></label>
-                <input type="month" id="expire" placeholder="MM/YY" />
+                <input type="month" id="expire" name="expire" placeholder="MM/YY" />
                 <br>
                 <label for="cvv"><strong>CVV:</strong></label>
-                <input type="text" id="cvv" placeholder="000" />
+                <input type="text" id="cvv" name="cvv" placeholder="000" />
                 <br><br>
-                <button type="submit" class="checkout-btn">Confirm payment</button>
+                <button type="submit" class="checkout-btn" aria-label="Confirm payment for total <?php echo $finalTotal; ?>">Confirm payment</button>
             </form>
         </div>
 

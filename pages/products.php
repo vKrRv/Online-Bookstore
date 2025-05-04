@@ -42,13 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 
 <body>
     <?php include '../includes/header.php'; ?>
-    <h1 class="title">All Books</h1>
-    <main>
+    <main role="main">
+        <h1 class="title">All Books</h1>
         <div class="filters-container">
             <div class="filter-section">
                 <form method="GET" action="" id="sortForm">
-                    <span>Sort by:</span>
-                    <select name="sort" onchange="document.getElementById('sortForm').submit()"> <!-- Sort by dropdown -->
+                    <label for="sortSelect">Sort by:</label>
+                    <select name="sort" id="sortSelect" onchange="document.getElementById('sortForm').submit()"> <!-- Sort by dropdown -->
                         <option value="featured" <?php echo (!isset($_GET['sort']) || $_GET['sort'] == 'featured') ? 'selected' : ''; ?>>Featured</option>
                         <option value="price_asc" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_asc') ? 'selected' : ''; ?>>Price: Low to High</option>
                         <option value="price_desc" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_desc') ? 'selected' : ''; ?>>Price: High to Low</option>
@@ -60,9 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             </div>
             <div class="filter-section">
                 <form method="GET" action="" id="filterForm">
-                    <span>Filter by:</span>
+                    <label for="filterSelect">Filter by:</label>
                     <!-- Category filter -->
-                    <select name="category" onchange="document.getElementById('filterForm').submit()">
+                    <select name="category" id="filterSelect" onchange="document.getElementById('filterForm').submit()">
                         <option value="all" <?php echo (!isset($_GET['category']) || $_GET['category'] == 'all') ? 'selected' : ''; ?>>All Categories</option>
                         <?php
                         // Check db connection
@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                     <div class="book-card">
                         <a href="product-details.php?id=<?php echo $book['book_id']; ?>" class="card-link">
                             <div class="card-img-container">
-                                <img src="../assets/images/<?php echo htmlspecialchars($book['image']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>" class="card-img">
+                                <img src="../assets/images/<?php echo htmlspecialchars($book['image']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?> cover" class="card-img">
                                 <div class="view-details">View Details</div>
                             </div>
                         </a>
@@ -140,21 +140,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                             </div>
                             <div class="card-stock <?php echo $book['stock'] == 0 ? 'stock-out' : ($book['stock'] <= 5 ? 'stock-low' : 'stock-in'); ?>">
                                 <?php if ($book['stock'] == 0): ?>
-                                    <i class="fas fa-times-circle"></i>
+                                    <i class="fas fa-times-circle" aria-hidden="true"></i>
                                     <span>Out of Stock</span>
                                 <?php elseif ($book['stock'] <= 5): ?>
-                                    <i class="fas fa-exclamation-circle"></i>
+                                    <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
                                     <span>Only <?php echo htmlspecialchars($book['stock']); ?> left in stock</span>
                                 <?php else: ?>
-                                    <i class="fas fa-check-circle"></i>
+                                    <i class="fas fa-check-circle" aria-hidden="true"></i>
                                     <span>In Stock</span>
                                 <?php endif; ?>
                             </div>
                             <form method="post" style="margin-top:10px;">
                                 <input type="hidden" name="book_id" value="<?php echo $book['book_id']; ?>">
                                 <input type="hidden" name="quantity" value="1">
-                                <button type="submit" name="add_to_cart" class="add-to-cart-btn">
-                                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                                <button type="submit" name="add_to_cart" class="add-to-cart-btn" aria-label="Add '<?php echo $book['title']; ?>' to cart">
+                                    <i class="fas fa-shopping-cart" aria-hidden="true"></i> Add to Cart
                                 </button>
                             </form>
                         </div>
@@ -163,8 +163,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 }
             } else {
                 ?>
-                <div class="no-books">
-                    <i class="fas fa-book-open"></i>
+                <div class="no-books" role="alert" aria-live="polite">
+                    <i class="fas fa-book-open" aria-hidden="true"></i>
                     <p>No books available at the moment.</p>
                 </div>
             <?php

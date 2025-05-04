@@ -27,12 +27,12 @@
             <p><strong>Email:</strong> username@example.com</p>
             <p><strong>Phone Number</strong> +966 00 000 0000</p>
 
-            <p><strong>Shipping Address:</strong> 123 Main St, City, State, ZIP</p>
+            <p><strong>Shipping Address:</strong> <address>123 Main St, City, State, ZIP</address></p>
         </div>
         <div class="thank-you">
-            <p>Your order has been Confirmed</p>
+            <p role="status">Your order has been Confirmed</p>
         </div>
-        <a href="../index.php" class="button btn">Continue Shopping</a>
+        <a href="../index.php" class="button btn" aria-label="Continue shopping on the homepage">Continue Shopping</a>
     </div>
     <footer>
         <p>&copy; 2025 Online Bookstore. All rights reserved.</p>
