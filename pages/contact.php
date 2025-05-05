@@ -89,12 +89,12 @@ session_start();
                 <form class="contact-form" id="contactForm" action="mailto:contactus@bookhaven.com" method="post" enctype="text/plain">
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" name="Name" placeholder="Enter your name" >
+                        <input type="text" id="name" name="Name" placeholder="Enter your name">
                     </div>
 
                     <div class="form-group">
                         <label for="email">Your Email</label>
-                        <input type="email" id="email" name="Email" placeholder="Enter your email" >
+                        <input type="email" id="email" name="Email" placeholder="Enter your email">
                     </div>
 
                     <div class="form-group">
@@ -104,7 +104,7 @@ session_start();
 
                     <div class="form-group">
                         <label for="message">Your Message</label>
-                        <textarea id="message" name="Message" placeholder="Write your message here..." ></textarea>
+                        <textarea id="message" name="Message" placeholder="Write your message here..."></textarea>
                     </div>
 
                     <button type="submit" class="contact-submit-btn">Send Message</button>
@@ -114,7 +114,6 @@ session_start();
     </div>
 
     <?php include '../includes/footer.php'; ?>
-    <!-- Link to external JS file -->
     <script src="../js/validation.js"></script>
 </body>
 

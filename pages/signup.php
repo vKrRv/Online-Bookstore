@@ -1,8 +1,7 @@
 <?php
 // Start session
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
+session_start();
+require_once '../includes/db.php';
 require_once '../includes/functions.php';
 ?>
 <!DOCTYPE html>
@@ -28,11 +27,13 @@ require_once '../includes/functions.php';
 
     <div class="signup-form">
       <?php if (isset($_SESSION['error'])): ?>
-        <?php showError($_SESSION['error']); unset($_SESSION['error']); ?>
+        <?php showError($_SESSION['error']);
+        unset($_SESSION['error']); ?>
       <?php endif; ?>
 
       <?php if (isset($_SESSION['success'])): ?>
-        <?php showSuccess($_SESSION['success']); unset($_SESSION['success']); ?>
+        <?php showSuccess($_SESSION['success']);
+        unset($_SESSION['success']); ?>
       <?php endif; ?>
 
       <form method="POST" action="signup_process.php">
@@ -40,7 +41,7 @@ require_once '../includes/functions.php';
           <input type="text" placeholder="Full Name" name="name" required />
         </div>
         <div class="input-group">
-          <input type="text" placeholder="Username" name="username" required/>
+          <input type="text" placeholder="Username" name="username" required />
         </div>
         <div class="input-group">
           <input type="email" placeholder="Email Address" name="email" required />
@@ -58,6 +59,7 @@ require_once '../includes/functions.php';
   </div>
 
   <?php include '../includes/footer.php'; ?>
+  <script src="../js/validation.js"></script>
 </body>
 
 </html>
