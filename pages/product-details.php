@@ -144,7 +144,6 @@ unset($_SESSION['applied_coupon']);
             </div>
         </div>
     </div>
-    <!-- Help popup -->
     <script src="../js/popup.js"></script>
 </body>
 

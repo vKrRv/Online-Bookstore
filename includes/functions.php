@@ -4,7 +4,8 @@
 // =====================
 // Database/Book Queries
 // =====================
-function getBookById($conn, $book_id) {
+function getBookById($conn, $book_id)
+{
     $stmt = $conn->prepare("SELECT * FROM books WHERE book_id = ?");
     $stmt->bind_param("i", $book_id);
     $stmt->execute();
@@ -14,7 +15,8 @@ function getBookById($conn, $book_id) {
     return $book;
 }
 
-function getAllBooks($conn, $filters = []) {
+function getAllBooks($conn, $filters = [])
+{
     $query = "SELECT * FROM books";
     $params = [];
     $types = '';
@@ -58,7 +60,8 @@ function getAllBooks($conn, $filters = []) {
     return $books;
 }
 
-function getBookStock($conn, $book_id) {
+function getBookStock($conn, $book_id)
+{
     $stmt = $conn->prepare("SELECT stock FROM books WHERE book_id = ?");
     $stmt->bind_param("i", $book_id);
     $stmt->execute();
@@ -68,7 +71,8 @@ function getBookStock($conn, $book_id) {
     return $row ? (int)$row['stock'] : 0;
 }
 
-function getCategories($conn) {
+function getCategories($conn)
+{
     $categories = [];
     $result = $conn->query("SELECT DISTINCT category FROM books ORDER BY category");
     if ($result) {
@@ -111,9 +115,10 @@ function getFilteredBooks($conn, $params = [])
 }
 
 // =====================
-// Cart/Session Logic
+// Cart Logic
 // =====================
-function addToCart($book, $quantity) {
+function addToCart($book, $quantity)
+{
     if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
     $book_id = $book['book_id'];
     if (isset($_SESSION['cart'][$book_id])) {
@@ -129,25 +134,29 @@ function addToCart($book, $quantity) {
     }
 }
 
-function incrementCartItem($book_id) {
+function incrementCartItem($book_id)
+{
     if (isset($_SESSION['cart'][$book_id])) {
         $_SESSION['cart'][$book_id]['quantity']++;
     }
 }
 
-function decrementCartItem($book_id) {
+function decrementCartItem($book_id)
+{
     if (isset($_SESSION['cart'][$book_id]) && $_SESSION['cart'][$book_id]['quantity'] > 1) {
         $_SESSION['cart'][$book_id]['quantity']--;
     }
 }
 
-function removeCartItem($book_id) {
+function removeCartItem($book_id)
+{
     if (isset($_SESSION['cart'][$book_id])) {
         unset($_SESSION['cart'][$book_id]);
     }
 }
 
-function updateQuantitiy($quantities) {
+function updateQuantitiy($quantities)
+{
     foreach ($quantities as $book_id => $quantity) {
         $quantity = filter_var($quantity, FILTER_VALIDATE_INT);
         if (!$quantity || $quantity < 1) {
@@ -159,7 +168,8 @@ function updateQuantitiy($quantities) {
     }
 }
 
-function addToCartPost($conn) {
+function addToCartPost($conn)
+{
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         $book_id = filter_var($_POST['book_id'], FILTER_VALIDATE_INT);
         $quantity = filter_var($_POST['quantity'], FILTER_VALIDATE_INT);
@@ -176,8 +186,10 @@ function addToCartPost($conn) {
 // =====================
 // Order Utils
 // =====================
-function calculateCartTotals($conn) {
+function calculateCartTotals($conn)
+{
     $totalPrice = 0;
+    $totalPriceExclVAT = 0;
     $bookDetails = [];
     if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         foreach ($_SESSION['cart'] as $item) {
@@ -185,22 +197,35 @@ function calculateCartTotals($conn) {
             $book = getBookById($conn, $item['book_id']);
             if ($book) {
                 $bookPrice = $book['price'];
+                $bookPriceWithVAT = $bookPrice * 1.15; // Include 15% VAT
                 $bookTotal = $bookPrice * $item['quantity'];
-                $totalPrice += $bookTotal;
+                $bookTotalWithVAT = $bookPriceWithVAT * $item['quantity'];
+
+                $totalPriceExclVAT += $bookTotal;
+                $totalPrice += $bookTotalWithVAT;
+
                 $bookDetails[] = [
                     'title' => $book['title'],
                     'price' => $bookPrice,
+                    'priceWithVAT' => $bookPriceWithVAT,
                     'quantity' => $item['quantity'],
                     'total' => $bookTotal,
+                    'totalWithVAT' => $bookTotalWithVAT,
                     'image' => $book['image']
                 ];
             }
         }
     }
-    return ['totalPrice' => $totalPrice, 'bookDetails' => $bookDetails];
+    return [
+        'totalPrice' => $totalPrice,
+        'totalPriceExclVAT' => $totalPriceExclVAT,
+        'vat' => $totalPrice - $totalPriceExclVAT,
+        'bookDetails' => $bookDetails
+    ];
 }
 
-function createOrder($conn, $cart, $finalTotal) {
+function createOrder($conn, $cart, $finalTotal)
+{
     $orderId = null;
     $errorMessage = '';
     $sql = "INSERT INTO orders (customer_id, total_price, order_date) VALUES (NULL, $finalTotal, NOW())";
@@ -233,15 +258,18 @@ function createOrder($conn, $cart, $finalTotal) {
 // =====================
 // Product Utils
 // =====================
-function formatPrice($price) {
+function formatPrice($price)
+{
     return number_format($price, 2);
 }
 
-function isInStock($book) {
+function isInStock($book)
+{
     return isset($book['stock']) && $book['stock'] > 0;
 }
 
-function getDeliveryDate() {
+function getDeliveryDate()
+{
     $minDelivery = date('M j', strtotime('+3 days'));
     $maxDelivery = date('M j', strtotime('+5 days'));
     return [$minDelivery, $maxDelivery];
@@ -250,7 +278,8 @@ function getDeliveryDate() {
 // =====================
 // Session Helper
 // =====================
-function requireAdmin() {
+function requireAdmin()
+{
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
@@ -263,23 +292,27 @@ function requireAdmin() {
 // =====================
 // Messaging Utils
 // =====================
-function showError($message) {
+function showError($message)
+{
     echo '<div class="error-message"><i class="fas fa-exclamation-circle"></i> ' . htmlspecialchars($message) . '</div>';
 }
 
-function showSuccess($message) {
+function showSuccess($message)
+{
     echo '<div class="message-box success"><i class="fas fa-check-circle"></i> ' . htmlspecialchars($message) . '</div>';
 }
 
-function showInfo($message) {
+function showInfo($message)
+{
     echo '<div class="info-message"><i class="fas fa-info-circle"></i> ' . htmlspecialchars($message) . '</div>';
 }
 
 // =====================
 // UI Components
 // =====================
-function showBookCard($book, $basePath = '../') {
-    ?>
+function showBookCard($book, $basePath = '../')
+{
+?>
     <div class="book-card">
         <a href="<?php echo $basePath; ?>pages/product-details.php?id=<?php echo $book['book_id']; ?>" class="card-link">
             <div class="card-img-container">
@@ -319,16 +352,17 @@ function showBookCard($book, $basePath = '../') {
             </form>
         </div>
     </div>
-    <?php
+<?php
 }
 
-function showBookRow($book) {
+function showBookRow($book)
+{
     $stock = (int)$book['stock'];
     $stockClass = $stock < 5 ? 'low-stock' : 'in-stock';
     $category = htmlspecialchars($book['category']);
     $categoryBadge = "<span style='background:#e3fcec;color:#38a169;padding:4px 12px;border-radius:12px;font-size:0.95em;font-weight:500;'>$category</span>";
     if (!$category) $categoryBadge = "<span style='background:#fbe9e7;color:#e57373;padding:4px 12px;border-radius:12px;font-size:0.95em;font-weight:500;'>Uncategorized</span>";
-    ?>
+?>
     <tr>
         <td style="display:flex;align-items:center;justify-content:flex-start;gap:18px;">
             <div style="background:#fff;border-radius:10px;box-shadow:0 2px 8px #e3e3e3;display:flex;align-items:center;justify-content:center;width:100px;height:100px;min-width:100px;min-height:100px;max-width:100px;max-height:100px;overflow:hidden;">
@@ -351,13 +385,14 @@ function showBookRow($book) {
             </div>
         </td>
     </tr>
-    <?php
+<?php
 }
 
 // =====================
 // Utility Functions
 // =====================
-function getBasePath() {
+function getBasePath()
+{
     $currentPath = $_SERVER['PHP_SELF'];
     if (strpos($currentPath, '/pages/') !== false || strpos($currentPath, '/admin/') !== false) {
         return '../';
@@ -370,7 +405,8 @@ function getBasePath() {
 // =====================
 // File Upload Utils
 // =====================
-function ImageUpload($fileInput, &$errorMessage = null) {
+function ImageUpload($fileInput, &$errorMessage = null)
+{
     $target_dir = __DIR__ . '/../assets/images/';
     $image_name = basename($fileInput['name']);
     $target_file = $target_dir . $image_name;
@@ -390,7 +426,8 @@ function ImageUpload($fileInput, &$errorMessage = null) {
 // =====================
 // Past Purchases Utils
 // =====================
-function addToPastPurchases($books) {
+function addToPastPurchases($books)
+{
     if (!is_array($books) || empty($books)) return;
     $purchasedBooks = $books;
     if (isset($_COOKIE['past_purchases'])) {
@@ -411,10 +448,11 @@ function addToPastPurchases($books) {
             $purchasedBooks = $existing;
         }
     }
-    setcookie('past_purchases', json_encode($purchasedBooks), time() + 60*60*24*7, '/'); // 7 days
+    setcookie('past_purchases', json_encode($purchasedBooks), time() + 60 * 60 * 24 * 7, '/'); // 7 days
 }
 
-function showPastPurchases() {
+function showPastPurchases()
+{
     if (isset($_COOKIE['past_purchases'])) {
         $pastPurchases = json_decode($_COOKIE['past_purchases'], true);
         if (is_array($pastPurchases) && count($pastPurchases) > 0) {
