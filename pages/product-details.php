@@ -103,14 +103,28 @@ unset($_SESSION['applied_coupon']);
 
     <?php
         } else {
-            // Book not found
-            echo "<div class='products-error-message' role='alert'><i class='fas fa-exclamation-triangle' aria-hidden='true'></i><h2>Book not found</h2><p>The book you are looking for does not exist.</p><a href='products.php'><i class='fas fa-arrow-left' aria-hidden='true'></i> Back to Books</a></div>";
+            // Book not found - Improved error message
+            echo '<div class="products-error-message" role="alert">
+                <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+                <div>
+                    <h2>Book Not Found</h2>
+                    <p>The book you are looking for does not exist or may have been removed.</p>
+                    <a href="products.php" class="back-to-products"><i class="fas fa-arrow-left" aria-hidden="true"></i> Browse Available Books</a>
+                </div>
+            </div>';
         }
 
         $stmt->close();
     } else {
-        // Invalid book ID
-        echo "<div class='products-error-message' role='alert'><i class='fas fa-exclamation-triangle' aria-hidden='true'></i><h2>Invalid Request</h2><p>Please provide a valid book ID.</p><a href='products.php'><i class='fas fa-arrow-left' aria-hidden='true'></i> Back to Books</a></div>";
+        // Invalid book ID - Improved error message
+        echo '<div class="products-error-message" role="alert">
+            <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+            <div>
+                <h2>Invalid Request</h2>  
+                <p>Please provide a valid book ID. The ID must be a number.</p>
+                <a href="products.php" class="back-to-products"><i class="fas fa-arrow-left" aria-hidden="true"></i> Browse Available Books</a>
+            </div>
+        </div>';
     }
 
     $conn->close();
