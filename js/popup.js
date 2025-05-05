@@ -1,6 +1,6 @@
-// ===============================
-// Help Popup Script for product-details.php
-// ===============================
+/**
+ * Popup functionality script
+ */
 
 document.addEventListener("DOMContentLoaded", () => {
   const helpBtn = document.getElementById("helpBtn");
