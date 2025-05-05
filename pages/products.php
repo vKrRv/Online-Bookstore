@@ -111,7 +111,7 @@ if (addToCartPost($conn)) {
                             <form method="post" style="margin-top:10px;">
                                 <input type="hidden" name="book_id" value="<?php echo $book['book_id']; ?>">
                                 <input type="hidden" name="quantity" value="1">
-                                <button type="submit" name="add_to_cart" class="add-to-cart-btn" aria-label="Add '<?php echo htmlspecialchars($book['title']); ?>' to cart">
+                                <button type="submit" name="add_to_cart" class="add-to-cart-btn" aria-label="Add '<?php echo htmlspecialchars($book['title']); ?>' to cart" <?php if ($book['stock'] == 0) echo 'disabled style="opacity: 0.5; cursor: not-allowed;"'; ?>>
                                     <i class="fas fa-shopping-cart" aria-hidden="true"></i> Add to Cart
                                 </button>
                             </form>

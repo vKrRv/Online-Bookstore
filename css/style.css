@@ -39,6 +39,18 @@ label.visually-hidden {
     margin: 0;
 }
 
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
 /* ========================================
    Header Styles
    ======================================== */
@@ -331,9 +343,10 @@ label.visually-hidden {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
   position: relative;
-  display: inline-block;
+  display: block;
   text-align: center;
-  clear: left;
+  clear: both;
+  width: 100%;
 }
 
 .title:after {

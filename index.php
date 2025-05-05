@@ -41,6 +41,7 @@ include 'includes/header.php';
                 if ($book['featured'] != 1) continue;
                 if ($count >= 3) break;
                 $count++;
+                $isOutOfStock = $book['stock'] == 0;
                 ?>
                 <div class="book-card">
                     <a href="pages/product-details.php?id=<?php echo $book['book_id']; ?>" class="card-link" aria-label="View details of <?php echo $book['title']; ?>">
@@ -59,8 +60,8 @@ include 'includes/header.php';
                         <div class="card-price" aria-label="Price: <?php echo $book['price']; ?> riyal">
                             <span class="symbol">&#xea;</span><?php echo $book['price']; ?>
                         </div>
-                        <div class="card-stock <?php echo $book['stock'] == 0 ? 'stock-out' : ($book['stock'] <= 5 ? 'stock-low' : 'stock-in'); ?>">
-                            <?php if ($book['stock'] == 0): ?>
+                        <div class="card-stock <?php echo $isOutOfStock ? 'stock-out' : ($book['stock'] <= 5 ? 'stock-low' : 'stock-in'); ?>">
+                            <?php if ($isOutOfStock): ?>
                                 <i class="fas fa-times-circle" aria-hidden="true"></i>
                                 <span>Out of Stock</span>
                             <?php elseif ($book['stock'] <= 5): ?>
@@ -74,7 +75,7 @@ include 'includes/header.php';
                         <form method="post" style="margin-top:10px;">
                             <input type="hidden" name="book_id" value="<?php echo $book['book_id']; ?>">
                             <input type="hidden" name="quantity" value="1">
-                            <button type="submit" name="add_to_cart" class="add-to-cart-btn" aria-label="Add '<?php echo $book['title']; ?>' to cart">
+                            <button type="submit" name="add_to_cart" class="add-to-cart-btn" aria-label="Add '<?php echo $book['title']; ?>' to cart" <?php if ($isOutOfStock) echo 'disabled style="opacity: 0.5; cursor: not-allowed;"'; ?>>
                                 <i class="fas fa-shopping-cart" aria-hidden="true"></i> Add to Cart
                             </button>
                         </form>

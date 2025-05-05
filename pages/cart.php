@@ -163,18 +163,16 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                                     </td>
                                     <td class="quantity-cell">
                                         <div class="quantity-control" role="group">
-                                            <a href="cart.php?action=decrement&id=<?php echo $book_id; ?>" role="button" class="quantity-btn" aria-label="Increase quantity">−</a>
+                                            <a href="cart.php?action=decrement&id=<?php echo $book_id; ?>" role="button" class="quantity-btn" aria-label="Decrease quantity">−</a>
                                             <input type="number" name="quantity[<?php echo $book_id; ?>]"
                                                    value="<?php echo htmlspecialchars($item['quantity']); ?>"
                                                    min="1" max="<?php echo $stock; ?>" class="quantity-input"
                                                    aria-label="Quantity for <?php echo htmlspecialchars($item['title']); ?>: <?php echo htmlspecialchars($item['quantity']); ?>"
-                                                   aria-live="polite" readonly>
-                                            <a href="cart.php?action=increment&id=<?php echo $book_id; ?>" role="button" class="quantity-btn" aria-label="Decrease quantity">+</a>
+                                                   aria-live="off" readonly>
+                                            <a href="cart.php?action=increment&id=<?php echo $book_id; ?>" role="button" class="quantity-btn" aria-label="Increase quantity">+</a>
                                         </div>
-                                        <div id="quantity-announcement-<?php echo $book_id; ?>" class="visually-hidden" aria-live="polite">
-                                            Quantity updated to <?php echo htmlspecialchars($item['quantity']); ?> for <?php echo htmlspecialchars($item['title']); ?>
-                                        </div> <!-- This div block is for accessibility, it announces the user that the quantity updated via screen reader only -->
-
+                                        <!-- Using visually-hidden class to hide this from view but keep it for screen readers -->
+                                        <div id="quantity-announcement-<?php echo $book_id; ?>" class="visually-hidden" aria-live="assertive"></div>
                                     </td>
                                     <td>
                                         <a href="cart.php?remove=<?php echo htmlspecialchars($book_id); ?>" class="remove-btn" title="Remove from cart">
