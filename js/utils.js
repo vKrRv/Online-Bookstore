@@ -1,56 +1,57 @@
 /**
- * JavaScript for toggling the Recently Purchased section
+ * Utiility functions script
  */
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleButton = document.getElementById('toggleRecentPurchases');
-    const recentPurchasesContent = document.getElementById('recentPurchasesContent');
-    
-    // Check if elements exist (only on pages with recent purchases)
-    if (toggleButton && recentPurchasesContent) {
-        // Set initial state (expanded)
-        let isCollapsed = false;
-        
-        // Get the original height of the content
-        const originalHeight = recentPurchasesContent.scrollHeight;
-        recentPurchasesContent.style.maxHeight = originalHeight + 'px';
-        
-        // Function to toggle the section visibility
-        function toggleRecentPurchases() {
-            if (isCollapsed) {
-                // Expand the section
-                recentPurchasesContent.style.maxHeight = originalHeight + 'px';
-                recentPurchasesContent.style.opacity = '1';
-                toggleButton.classList.remove('collapsed');
-                
-                // Save state to localStorage
-                localStorage.setItem('recentPurchasesCollapsed', 'false');
-            } else {
-                // Collapse the section
-                recentPurchasesContent.style.maxHeight = '0';
-                recentPurchasesContent.style.opacity = '0';
-                toggleButton.classList.add('collapsed');
-                
-                // Save state to localStorage
-                localStorage.setItem('recentPurchasesCollapsed', 'true');
-            }
-            
-            // Toggle the state
-            isCollapsed = !isCollapsed;
-        }
-        
-        // Add click event listener to the toggle button
-        toggleButton.addEventListener('click', toggleRecentPurchases);
-        
-        // Check if there's a saved state in localStorage
-        const savedState = localStorage.getItem('recentPurchasesCollapsed');
-        
-        // Apply the saved state if it exists
-        if (savedState === 'true') {
-            // Trigger the toggle to collapse
-            isCollapsed = false; // Set to false so the toggle function will collapse it
-            toggleRecentPurchases();
-        }
+
+// Toggle for recent purchases
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleButton = document.getElementById("toggleRecent");
+  const pastPurchase = document.getElementById("pastPurchase");
+
+  // check if button and content exist
+  if (toggleButton && pastPurchase) {
+    // Make sure its initally expanded
+    let isCollapsed = false;
+
+    // Original height of the section
+    const originalHeight = pastPurchase.scrollHeight;
+    pastPurchase.style.maxHeight = originalHeight + "px";
+
+    // Toggle function
+    function toggleRecent() {
+      if (isCollapsed) {
+        // Expand section
+        pastPurchase.style.maxHeight = originalHeight + "px";
+        pastPurchase.style.opacity = "1";
+        toggleButton.classList.remove("collapsed");
+
+        // Save state
+        localStorage.setItem("recentCollapsed", "false");
+      } else {
+        // Collapse the section
+        pastPurchase.style.maxHeight = "0";
+        pastPurchase.style.opacity = "0";
+        toggleButton.classList.add("collapsed");
+
+        // Save state
+        localStorage.setItem("recentCollapsed", "true");
+      }
+
+      // Toggle state
+      isCollapsed = !isCollapsed;
     }
+
+    // Add event listener to the button
+    toggleButton.addEventListener("click", toggleRecent);
+
+    // Check for saved state
+    const savedState = localStorage.getItem("recentCollapsed");
+
+    // Apply state if it exists
+    if (savedState === "true") {
+      isCollapsed = false;
+      toggleRecent();
+    }
+  }
 });
 
 // Toggle for available offers
@@ -95,3 +96,64 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   };
 });
+
+function formatCardNumber() {
+  const input = document.getElementById("card-number");
+  let v = input.value.replace(/\D/g, "");
+  let out = "";
+  for (let i = 0; i < v.length; i++) {
+    if (i > 0 && i % 4 === 0) out += " ";
+    out += v[i];
+  }
+  input.value = out.slice(0, 19);
+}
+
+function formatExpiryDate() {
+  const input = document.getElementById("expire");
+  let v = input.value.replace(/\D/g, "");
+
+  // Format as MM/YY
+  if (v.length > 0) {
+    // First limit month to valid range (01-12)
+    if (v.length >= 1) {
+      if (v[0] > 1) {
+        v = "0" + v[0];
+      }
+    }
+    if (v.length >= 2) {
+      if (v[0] == 1 && v[1] > 2) {
+        v = "12";
+      }
+    }
+
+    // Format with slash
+    if (v.length > 2) {
+      v = v.substring(0, 2) + "/" + v.substring(2, 4);
+    } else if (v.length == 2) {
+      v = v + "/";
+    }
+  }
+
+  input.value = v;
+}
+
+function copyShippingDetails() {
+  document.getElementById("form-ship-name").value =
+    document.getElementById("ship-name").value;
+  document.getElementById("form-ship-line1").value =
+    document.getElementById("ship-line1").value;
+  document.getElementById("form-ship-line2").value =
+    document.getElementById("ship-line2").value;
+  document.getElementById("form-ship-city").value =
+    document.getElementById("ship-city").value;
+  document.getElementById("form-ship-postal").value =
+    document.getElementById("ship-postal").value;
+  document.getElementById("form-ship-phone").value =
+    document.getElementById("ship-phone").value;
+  document.getElementById("form-ship-email").value =
+    document.getElementById("ship-email").value;
+}
+function payLater() {
+  copyShippingDetails();
+  document.getElementById("payment-form").submit();
+}

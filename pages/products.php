@@ -84,7 +84,7 @@ if (addToCartPost($conn)) {
                     showBookCard($book, '../');
                 }
             } else {
-                ?>
+            ?>
                 <div class="no-books">
                     <i class="fas fa-book-open"></i>
                     <p>
@@ -102,7 +102,6 @@ if (addToCartPost($conn)) {
             ?>
         </div>
     </main>
-
     <?php include '../includes/footer.php'; ?>
 </body>
 

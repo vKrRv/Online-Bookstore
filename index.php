@@ -1,9 +1,9 @@
 <?php
 session_start();
 unset($_SESSION['applied_coupon']);
-// Check if POST request is made to add to cart
 require_once 'includes/db.php';
 include_once 'includes/functions.php';
+// Check if POST request is made to add to cart
 if (addToCartPost($conn)) {
     header('Location: pages/cart.php');
     exit;
