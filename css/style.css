@@ -957,6 +957,116 @@ nav a:hover {
   margin-bottom: 20px;
 }
 
+/* Error Message Styling */
+.error-message,
+.products-error-message,
+.order-error-msg,
+.auth-error-message {
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: left;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 400px;
+  padding: 10px 16px;
+  border-left: 4px solid #e74c3c;
+  color: #e74c3c;
+  margin: 18px auto;
+}
+
+.error-message i {
+  color: #e74c3c;
+  font-size: 1.3rem;
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+.products-error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  margin: 50px auto;
+  max-width: 650px;
+  padding: 30px;
+  border-left: 6px solid #e74c3c;
+  color: #333;
+  justify-content: flex-start;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.products-error-message i {
+  color: #e74c3c;
+  font-size: 2.5rem;
+  margin-top: 5px;
+  filter: drop-shadow(0 2px 3px rgba(231, 76, 60, 0.2));
+}
+
+.products-error-message h2 {
+  font-size: 1.8rem;
+  margin: 0 0 15px 0;
+  padding: 0;
+  text-align: left;
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+.products-error-message p {
+  margin-bottom: 25px;
+  color: #555;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+.products-error-message .back-to-products {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 10px rgba(52, 152, 219, 0.25);
+}
+
+.products-error-message .back-to-products:hover {
+  background: linear-gradient(135deg, #2980b9, #2573a7);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(52, 152, 219, 0.35);
+}
+
+.products-error-message .back-to-products i {
+  color: white;
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-top: 0;
+  filter: none;
+}
+
+.order-error-msg {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  text-align: center;
+}
+
 .auth-error-message {
   color: #e74c3c;
   background-color: rgba(231, 76, 60, 0.1);
@@ -965,6 +1075,22 @@ nav a:hover {
   margin-bottom: 25px;
   margin-top: 25px;
   font-weight: 500;
+}
+
+/* Responsive styles for error messages */
+@media (max-width: 768px) {
+  .products-error-message {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px 20px;
+    gap: 15px;
+  }
+  
+  .products-error-message h2,
+  .products-error-message p {
+    text-align: center;
+  }
 }
 
 /* Admin Section Styles */
@@ -3556,21 +3682,31 @@ main {
 }
 
 /* Error Message Styling */
+.error-message,
+.products-error-message,
+.order-error-msg,
+.auth-error-message {
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: left;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 .error-message {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin: 18px auto;
   max-width: 400px;
   padding: 10px 16px;
-  background: #fff;
-  border-radius: 8px;
   border-left: 4px solid #e74c3c;
-  font-size: 1rem;
   color: #e74c3c;
-  position: relative;
+  margin: 18px auto;
 }
+
 .error-message i {
   color: #e74c3c;
   font-size: 1.3rem;
@@ -3580,32 +3716,105 @@ main {
 
 .products-error-message {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 18px auto;
-  max-width: 400px;
-  padding: 10px 16px;
-  background: #fff;
-  border-radius: 8px;
-  border-left: 4px solid #e74c3c;
-  font-size: 1rem;
-  color: #e74c3c;
-  position: relative;
-  text-align: left;
+  align-items: flex-start;
+  gap: 25px;
+  margin: 50px auto;
+  max-width: 650px;
+  padding: 30px;
+  border-left: 6px solid #e74c3c;
+  color: #333;
   justify-content: flex-start;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
+
 .products-error-message i {
   color: #e74c3c;
-  font-size: 1.3rem;
-  margin-bottom: 0;
-  float: left;
+  font-size: 2.5rem;
+  margin-top: 5px;
+  filter: drop-shadow(0 2px 3px rgba(231, 76, 60, 0.2));
 }
+
 .products-error-message h2 {
-  font-size: 1.5rem;
-  margin-left: 10px;
-  padding-bottom: 5px;
-  flex-grow: 1;
+  font-size: 1.8rem;
+  margin: 0 0 15px 0;
+  padding: 0;
   text-align: left;
+  color: #e74c3c;
+  font-weight: 700;
+}
+
+.products-error-message p {
+  margin-bottom: 25px;
+  color: #555;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+.products-error-message .back-to-products {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 10px rgba(52, 152, 219, 0.25);
+}
+
+.products-error-message .back-to-products:hover {
+  background: linear-gradient(135deg, #2980b9, #2573a7);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(52, 152, 219, 0.35);
+}
+
+.products-error-message .back-to-products i {
+  color: white;
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-top: 0;
+  filter: none;
+}
+
+.order-error-msg {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  text-align: center;
+}
+
+.auth-error-message {
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  font-weight: 500;
+}
+
+/* Responsive styles for error messages */
+@media (max-width: 768px) {
+  .products-error-message {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px 20px;
+    gap: 15px;
+  }
+  
+  .products-error-message h2,
+  .products-error-message p {
+    text-align: center;
+  }
 }
 
 /* Utility */
