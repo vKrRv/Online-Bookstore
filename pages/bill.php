@@ -103,7 +103,7 @@ if (empty($totalPrice) && !empty($orderItems)) {
                     <?php foreach ($orderItems as $item): ?>
                         <div class="ordered-item">
                             <?php if (!empty($item['image'])): ?>
-                                <img src="../assets/images/<?php echo $item['image']; ?>" alt="<?php echo $item['title']; ?>" class="small-book-image">
+                                <img src="../assets/images/<?php echo $item['image']; ?>" alt="<?php echo $item['title']; ?> cover" class="small-book-image">
                             <?php endif; ?>
                             <div class="ordered-item-details">
                                 <p><strong><?php echo $item['title']; ?></strong></p>
@@ -142,28 +142,32 @@ if (empty($totalPrice) && !empty($orderItems)) {
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($customerEmail); ?></p>
                 <p><strong>Phone Number:</strong> <?php echo htmlspecialchars($customerPhone); ?></p>
                 <p><strong>Shipping Address:</strong>
+                    <address>
                     <?php
                     echo htmlspecialchars($addressLine1);
                     if (!empty($addressLine2)) echo ", " . htmlspecialchars($addressLine2);
                     echo ", " . htmlspecialchars($city) . ", " . htmlspecialchars($postalCode);
                     ?>
+                    </address>
                 </p>
             <?php else: ?>
                 <!-- Display from session if available -->
                 <p><strong>Name:</strong> <?php echo isset($_SESSION['customer_name']) ? htmlspecialchars($_SESSION['customer_name']) : 'Name'; ?></p>
                 <p><strong>Email:</strong> <?php echo isset($_SESSION['customer_email']) ? htmlspecialchars($_SESSION['customer_email']) : 'username@example.com'; ?></p>
                 <p><strong>Phone Number:</strong> <?php echo isset($_SESSION['customer_phone']) ? htmlspecialchars($_SESSION['customer_phone']) : '+966 00 000 0000'; ?></p>
-                <p><strong>Shipping Address:</strong> <?php echo isset($_SESSION['customer_address']) ? htmlspecialchars($_SESSION['customer_address']) : '123 Main St, City, State, ZIP'; ?></p>
+                <p><strong>Shipping Address:</strong> 
+                    <address><?php echo isset($_SESSION['customer_address']) ? htmlspecialchars($_SESSION['customer_address']) : '123 Main St, City, State, ZIP'; ?></address>
+                </p>
             <?php endif; ?>
         </div>
 
         <div class="thank-you">
-            <p>Your order has been confirmed and will be processed soon!</p>
+            <p role="status">Your order has been confirmed and will be processed soon!</p>
         </div>
 
         <div class="action-buttons">
-            <a href="../index.php" class="button btn">Continue Shopping</a>
-            <button onclick="window.print()" class="button btn-secondary">Print Receipt</button>
+            <a href="../index.php" class="button btn" aria-label="Continue shopping on the homepage">Continue Shopping</a>
+            <button onclick="window.print()" class="button btn-secondary" aria-label="Print your receipt">Print Receipt</button>
         </div>
     </div>
 

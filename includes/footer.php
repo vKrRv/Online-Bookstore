@@ -9,10 +9,10 @@ $footerBasePath = getBasePath();
             <p>Your destination for quality books with worldwide shipping. Discover new worlds through our carefully
                 curated collection.</p>
             <div class="social-icons">
-                <a href="#" aria-label="Facebook"><i class="fab fa-whatsapp"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Pinterest"><i class="fab fa-tiktok"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
             </div>
         </div>
 
@@ -39,8 +39,9 @@ $footerBasePath = getBasePath();
             <h3>Stay Updated</h3>
             <p>Subscribe to our newsletter for the latest releases and exclusive offers.</p>
             <form class="newsletter-form">
-                <input type="email" placeholder="Your Email Address" required>
-                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                <label for="newsletter-email" class="visually-hidden">Email address</label>
+                <input type="email" id="newsletter-email" name="newsletter_email" placeholder="Your Email Address" required>
+                <button type="submit"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>
             </form>
             <div class="payment-methods">
                 <img src="<?php echo $footerBasePath; ?>assets/cards/visa.svg" alt="Visa" class="payment-icon">

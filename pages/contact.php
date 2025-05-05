@@ -26,7 +26,7 @@ session_start();
             <div class="contact-info-container">
                 <div class="contact-info">
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <div>
                             <h3>Address</h3>
                             <div class="map-container">
@@ -50,7 +50,7 @@ session_start();
                     </div>
 
                     <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
                         <div>
                             <h3>Email</h3>
                             <p><a href="mailto:contactus@bookhaven.com" class="contact-email">contactus@bookhaven.com</a></p>
@@ -58,7 +58,7 @@ session_start();
                     </div>
 
                     <div class="contact-item">
-                        <i class="fas fa-phone"></i>
+                        <i class="fas fa-phone" aria-hidden="true"></i>
                         <div>
                             <h3>Phone</h3>
                             <p>+966 056 789 1230</p>
@@ -66,7 +66,7 @@ session_start();
                     </div>
 
                     <div class="contact-item">
-                        <i class="fas fa-clock"></i>
+                        <i class="fas fa-clock" aria-hidden="true"></i>
                         <div>
                             <h3>Opening Hours</h3>
                             <p>Daily 9:00 AM - 10:00 PM</p>
@@ -74,7 +74,7 @@ session_start();
                     </div>
 
                     <div class="contact-item">
-                        <i class="fas fa-book-open"></i>
+                        <i class="fas fa-book-open" aria-hidden="true"></i>
                         <div>
                             <h3>About Us</h3>
                             <p>We're passionate about books and dedicated to providing a wide selection of titles for
@@ -107,7 +107,7 @@ session_start();
                         <textarea id="message" name="Message" placeholder="Write your message here..."></textarea>
                     </div>
 
-                    <button type="submit" class="contact-submit-btn">Send Message</button>
+                    <button type="submit" class="contact-submit-btn" aria-label="Send your message">Send Message</button>
                 </form>
             </div>
         </div>

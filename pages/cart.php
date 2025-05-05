@@ -141,7 +141,7 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                                     <td>
                                         <div class="product-image">
                                             <a href="product-details.php?id=<?php echo $book_id; ?>">
-                                                <img src="../assets/images/<?php echo htmlspecialchars($item['image']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
+                                                <img src="../assets/images/<?php echo htmlspecialchars($item['image']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?> cover">
                                             </a>
                                         </div>
                                     </td>
@@ -149,10 +149,10 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                                         <div class="product-details">
                                             <div class="product-title"><?php echo htmlspecialchars($item['title']); ?></div>
                                             <div class="product-delivery">
-                                                <i class="fas fa-truck"></i> Get it by <?php echo $minDelivery; ?> - <?php echo $maxDelivery; ?>
+                                                <i class="fas fa-truck" aria-hidden="true"></i> Get it by <?php echo $minDelivery; ?> - <?php echo $maxDelivery; ?>
                                             </div>
                                             <div class="product-reserved">
-                                                <i class="fas fa-info-circle"></i> Reserved for 1 hour
+                                                <i class="fas fa-info-circle" aria-hidden="true"></i> Reserved for 1 hour
                                             </div>
                                         </div>
                                     </td>
@@ -162,15 +162,23 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                                         </div>
                                     </td>
                                     <td class="quantity-cell">
-                                        <div class="quantity-control">
-                                            <a href="cart.php?action=decrement&id=<?php echo $book_id; ?>" class="quantity-btn">−</a>
-                                            <input type="number" name="quantity[<?php echo $book_id; ?>]" value="<?php echo htmlspecialchars($item['quantity']); ?>" min="1" max="<?php echo $stock; ?>" class="quantity-input" readonly>
-                                            <a href="cart.php?action=increment&id=<?php echo $book_id; ?>" class="quantity-btn">+</a>
+                                        <div class="quantity-control" role="group">
+                                            <a href="cart.php?action=decrement&id=<?php echo $book_id; ?>" role="button" class="quantity-btn" aria-label="Increase quantity">−</a>
+                                            <input type="number" name="quantity[<?php echo $book_id; ?>]"
+                                                   value="<?php echo htmlspecialchars($item['quantity']); ?>"
+                                                   min="1" max="<?php echo $stock; ?>" class="quantity-input"
+                                                   aria-label="Quantity for <?php echo htmlspecialchars($item['title']); ?>: <?php echo htmlspecialchars($item['quantity']); ?>"
+                                                   aria-live="polite" readonly>
+                                            <a href="cart.php?action=increment&id=<?php echo $book_id; ?>" role="button" class="quantity-btn" aria-label="Decrease quantity">+</a>
                                         </div>
+                                        <div id="quantity-announcement-<?php echo $book_id; ?>" class="visually-hidden" aria-live="polite">
+                                            Quantity updated to <?php echo htmlspecialchars($item['quantity']); ?> for <?php echo htmlspecialchars($item['title']); ?>
+                                        </div> <!-- This div block is for accessibility, it announces the user that the quantity updated via screen reader only -->
+
                                     </td>
                                     <td>
                                         <a href="cart.php?remove=<?php echo htmlspecialchars($book_id); ?>" class="remove-btn" title="Remove from cart">
-                                            <i class="fas fa-trash"></i>
+                                            <i class="fas fa-trash" aria-hidden="true"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -186,16 +194,16 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                         <h3 class="summary-title">Order Summary</h3>
 
                         <div class="coupon-input">
-                            <input type="text" name="coupon_code" placeholder="Coupon Code" value="<?php echo htmlspecialchars($discountCode); ?>">
-                            <button type="submit" name="apply_coupon">APPLY</button>
+                            <input type="text" name="coupon_code" placeholder="Coupon Code" value="<?php echo htmlspecialchars($discountCode); ?>" aria-label="Enter coupon code">
+                            <button type="submit" name="apply_coupon" aria-label="Apply coupon code">APPLY</button>
                         </div>
                         <?php if ($discountError): ?>
-                            <?php showError($discountError); ?>
+                            <div class="success-message" style="background:#ffe3e3;color:#e53e3e;" role="alert"><i class="fas fa-times-circle" aria-hidden="true"></i> <?php echo $discountError; ?></div>
                         <?php endif; ?>
 
-                        <a href="#" class="offers-link" id="toggle-offers">
-                            <div><i class="fas fa-tag"></i> View Available Offers</div>
-                            <i class="fas fa-chevron-right" id="offers-chevron"></i>
+                        <a href="#" class="offers-link" id="toggle-offers" aria-controls="available-offers" aria-expanded="false">
+                            <div><i class="fas fa-tag" aria-hidden="true"></i> View Available Offers</div>
+                            <i class="fas fa-chevron-right" id="offers-chevron" aria-hidden="true"></i>
                         </a>
 
                         <div class="available-offers" id="available-offers">
@@ -203,12 +211,12 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                                 <div class="coupon-item">
                                     <div>
                                         <div class="coupon-code">
-                                            <i class="fas fa-ticket-alt"></i>
+                                            <i class="fas fa-ticket-alt" aria-hidden="true"></i>
                                             <strong>FIRST15</strong>
                                         </div>
                                         <div class="coupon-description">Get 15% off on your first order</div>
                                     </div>
-                                    <button class="copy-button" onclick="event.preventDefault(); copyToClipboard('FIRST15', this)">COPY</button>
+                                    <button class="copy-button" onclick="event.preventDefault(); copyToClipboard('FIRST15', this)" aria-label="Copy coupon code FIRST15">COPY</button>
                                 </div>
                             </div>
                         </div>
@@ -244,10 +252,10 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
                         </div>
 
                         <div class="payment-options">
-                            <i class="fas fa-credit-card"></i> Monthly payment plans available
+                            <i class="fas fa-credit-card" aria-hidden="true"></i> Monthly payment plans available
                         </div>
 
-                        <button type="submit" name="checkout" class="checkout-btn">CHECKOUT</button>
+                        <button type="submit" name="checkout" class="checkout-btn" aria-label="Proceed to checkout">CHECKOUT</button>
                     </div>
                 </div>
             </div>
@@ -256,11 +264,11 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
         <?php
             // If cart is empty
         } else {
-            echo '<div class="empty-cart">
-                    <i class="fas fa-shopping-cart"></i>
+            echo '<div class="empty-cart" aria-live="polite">
+                    <i class="fas fa-shopping-cart" aria-hidden="true"></i>
                     <h2>Your cart is empty</h2>
                     <p>Looks like you haven\'t added any books to your cart yet.</p>
-                    <a href="../pages/products.php" class="browse-books-btn"><i class="fas fa-book" style= "color: white"></i> Browse Books</a>
+                    <a href="../pages/products.php" class="browse-books-btn"><i class="fas fa-book" aria-hidden="true" style= "color: white"></i> Browse Books</a>
                   </div>';
         }
         ?>

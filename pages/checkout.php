@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $couponParam = ($discountCode) ? "&coupon=" . urlencode($discountCode) : "";
             $discountParam = ($discount > 0) ? "&discount=" . $discount : "";
 
-            header("Location: bill.php?order_id=$orderId&total_price=$finalTotal&shipping=$shipping&vat=$vat" . $discountParam . $couponParam);
+            header("Location: bill.php?order_id=$orderId&total_price=$finalTotal&shipping=$shipping" . $discountParam . $couponParam);
             exit();
         }
     } else {
@@ -109,7 +109,7 @@ mysqli_close($conn);
         <h1>Checkout</h1>
 
         <?php if (!empty($errorMessage)): ?>
-            <div class="order-error-msg"><?php echo $errorMessage; ?></div>
+            <div class="order-error-msg" role="alert"><?php echo $errorMessage; ?></div>
         <?php endif; ?>
 
         <div class="checkout-container">
@@ -118,13 +118,13 @@ mysqli_close($conn);
                 <hr>
                 <br>
                 <?php if (empty($bookDetails)): ?>
-                    <p class="order-error-msg">Your cart is empty.</p>
+                    <p class="order-error-msg" role="alert">Your cart is empty.</p>
                 <?php else: ?>
                     <div class="book-list-co">
                         <?php foreach ($bookDetails as $book): ?>
                             <div class="book-item">
                                 <div class="book-image-co">
-                                    <img src="../assets/images/<?php echo $book['image']; ?>" alt="<?php echo $book['title']; ?>">
+                                    <img src="../assets/images/<?php echo $book['image']; ?>" alt="<?php echo $book['title']; ?> cover">
                                 </div>
                                 <div class="book-details-co">
                                     <h3><?php echo $book['title']; ?></h3>
@@ -155,19 +155,19 @@ mysqli_close($conn);
                 <hr>
                 <form id="shipping-form">
                     <label for="ship-name">Full Name</label>
-                    <input type="text" id="ship-name" name="ship_name" placeholder="Full Name" required />
+                    <input type="text" id="ship-name" name="ship_name" placeholder="Full Name" required aria-required="true" />
                     <label for="ship-line1">Address Line 1</label>
-                    <input type="text" id="ship-line1" name="ship_line1" placeholder="123 Main St" required />
+                    <input type="text" id="ship-line1" name="ship_line1" placeholder="123 Main St" required aria-required="true" />
                     <label for="ship-line2">Address Line 2</label>
                     <input type="text" id="ship-line2" name="ship_line2" placeholder="Apt, Suite, etc. (optional)" />
                     <label for="ship-city">City</label>
-                    <input type="text" id="ship-city" name="ship_city" placeholder="Riyadh" required />
+                    <input type="text" id="ship-city" name="ship_city" placeholder="Riyadh" required aria-required="true" />
                     <label for="ship-postal">Postal Code</label>
-                    <input type="text" id="ship-postal" name="ship_postal" maxlength="5" placeholder="12345" required />
+                    <input type="text" id="ship-postal" name="ship_postal" maxlength="5" placeholder="12345" required aria-required="true" />
                     <label for="ship-phone">Phone Number</label>
-                    <input type="text" id="ship-phone" name="ship_phone" maxlength="10" placeholder="050 000 0000" required />
+                    <input type="text" id="ship-phone" name="ship_phone" maxlength="10" placeholder="050 000 0000" required aria-required="true" />
                     <label for="ship-email">Email Address</label>
-                    <input type="email" id="ship-email" name="ship_email" placeholder="example@email.com" required />
+                    <input type="email" id="ship-email" name="ship_email" placeholder="example@email.com" required aria-required="true" />
                 </form>
             </div>
             <div class="payment-details">
@@ -191,22 +191,22 @@ mysqli_close($conn);
                     <input type="hidden" id="form-ship-phone" name="ship_phone" value="">
                     <input type="hidden" id="form-ship-email" name="ship_email" value="">
                     <label for="card-number"><strong>Card Number</strong></label>
-                    <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCardNumber()" required />
+                    <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCardNumber()" required aria-required="true" />
                     <label for="expire"><strong>Expire date</strong></label>
-                    <input type="text" id="expire" placeholder="MM/YY" maxlength="5" oninput="formatExpiryDate()" required />
+                    <input type="text" id="expire" placeholder="MM/YY" maxlength="5" oninput="formatExpiryDate()" required aria-required="true" />
                     <label for="cvv"><strong>CVV</strong></label>
-                    <input type="text" id="cvv" maxlength="3" placeholder="000" required />
-                    <button type="submit" class="checkout-btn-co" onclick="copyShippingDetails()">
+                    <input type="text" id="cvv" maxlength="3" placeholder="000" required aria-required="true" />
+                    <button type="submit" class="checkout-btn-co" onclick="copyShippingDetails()" aria-label="Pay now <?php echo formatPrice($finalTotal); ?> riyals">
                         <span>PAY <br> <span class="symbol">&#xea;</span><?php echo formatPrice($finalTotal); ?></span>
                     </button>
-                    <button type="button" class="checkout-btn-pl" onclick="payLater()">
+                    <button type="button" class="checkout-btn-pl" onclick="payLater()" aria-label="Pay later <?php echo formatPrice($finalTotal); ?> riyals">
                         <span>PAY Later<br><span class="symbol">&#xea;</span><?php echo formatPrice($finalTotal); ?></span>
                     </button>
                 </form>
             </div>
         </div>
         <div class="cart-btn">
-            <a href="cart.php" class="back-shop-btn">← Back to cart</a>
+            <a href="cart.php" class="back-shop-btn" aria-label="Return to shopping cart">← Back to cart</a>
         </div>
     </div>
     <footer>
