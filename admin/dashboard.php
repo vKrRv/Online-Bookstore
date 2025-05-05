@@ -1,3 +1,11 @@
+<?php
+session_start();
+include '../includes/header.php';
+require_once '../includes/db.php';
+require_once '../includes/functions.php';
+requireAdmin();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,15 +17,9 @@
 </head>
 
 <body>
-    <?php include '../includes/header.php'; ?>
-    <?php include '../includes/db.php'; ?>
+
 
     <?php
-    if (!isset($_SESSION['admin_username'])) { // redirect if not logged in
-        header('Location: login.php');
-        exit();
-    }
-
     $addBookMessage = '';
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title'], $_POST['description'], $_POST['price'], $_POST['stock'], $_POST['category'])) { //submit form
         // sanitize input
@@ -30,26 +32,8 @@
 
         // check if image is uploaded
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $target_dir = __DIR__ . '/../assets/images/'; // save here
-            $image_name = basename($_FILES['image']['name']); // get name
-            $target_file = $target_dir . $image_name; // target path
-            $allowed_types = ['jpg', 'jpeg', 'png'];
-            // check file extension
-            $file_ext = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-            // check if its an image
-            if (in_array($file_ext, $allowed_types)) {
-                if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-                    // success
-                } else {
-                    // failure
-                    $addBookMessage = 'Failed to upload image. Check folder permissions.';
-                }
-            } else {
-                // invalid type
-                $addBookMessage = 'Only JPG, JPEG, and PNG files are allowed.';
-            }
+            $image_name = ImageUpload($_FILES['image'], $addBookMessage);
         } else {
-            // no image uploaded
             $addBookMessage = 'Please upload an image.';
         }
         // validate input
@@ -185,29 +169,8 @@
                         }
                         $books = $conn->query($query);
                         $rowIndex = 0;
-                        while ($row = $books->fetch_assoc()) { /// loop and fetch
-                            $stock = (int)$row['stock'];
-                            $stockClass = $stock < 5 ? 'low-stock' : 'in-stock';
-                            $category = htmlspecialchars($row['category']);
-                            $categoryBadge = "<span style='background:#e3fcec;color:#38a169;padding:4px 12px;border-radius:12px;font-size:0.95em;font-weight:500;'>$category</span>";
-                            if (!$category) $categoryBadge = "<span style='background:#fbe9e7;color:#e57373;padding:4px 12px;border-radius:12px;font-size:0.95em;font-weight:500;'>Uncategorized</span>";
-                            echo "<tr>
-                            <td style='display:flex;align-items:center;justify-content:flex-start;gap:18px;'>
-                                <div style='background:#fff;border-radius:10px;box-shadow:0 2px 8px #e3e3e3;display:flex;align-items:center;justify-content:center;width:100px;height:100px;min-width:100px;min-height:100px;max-width:100px;max-height:100px;overflow:hidden;'>
-                                    <img src='../assets/images/" . htmlspecialchars($row['image']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:100%;height:100%;object-fit:contain;display:block;background:#f8f9fa;'>
-                                </div>
-                                <span style='font-weight:600;color:#222;font-size:1.08rem;margin-left:10px;'>" . htmlspecialchars($row['title']) . "</span>
-                            </td>
-                            <td class='price' style='color:#1976d2;font-weight:700;'><span class='symbol'>&#xea;</span>" . htmlspecialchars($row['price']) . "</td>
-                            <td class='stock'><span class='$stockClass' style='padding:4px 10px;border-radius:10px;font-weight:600;font-size:0.97em;'>$stock</span></td>
-                            <td class='category'>$categoryBadge</td>
-                            <td style='min-width:90px;'>
-                                <div style='display:flex;justify-content:center;align-items:center;gap:8px;width:100%;height:100%;'>
-                                    <a href='edit-book.php?id={$row['book_id']}' class='edit-btn action-btn' title='Edit'><i class='fas fa-edit'></i></a>
-                                    <a href='delete-book.php?id={$row['book_id']}' class='delete-btn action-btn' title='Delete' onclick=\"return confirm('Are you sure you want to delete this book?');\"><i class='fas fa-trash-alt'></i></a>
-                                </div>
-                            </td>
-                        </tr>";
+                        while ($row = $books->fetch_assoc()) {
+                            showBookRow($row);
                             $rowIndex++;
                         }
                         ?>
@@ -218,6 +181,7 @@
     </section>
 
     <?php include '../includes/footer.php'; ?>
+    <script src="../js/validation.js"></script>
 </body>
 
 </html>

@@ -1,8 +1,8 @@
 <?php
 // Start session
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
+session_start();
+require_once '../includes/db.php';
+require_once '../includes/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,17 +27,13 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <div class="signup-form">
       <?php if (isset($_SESSION['error'])): ?>
-        <div class="error-message">
-          <i class="fas fa-exclamation-circle"></i> <?php echo $_SESSION['error'];
-                                                    unset($_SESSION['error']); ?>
-        </div>
+        <?php showError($_SESSION['error']);
+        unset($_SESSION['error']); ?>
       <?php endif; ?>
 
       <?php if (isset($_SESSION['success'])): ?>
-        <div class="message-box success">
-          <i class="fas fa-check-circle"></i> <?php echo $_SESSION['success'];
-                                              unset($_SESSION['success']); ?>
-        </div>
+        <?php showSuccess($_SESSION['success']);
+        unset($_SESSION['success']); ?>
       <?php endif; ?>
 
       <form method="POST" action="signup_process.php">
@@ -45,7 +41,7 @@ if (session_status() === PHP_SESSION_NONE) {
           <input type="text" placeholder="Full Name" name="name" required />
         </div>
         <div class="input-group">
-          <input type="text" placeholder="Username" name="username" required/>
+          <input type="text" placeholder="Username" name="username" required />
         </div>
         <div class="input-group">
           <input type="email" placeholder="Email Address" name="email" required />
@@ -63,6 +59,7 @@ if (session_status() === PHP_SESSION_NONE) {
   </div>
 
   <?php include '../includes/footer.php'; ?>
+  <script src="../js/validation.js"></script>
 </body>
 
 </html>
