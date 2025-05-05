@@ -451,7 +451,7 @@ function addToPastPurchases($books)
     setcookie('past_purchases', json_encode($purchasedBooks), time() + 60 * 60 * 24 * 7, '/'); // 7 days
 }
 
-function showPastPurchases()
+function showRecent()
 {
     if (isset($_COOKIE['past_purchases'])) {
         $pastPurchases = json_decode($_COOKIE['past_purchases'], true);

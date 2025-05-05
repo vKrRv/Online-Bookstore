@@ -20,7 +20,7 @@ include 'includes/header.php';
 </section>
 
 <section>
-    <?php showPastPurchases(); ?>
+    <?php showRecent(); ?>
 </section>
 
 <section>
