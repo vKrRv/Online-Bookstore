@@ -4,10 +4,11 @@ include '../includes/db.php';
 
 $orderId = isset($_GET['order_id']) ? $_GET['order_id'] : 0;
 $totalPrice = isset($_GET['total_price']) ? $_GET['total_price'] : 0;
-$shipping = isset($_GET['shipping']) ? $_GET['shipping'] : 5.00;
+$shipping = isset($_GET['shipping']) ? $_GET['shipping'] : 15.00; 
 $vat = isset($_GET['vat']) ? $_GET['vat'] : 0;
+$discount = isset($_GET['discount']) ? $_GET['discount'] : 0; 
 
-//information from form data (if coming from POST)
+//information from form data 
 $customerName = isset($_POST['ship_name']) ? $_POST['ship_name'] : '';
 $addressLine1 = isset($_POST['ship_line1']) ? $_POST['ship_line1'] : '';
 $addressLine2 = isset($_POST['ship_line2']) ? $_POST['ship_line2'] : '';
@@ -16,7 +17,7 @@ $postalCode = isset($_POST['ship_postal']) ? $_POST['ship_postal'] : '';
 $customerPhone = isset($_POST['ship_phone']) ? $_POST['ship_phone'] : '';
 $customerEmail = isset($_POST['ship_email']) ? $_POST['ship_email'] : '';
 
-//If customer info isn't in POST, check if it's in the session from checkout.php
+//If customer info isn't in POST, check if it's in the session 
 if (empty($customerName) && isset($_SESSION['ship_name'])) {
     $customerName = $_SESSION['ship_name'];
     $addressLine1 = $_SESSION['ship_line1'];
@@ -25,6 +26,12 @@ if (empty($customerName) && isset($_SESSION['ship_name'])) {
     $postalCode = $_SESSION['ship_postal'];
     $customerPhone = $_SESSION['ship_phone'];
     $customerEmail = $_SESSION['ship_email'];
+}
+
+// Check if a coupon was applied
+$appliedCoupon = '';
+if (isset($_GET['coupon'])) {
+    $appliedCoupon = $_GET['coupon'];
 }
 
 //order details from the database
@@ -57,8 +64,13 @@ if (empty($totalPrice) && !empty($orderItems)) {
     foreach ($orderItems as $item) {
         $subtotal += $item['total'];
     }
-    $vat = $subtotal * 0.15;
-    $totalPrice = $subtotal + $shipping + $vat;
+    
+    // If discount is not provided, calculate it based on coupon (if any)
+    if ($discount == 0 && $appliedCoupon == 'FIRST15') {
+        $discount = round($subtotal * 0.15, 2);
+    }
+    
+    $totalPrice = $subtotal + $shipping - $discount;
 }
 
 ?>
@@ -108,9 +120,16 @@ if (empty($totalPrice) && !empty($orderItems)) {
 
             <hr class="short-hr">
             <div class="order-summary-totals">
-                <p class="symbol"><strong>Subtotal:</strong> <span>&#xea; <?php echo number_format($totalPrice - $shipping - $vat, 2); ?></span></p>
+                <p class="symbol"><strong>Subtotal (incl. VAT):</strong> <span>&#xea; <?php echo number_format($totalPrice - $shipping + $discount, 2); ?></span></p>
+                
+                <?php if ($discount > 0): ?>
+                <p class="symbol" style="color:#38a169;"><strong>Discount<?php if (!empty($appliedCoupon)) echo " ($appliedCoupon)"; ?>:</strong> <span>-&#xea; <?php echo number_format($discount, 2); ?></span></p>
+                <?php endif; ?>
+                
                 <p class="symbol"><strong>Shipping:</strong> <span>&#xea; <?php echo number_format($shipping, 2); ?></span></p>
-                <p class="symbol"><strong>VAT (15%):</strong> <span>&#xea; <?php echo number_format($vat, 2); ?></span></p>
+                
+                <div class="vat-notice" style="font-size: 0.9em; color: #666; margin: 8px 0; font-style: italic;">All prices include 15% VAT</div>
+                
                 <p class="symbol final-total"><strong>Total:</strong> <span>&#xea; <?php echo number_format($totalPrice, 2); ?></span></p>
             </div>
         </div>

@@ -1,20 +1,56 @@
 <?php
 session_start();
-unset($_SESSION['applied_coupon']);
 require_once '../includes/db.php';
 require_once '../includes/functions.php';
 
-$shipping = 5.00;
-$vat = 0;
-$finalTotal = 0;
+$shipping = 15.00;
 $errorMessage = "";
+$discount = 0;
+$discountCode = '';
 
-// Calculate cart totals using utility function
-$cartTotals = calculateCartTotals($conn);
-$totalPrice = $cartTotals['totalPrice'];
-$bookDetails = $cartTotals['bookDetails'];
-$vat = $totalPrice * 0.15;
-$finalTotal = $totalPrice + $shipping + $vat;
+// Check if a coupon code is applied
+if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST15') {
+    $discountCode = 'FIRST15';
+}
+
+// Get cart items and total
+if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    $totalPrice = 0;
+    $totalItems = 0;
+    $bookDetails = [];
+
+    foreach ($_SESSION['cart'] as $book_id => $item) {
+        $itemPrice = $item['price'];
+        $itemTotal = $itemPrice * $item['quantity'];
+        $totalPrice += $itemTotal;
+        $totalItems += $item['quantity'];
+
+        // Get book details for display
+        $book = getBookById($conn, $book_id);
+        if ($book) {
+            $bookDetails[] = [
+                'title' => $book['title'],
+                'price' => $itemPrice,
+                'quantity' => $item['quantity'],
+                'total' => $itemTotal,
+                'image' => $book['image']
+            ];
+        }
+    }
+
+    // Calculate discount if coupon code is applied
+    if ($discountCode === 'FIRST15') {
+        $discount = round($totalPrice * 0.15, 2); // 15% discount on total
+    }
+
+    // Final total includes shipping
+    $finalTotal = $totalPrice + $shipping - $discount;
+} else {
+    $totalPrice = 0;
+    $totalItems = 0;
+    $bookDetails = [];
+    $finalTotal = 0;
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
@@ -41,7 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             addToPastPurchases($purchasedBooks);
             unset($_SESSION['cart']);
             $_SESSION['total_price'] = 0;
-            header("Location: bill.php?order_id=$orderId&total_price=$finalTotal&shipping=$shipping&vat=$vat");
+
+            // Add coupon code and discount to bill
+            $couponParam = ($discountCode) ? "&coupon=" . urlencode($discountCode) : "";
+            $discountParam = ($discount > 0) ? "&discount=" . $discount : "";
+
+            header("Location: bill.php?order_id=$orderId&total_price=$finalTotal&shipping=$shipping&vat=$vat" . $discountParam . $couponParam);
             exit();
         }
     } else {
@@ -60,6 +101,7 @@ mysqli_close($conn);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Book Haven</title>
     <link href="../css/style.css" rel="stylesheet" />
+    <script src="../js/utils.js"></script>
 </head>
 
 <body>
@@ -95,10 +137,16 @@ mysqli_close($conn);
                     </div>
                     <hr>
                     <div class="total-summary">
-                        <p><strong>Subtotal:</strong> <span><span class="symbol">&#xea;</span><?php echo formatPrice($totalPrice); ?></span></p>
+                        <p><strong>Subtotal (incl. VAT):</strong> <span><span class="symbol">&#xea;</span><?php echo formatPrice($totalPrice); ?></span></p>
+
+                        <?php if ($discountCode === 'FIRST15'): ?>
+                            <p class="discount-row" style="color:#38a169;"><strong>Discount (FIRST15):</strong> <span>-<span class="symbol">&#xea;</span><?php echo formatPrice($discount); ?></span></p>
+                        <?php endif; ?>
+
                         <p><strong>Shipping:</strong> <span><span class="symbol">&#xea;</span><?php echo formatPrice($shipping); ?></span></p>
-                        <p><strong>VAT (15%):</strong> <span><span class="symbol">&#xea;</span><?php echo formatPrice($vat); ?></span></p>
-                        <p class="final-total"><strong>Total:</strong> <span><span class="symbol">&#xea;</span><?php echo formatPrice($finalTotal); ?></span></p>
+
+                        <div class="vat-notice" style="font-size: 0.9em; color: #666; margin: 8px 0; font-style: italic;">All prices include 15% VAT</div>
+                        <p class="final-total"><strong>Total:</strong> <span class="summary-total-price"><span class="symbol">&#xea;</span><?php echo formatPrice($finalTotal); ?></span></p>
                     </div>
                 <?php endif; ?>
             </div>
@@ -145,14 +193,14 @@ mysqli_close($conn);
                     <label for="card-number"><strong>Card Number</strong></label>
                     <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCardNumber()" required />
                     <label for="expire"><strong>Expire date</strong></label>
-                    <input type="month" id="expire" required />
+                    <input type="text" id="expire" placeholder="MM/YY" maxlength="5" oninput="formatExpiryDate()" required />
                     <label for="cvv"><strong>CVV</strong></label>
                     <input type="text" id="cvv" maxlength="3" placeholder="000" required />
                     <button type="submit" class="checkout-btn-co" onclick="copyShippingDetails()">
-                        <span>PAY <br> <span class="symbol">&#xea;</span><?php echo formatPrice($finalTotal);?></span>
+                        <span>PAY <br> <span class="symbol">&#xea;</span><?php echo formatPrice($finalTotal); ?></span>
                     </button>
                     <button type="button" class="checkout-btn-pl" onclick="payLater()">
-                        <span>PAY Later<br><span class="symbol">&#xea;</span><?php echo formatPrice($finalTotal);?></span>
+                        <span>PAY Later<br><span class="symbol">&#xea;</span><?php echo formatPrice($finalTotal); ?></span>
                     </button>
                 </form>
             </div>
@@ -164,30 +212,7 @@ mysqli_close($conn);
     <footer>
         <p>&copy; 2025 Online Bookstore. All rights reserved.</p>
     </footer>
-    <script>
-    function formatCardNumber() {
-        const input = document.getElementById('card-number');
-        let v = input.value.replace(/\D/g, '');
-        let out = '';
-        for (let i=0; i<v.length; i++) {
-            if (i>0 && i%4===0) out += ' ';
-            out += v[i];
-        }
-        input.value = out.slice(0,19);
-    }
-    function copyShippingDetails() {
-        document.getElementById('form-ship-name').value = document.getElementById('ship-name').value;
-        document.getElementById('form-ship-line1').value = document.getElementById('ship-line1').value;
-        document.getElementById('form-ship-line2').value = document.getElementById('ship-line2').value;
-        document.getElementById('form-ship-city').value = document.getElementById('ship-city').value;
-        document.getElementById('form-ship-postal').value = document.getElementById('ship-postal').value;
-        document.getElementById('form-ship-phone').value = document.getElementById('ship-phone').value;
-        document.getElementById('form-ship-email').value = document.getElementById('ship-email').value;
-    }
-    function payLater() {
-        copyShippingDetails();
-        document.getElementById('payment-form').submit();
-    }
-    </script>
+    <script src="../js/validation.js"></script>
 </body>
+
 </html>

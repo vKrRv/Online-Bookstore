@@ -1,8 +1,5 @@
 <?php
 session_start();
-// unset any previously applied coupon
-unset($_SESSION['applied_coupon']);
-
 require_once '../includes/functions.php';
 
 // Quantity increase/decrease
@@ -268,7 +265,6 @@ if (isset($_SESSION['applied_coupon']) && $_SESSION['applied_coupon'] === 'FIRST
         }
         ?>
     </div>
-
     <?php include '../includes/footer.php'; ?>
 </body>
 
